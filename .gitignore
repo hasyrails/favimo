@@ -37,3 +37,8 @@ yarn-debug.log*
 
 # carrierwaveでアップロードする画像
 public/uploads/
+db/dummy_images/
+
+
+.DS_Store
+db/DS_Store
