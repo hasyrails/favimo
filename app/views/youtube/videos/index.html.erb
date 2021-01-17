@@ -1,0 +1,33 @@
+<div class="user-index-page">
+
+  <div class="swipe">
+    <div class="swipe--status">
+      <i class="fa fa-times"></i>
+      <i class="fa fa-heart"></i>
+    </div>
+
+    <div class="swipe--cards">
+      <% @youtube_videos.items.each do |item| %>
+        <div class="swipe--card">
+          <iframe width="480" height="200" src="https://www.youtube.com/embed/<%= item.id.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
+        </div>
+        <% snippet = item.snippet %>
+        <p class="profile-name" style="font-size:10px;color:black;"><%= snippet.title %></p>
+        <p class="profile-name" style="font-size:10px;color:black;"><%= snippet.published_at %><%= snippet.channel_title %></p>
+      <% end %>
+      <div class="no-user">近くにお相手がいません</div>
+    </div>
+
+    <div class="swipe--buttons">
+      <button id="dislike"><i class="fas fa-times fa-2x"></i></button>
+      <button id="like"><i class="fas fa-heart fa-2x"></i></button>
+    </div>
+  </div>
+
+  <%= form_with url:'/youtube/videos', method: :get, local: true do |f| %>
+    <%= f.text_field :keyword %>
+    <%= f.submit 'Search' %> <%= link_to 'Clear',youtube_videos_path %>
+  <% end %>
+  
+</div>
