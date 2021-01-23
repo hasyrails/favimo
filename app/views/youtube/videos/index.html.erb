@@ -1,27 +1,45 @@
-<div class="user-index-page">
+<div class="video-index-page">
 
-  <div class="swipe">
-    <div class="swipe--status">
+  <div class="video-swipe">
+    <div class="video-swipe--status">
       <i class="fa fa-times"></i>
       <i class="fa fa-heart"></i>
     </div>
 
-    <div class="swipe--cards">
+    <div class="video-swipe--cards">
       <% @youtube_videos.items.each do |item| %>
-        <div class="swipe--card">
+        <div class="video-swipe--card">
           <iframe width="480" height="200" src="https://www.youtube.com/embed/<%= item.id.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
           </iframe>
+          <% snippet = item.snippet %>
+          <div class="video-info" style="margin-top:10%;font-size:10px;color:black;">
+            <div>
+              <%= snippet.title %>
+            </div>
+            <div>
+              <%= snippet.description %>
+            </div>
+            <div>
+              <%= snippet.published_at %>
+            </div>
+            <div>
+              <%= snippet.channel_id %>
+            </div>
+            <div>
+              <%= snippet.channel_title %>
+            </div>
+            <div>
+              <%= image_tag snippet.thumbnails.default.url %>
+            </div>
+          </div>
         </div>
-        <% snippet = item.snippet %>
-        <p class="profile-name" style="font-size:10px;color:black;"><%= snippet.title %></p>
-        <p class="profile-name" style="font-size:10px;color:black;"><%= snippet.published_at %><%= snippet.channel_title %></p>
       <% end %>
       <div class="no-user">近くにお相手がいません</div>
     </div>
 
-    <div class="swipe--buttons">
-      <button id="dislike"><i class="fas fa-times fa-2x"></i></button>
-      <button id="like"><i class="fas fa-heart fa-2x"></i></button>
+    <div class="video-swipe--buttons">
+      <button id="video-dislike"><i class="fas fa-times fa-2x"></i></button>
+      <button id="video-like"><i class="fas fa-heart fa-2x"></i></button>
     </div>
   </div>
 

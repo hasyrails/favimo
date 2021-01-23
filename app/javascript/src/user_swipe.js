@@ -1,4 +1,4 @@
-if(location.pathname == "/users" || location.pathname == "/youtube/videos") {
+if(location.pathname == "/users") {
   $(function () {
     let allCards = document.querySelectorAll('.swipe--card');
     let swipeContainer = document.querySelector('.swipe');
@@ -116,3 +116,4 @@ if(location.pathname == "/users" || location.pathname == "/youtube/videos") {
     });
   });
 }
+

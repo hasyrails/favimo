@@ -42,3 +42,5 @@ db/dummy_images/
 
 .DS_Store
 db/DS_Store
+
+.env
