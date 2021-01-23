@@ -12,7 +12,5 @@ Rails.application.routes.draw do
   resources :chat_rooms, only: [:create, :show]
   namespace :youtube do
     resources :videos
-    resources :channels
-    resources :playlists
   end
 end
