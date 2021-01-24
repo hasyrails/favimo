@@ -49,6 +49,7 @@ if(location.pathname == "/youtube/videos") {
         data: {
           user_id: user_id,
           reaction: reaction,
+          title: $("div#video-title").text()
         }
       })
       .done(function () {
@@ -59,7 +60,7 @@ if(location.pathname == "/youtube/videos") {
     $('#video-like').on('click', function() {
       createButtonListener("like");
     })
-
+    
     $('#video-dislike').on('click', function() {
       createButtonListener("dislike");
     })

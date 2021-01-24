@@ -1,4 +1,5 @@
 <div class="video-index-page">
+  <%= render "partial/videos_page_navbar" %>
 
   <div class="video-swipe">
     <div class="video-swipe--status">
@@ -8,12 +9,14 @@
 
     <div class="video-swipe--cards">
       <% @youtube_videos.items.each do |item| %>
-        <div class="video-swipe--card">
+        <div 
+        class="video-swipe--card"
+        >
           <iframe width="480" height="200" src="https://www.youtube.com/embed/<%= item.id.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
           </iframe>
           <% snippet = item.snippet %>
           <div class="video-info" style="margin-top:10%;font-size:10px;color:black;">
-            <div>
+            <div id="video-title">
               <%= snippet.title %>
             </div>
             <div>

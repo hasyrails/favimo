@@ -62,4 +62,3 @@ gem "mini_magick"
 
 # YouTube API
 gem 'google-api-client', '~> 0.11'
-
