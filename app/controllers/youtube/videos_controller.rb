@@ -3,9 +3,10 @@ class Youtube::VideosController < ApplicationController
   GOOGLE_API_KEY = Rails.application.credentials.google[:api_key]
 
   def create
-    reaction = YoutubeVideo.find_or_initialize_by(user_id: current_user.id)
-    reaction.update_attributes(
-      status: params[:reaction]
+    reaction = YoutubeVideo.create(
+      user_id: current_user.id,
+      status: params[:reaction],
+      title: params[:title],
     )
   end
 
@@ -32,6 +33,6 @@ class Youtube::VideosController < ApplicationController
     else
       @youtube_videos = find_videos('')
     end
-    
   end
+
 end
