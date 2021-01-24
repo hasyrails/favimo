@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   resources :matching, only: [:index]
   resources :chat_rooms, only: [:create, :show]
   namespace :youtube do
-    resources :videos
+    resources :videos, only: [:index]
+    namespace :videos do
+      resources :like, only: [:show, :index]
+      resources :dislike, only: [:show, :index]
+    end
   end
 end
