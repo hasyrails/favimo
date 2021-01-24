@@ -70,10 +70,11 @@ ActiveRecord::Schema.define(version: 2021_01_23_071806) do
     t.string "video_id"
     t.string "title"
     t.string "description"
+    t.datetime "published_at"
     t.string "channel_id"
     t.string "channel_title"
     t.string "thumbnail_url"
-    t.integer "status", null: false
+    t.integer "status", default: 0, null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

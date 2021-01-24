@@ -5,10 +5,11 @@ class CreateYoutubeVideos < ActiveRecord::Migration[6.0]
       t.string :video_id
       t.string :title
       t.string :description
+      t.datetime :published_at
       t.string :channel_id
       t.string :channel_title
       t.string :thumbnail_url
-      t.integer :status, null: false
+      t.integer :status, null: false, default: 0
       t.references :user, null: false, foreign_key: true
 
       t.timestamps
