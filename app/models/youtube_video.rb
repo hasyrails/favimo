@@ -1,4 +1,4 @@
 class YoutubeVideo < ApplicationRecord
   belongs_to :user
-  enum status: { like: 0, dislike: 1 }
+  enum status: { default: 0, like: 1, dislike: 2 }
 end

@@ -8,7 +8,7 @@
     </div>
 
     <div class="video-swipe--cards">
-      <% @youtube_videos.items.each do |item| %>
+      <% @search_results.items.each do |item| %>
         <div 
         class="video-swipe--card"
         >
@@ -33,6 +33,15 @@
             </div>
             <div>
               <%= image_tag snippet.thumbnails.default.url %>
+            </div>
+            <div>
+              <%= @youtube_videos %>
+            </div>
+            <div>
+              <%= @youtube_video %>
+            </div>
+            <div>
+              <%= @youtube_video.title %>
             </div>
           </div>
         </div>

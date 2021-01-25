@@ -18,7 +18,7 @@ class Youtube::VideosController < ApplicationController
     opt = {
       q: keyword,
       type: 'video',
-      max_results: 1,
+      max_results: 2,
       order: :date,
       page_token: next_page_token,
       published_after: after.iso8601,
@@ -28,11 +28,48 @@ class Youtube::VideosController < ApplicationController
   end
 
   def index
+    @youtube_videos = []
+    id = 1.step
+
     if params[:keyword].present?
-      @youtube_videos = find_videos(params[:keyword])
+      @search_results = find_videos(params[:keyword])
+      @search_results.items.each do |search_result|
+        @youtube_video = YoutubeVideo.new(
+          id: id.next,
+          identify_id: search_result.id,
+          video_id: search_result.id.video_id,
+          title: search_result.snippet.title,
+          description: search_result.snippet.description,
+          published_at: search_result.snippet.published_at,
+          channel_id: search_result.snippet.channel_id,
+          channel_title: search_result.snippet.channel_title,
+          thumbnail_url: search_result.snippet.thumbnails.default.url,
+          user_id: current_user.id
+        )
+        @youtube_video.save!
+        @youtube_videos << @youtube_video
+      end
     else
-      @youtube_videos = find_videos('')
+      @search_results = find_videos('')
+      @search_results.items.each do |search_result|
+        @youtube_video = YoutubeVideo.new(
+          id: id.next,
+          identify_id: search_result.id,
+          video_id: search_result.id.video_id,
+          title: search_result.snippet.title,
+          description: search_result.snippet.description,
+          published_at: search_result.snippet.published_at,
+          channel_id: search_result.snippet.channel_id,
+          channel_title: search_result.snippet.channel_title,
+          thumbnail_url: search_result.snippet.thumbnails.default.url,
+          user_id: current_user.id
+        )
+        @youtube_video.save!
+        @youtube_videos << @youtube_video
+      end
     end
   end
+
+  private
 
 end
