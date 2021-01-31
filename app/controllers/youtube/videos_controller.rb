@@ -29,7 +29,7 @@ class Youtube::VideosController < ApplicationController
 
   def index
     @youtube_videos = []
-    id = 1.step
+    id = YoutubeVideo.last.id.next.step
 
     if params[:keyword].present?
       @search_results = find_videos(params[:keyword])
