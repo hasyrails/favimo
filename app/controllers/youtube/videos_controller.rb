@@ -29,13 +29,17 @@ class Youtube::VideosController < ApplicationController
 
   def index
     @youtube_videos = []
-    id = YoutubeVideo.last.id.next.step
+    # if YoutubeVideo.last.nil?
+    #   id = 1
+    # else
+    #   id = YoutubeVideo.last.id.next.step
+    # end
 
     if params[:keyword].present?
       @search_results = find_videos(params[:keyword])
       @search_results.items.each do |search_result|
         @youtube_video = YoutubeVideo.new(
-          id: id.next,
+          # id: id.next,
           identify_id: search_result.id,
           video_id: search_result.id.video_id,
           title: search_result.snippet.title,
@@ -47,13 +51,15 @@ class Youtube::VideosController < ApplicationController
           user_id: current_user.id
         )
         @youtube_video.save!
+        rescue ActiveRecord::RecordInvalid => e
+          pp e.record.errors
         @youtube_videos << @youtube_video
       end
     else
       @search_results = find_videos('')
       @search_results.items.each do |search_result|
         @youtube_video = YoutubeVideo.new(
-          id: id.next,
+          # id: id.next,
           identify_id: search_result.id,
           video_id: search_result.id.video_id,
           title: search_result.snippet.title,
@@ -65,9 +71,12 @@ class Youtube::VideosController < ApplicationController
           user_id: current_user.id
         )
         @youtube_video.save!
+        rescue ActiveRecord::RecordInvalid => e
+          pp e.record.errors
         @youtube_videos << @youtube_video
       end
     end
+
   end
 
   private
