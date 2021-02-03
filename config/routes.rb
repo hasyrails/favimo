@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   resources :reactions, only: [:create]
   resources :matching, only: [:index]
   resources :chat_rooms, only: [:create, :show]
+  resources :qiitas
   namespace :youtube do
-    resources :videos, only: [:index]
+    resources :videos
     namespace :videos do
       resources :like, only: [:show, :index]
       resources :dislike, only: [:show, :index]
