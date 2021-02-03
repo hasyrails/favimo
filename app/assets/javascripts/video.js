@@ -43,13 +43,11 @@ if(location.pathname == "/youtube/videos") {
 
     function postReaction(user_id, reaction) {
       $.ajax({
-        url: "videos",
+        url: "youtube/videos",
         type: "POST",
         datatype: "json",
         data: {
-          user_id: user_id,
           reaction: reaction,
-          title: $("div#video-title").text()
         }
       })
       .done(function () {
