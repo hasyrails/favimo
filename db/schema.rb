@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2021_01_23_071806) do
     t.string "channel_title"
     t.string "thumbnail_url"
     t.integer "status", default: 0, null: false
+    t.string "search_keyword"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

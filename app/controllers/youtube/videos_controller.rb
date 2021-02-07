@@ -1,4 +1,5 @@
 class Youtube::VideosController < ApplicationController
+  before_action :authenticate_user!
   require 'google/apis/youtube_v3'
   GOOGLE_API_KEY = Rails.application.credentials.google[:api_key]
 
@@ -48,13 +49,15 @@ class Youtube::VideosController < ApplicationController
           channel_id: search_result.snippet.channel_id,
           channel_title: search_result.snippet.channel_title,
           thumbnail_url: search_result.snippet.thumbnails.default.url,
+          search_keyword: params[:keyword],
           user_id: current_user.id
         )
         @youtube_video.save!
         rescue ActiveRecord::RecordInvalid => e
           pp e.record.errors
-        @youtube_videos << @youtube_video
+          @youtube_videos << @youtube_video
       end
+      redirect_to youtube_myvideos_path(q: params[:keyword]) and return
     else
       @search_results = find_videos('')
       @search_results.items.each do |search_result|
