@@ -13,9 +13,12 @@ Rails.application.routes.draw do
   resources :qiitas
   namespace :youtube do
     resources :videos
+    # resources :myvideos
+    get '/myvideos/:q', to: 'myvideos#index', as: 'myvideos'
+    patch '/myvideos/:id', to: 'myvideos#update'
     namespace :videos do
-      resources :like, only: [:show, :index]
-      resources :dislike, only: [:show, :index]
+      resources :like
+      resources :dislike
     end
   end
 end

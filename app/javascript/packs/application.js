@@ -16,3 +16,4 @@ require("channels")
 require("src/profile_image_upload");
 require("src/user_swipe")
 require("../../assets/javascripts/video")
+require("../../assets/javascripts/myvideo")
