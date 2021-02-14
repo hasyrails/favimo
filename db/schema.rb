@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_23_071806) do
+ActiveRecord::Schema.define(version: 2021_02_07_215659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 2021_01_23_071806) do
   create_table "chat_rooms", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "youtube_video_id", null: false
+    t.integer "status", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+    t.index ["youtube_video_id"], name: "index_favorites_on_youtube_video_id"
   end
 
   create_table "reactions", force: :cascade do |t|
@@ -86,6 +96,8 @@ ActiveRecord::Schema.define(version: 2021_01_23_071806) do
   add_foreign_key "chat_messages", "users"
   add_foreign_key "chat_room_users", "chat_rooms"
   add_foreign_key "chat_room_users", "users"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "favorites", "youtube_videos"
   add_foreign_key "reactions", "users", column: "from_user_id"
   add_foreign_key "reactions", "users", column: "to_user_id"
   add_foreign_key "youtube_videos", "users"
