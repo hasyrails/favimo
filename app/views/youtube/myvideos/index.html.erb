@@ -9,9 +9,11 @@
 
     <div class="video-swipe--cards">
       <% @my_videos.each do |my_video| %>
+        <%= myvideo_id = my_video.id.to_s %>
+        <%= myvideo_unique_id = my_video.video_id.to_s %>
         <div 
         class="video-swipe--card"
-        id="<%= my_video.id %>"
+        id="<%= myvideo_id + '-' + myvideo_unique_id %>"
         >
           <iframe width="480" height="200" src="https://www.youtube.com/embed/<%= my_video.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
           </iframe>

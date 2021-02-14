@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       registrations: 'registrations',
       sessions: :sessions
     }
-  
+    
   root 'top#index'
   resources :users, only: [:show, :index]
   resources :reactions, only: [:create]
@@ -15,10 +15,14 @@ Rails.application.routes.draw do
     resources :videos
     # resources :myvideos
     get '/myvideos/:q', to: 'myvideos#index', as: 'myvideos'
-    patch '/myvideos/:id', to: 'myvideos#update'
     namespace :videos do
-      resources :like
-      resources :dislike
+    end
+    namespace :myvideos do
+      resources :favorites, only: [:create]
+      namespace :status do
+        resources :like
+        resources :dislike
+      end
     end
   end
 end
