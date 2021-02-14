@@ -1,3 +1,6 @@
+//= require_tree .
+//= require_jquery .
+
 import 'bootstrap';
 import 'hammerjs';
 import '../stylesheets/application';

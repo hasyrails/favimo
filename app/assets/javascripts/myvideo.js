@@ -19,7 +19,7 @@ if(location.pathname.includes('/youtube/myvideos/')) {
     
     initCards();
 
-    function createButtonListener(reaction) {
+    function createButtonListener(favorite) {
       let cards = document.querySelectorAll('.video-swipe--card:not(.removed)');
 
       if (!cards.length) return false;
@@ -27,12 +27,21 @@ if(location.pathname.includes('/youtube/myvideos/')) {
       let moveOutWidth = document.body.clientWidth * 2;
 
       let card = cards[0];
-      let myvideo_id = card.id;
+      let video_swipe_card_id = card.id;
 
-      postReaction(myvideo_id, reaction);
+      let video_swipe_card_id_hyphon_split_array = video_swipe_card_id.split('-');
+    
+      let youtube_video_id = video_swipe_card_id_hyphon_split_array[0]
+      let youtube_video_unique_id = video_swipe_card_id_hyphon_split_array[1]
+      console.log(video_swipe_card_id_hyphon_split_array)
+      console.log(video_swipe_card_id_hyphon_split_array[0])
+      console.log(video_swipe_card_id_hyphon_split_array[1])
+
+
+      postReaction(youtube_video_id, youtube_video_unique_id,favorite);
       card.classList.add('removed');
 
-      if (reaction == "like") {
+      if (favorite == "like") {
         card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
       } else {
         card.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(30deg)';
@@ -41,20 +50,22 @@ if(location.pathname.includes('/youtube/myvideos/')) {
       initCards();
     }
 
-    function postReaction(myvideo_id, reaction) {
-      // $.ajax({
-      //   url: "youtube/myvideos/"+ myvideo_id,
-      //   type: "POST",
-      //   datatype: "json",
-      //   data: {
-      //     reaction: reaction,
-      //   }
-      // })
-      // .done(function () {
-      //   console.log("done!")
-      // })
+    function postReaction(youtube_video_id, youtube_video_unique_id, favorite) {
+      $.ajax({
+        url: "favorites.json",
+        type: "POST",
+        datatype: "json",
+        data: {
+          youtube_video_id: youtube_video_id,
+          youtube_video_unique_id: youtube_video_unique_id,
+          favorite: favorite,
+        }
+      })
+      .done(function () {
+        console.log("done!")
+      })
     }
-
+    
     $('#myvideo-like').on('click', function() {
       createButtonListener("like");
     })
