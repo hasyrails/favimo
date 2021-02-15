@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :chat_rooms, only: [:create, :show]
   resources :qiitas
   namespace :youtube do
-    resources :videos
+    resources :videos_search
     # resources :myvideos
     get '/myvideos/:q', to: 'myvideos#index', as: 'myvideos'
     namespace :videos do
