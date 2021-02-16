@@ -9,48 +9,142 @@
 
     <div class="video-swipe--cards">
       <% @my_videos.each do |my_video| %>
-        <%= myvideo_id = my_video.id.to_s %>
-        <%= myvideo_unique_id = my_video.video_id.to_s %>
+        <div
+          style="display:none;"
+        >
+          <%= myvideo_id = my_video.id.to_s %>
+          <%= myvideo_unique_id = my_video.video_id.to_s %>
+        </div>
         <div 
         class="video-swipe--card"
         id="<%= myvideo_id + '-' + myvideo_unique_id %>"
         >
-          <iframe width="480" height="200" src="https://www.youtube.com/embed/<%= my_video.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          <iframe width="100%" height="200" src="https://www.youtube.com/embed/<%= my_video.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
           </iframe>
           <div class="video-info" style="margin-top:10%;font-size:10px;color:black;">
-            <div id="video-title">
+            <div
+              style="font-size:16px;"
+            >
+              動画のタイトル
+            </div>
+            <div
+              style="
+              text-align:center;
+              "
+            >
               <%= my_video.title %>
             </div>
-            <div>
+            <div
+              style="font-size:16px;"
+            >
+              動画の説明
+            </div>
+            <div
+              style="text-align:center;"
+            >
               <%= my_video.description %>
-            </div>
-            <div>
-              <%= my_video.published_at %>
-            </div>
-            <div>
-              <%= my_video.channel_id %>
-            </div>
-            <div>
-              <%= my_video.channel_title %>
-            </div>
-            <div>
-              <%= image_tag my_video.thumbnail_url %>
             </div>
           </div>
         </div>
       <% end %>
-      <div class="no-user">近くにお相手がいません</div>
-    </div>
-
-    <div class="video-swipe--buttons">
-      <button id="myvideo-dislike"><i class="fas fa-times fa-2x"></i></button>
-      <button id="myvideo-like"><i class="fas fa-heart fa-2x"></i></button>
+      <div class="no-user">動画がありません</div>
     </div>
   </div>
+  
+  <div 
+    class="video-swipe--buttons"
+    >
+    <button id="myvideo-dislike"><i class="fas fa-times fa-2x"></i></button>
+    <button id="myvideo-like"><i class="fas fa-heart fa-2x"></i></button>
+  </div>
 
-  <%= form_with url:'/youtube/videos', method: :get, local: true do |f| %>
-    <%= f.text_field :keyword %>
-    <%= f.submit 'Search' %> <%= link_to 'Clear',youtube_myvideos_path %>
-  <% end %>
+  <div
+    style="
+      margin-top:10%;
+      margin-bottom:10%;
+    "
+  >
+    <%= form_with url:'/youtube/videos_search', method: :get, local: true do |f| %>
+      <div
+        style="text-align:center;"
+      >
+        <%= f.text_field :keyword %>
+        <%= f.submit 'Search' %> <%= link_to 'Clear',youtube_myvideos_path %>
+      </div>
+    <% end %>
+  </div>
+
+  <div
+    style="
+    display:flex;
+    text-align:center;
+    justify-content: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    "
+  >
+    <div
+      style="
+      background-color: #F5F5F5;
+      border-radius: 10px 10px 10px 10px;
+      margin-right: 10px;
+      "
+    >
+      <%= link_to youtube_myvideos_status_dislike_index_path, 
+      class: "nav-item nav-link", 
+      style: "
+      color: black;
+      font-size: 12px;
+      " do%>
+        <div>✖︎した動画リストへ</div>
+        <div
+          style="
+          display: flex;
+          justify-content: center;
+          "
+        >
+          <div
+            style="margin-right: 5px;"
+          >
+            <i class="fas fa-times fa-sm inherit", style="color:black;"></i>
+          </div>
+          <div>
+            <i class="fas fa-play-circle fa-lg inherit"></i>
+          </div>
+        </div>
+    </div>
+    <% end %>
+    <div
+      style="
+      background-color: lavenderblush;
+      border-radius: 10px 10px 10px 10px;
+      margin-left: 10px;
+      "
+    >
+      <%= link_to youtube_myvideos_status_like_index_path,
+      class: "nav-item nav-link",
+      style: "
+      color:black;
+      font-size: 12px;
+      " do %>
+        <div>❤︎した動画リストへ</div>
+       <div
+          style="
+          display: flex;
+          justify-content: center;
+          "
+        >
+          <div
+            style="margin-right: 5px;"
+          >
+            <i class="fas fa-heart fa-sm inherit"></i>
+          </div>
+          <div>
+            <i class="fas fa-play-circle fa-lg inherit"></i>
+          </div>
+        </div>
+        <% end %>
+    </div>
+  </div>
   
 </div>

@@ -32,11 +32,14 @@ if(location.pathname.includes('/youtube/myvideos/')) {
       let video_swipe_card_id_hyphon_split_array = video_swipe_card_id.split('-');
     
       let youtube_video_id = video_swipe_card_id_hyphon_split_array[0]
-      let youtube_video_unique_id = video_swipe_card_id_hyphon_split_array[1]
-      console.log(video_swipe_card_id_hyphon_split_array)
-      console.log(video_swipe_card_id_hyphon_split_array[0])
-      console.log(video_swipe_card_id_hyphon_split_array[1])
-
+      
+      let youtube_video_unique_id;
+      if(video_swipe_card_id_hyphon_split_array.length === 2){
+        youtube_video_unique_id = video_swipe_card_id_hyphon_split_array[1]
+      }
+      else{
+        youtube_video_unique_id = video_swipe_card_id_hyphon_split_array[1] + video_swipe_card_id_hyphon_split_array[2]
+      }
 
       postReaction(youtube_video_id, youtube_video_unique_id,favorite);
       card.classList.add('removed');
@@ -95,16 +98,30 @@ if(location.pathname.includes('/youtube/myvideos/')) {
     });
  
     hammertime.on('panend', function (event) {
+      let video_swipe_card_id = el.id;
+
+      let video_swipe_card_id_hyphon_split_array = video_swipe_card_id.split('-');
+    
+      let youtube_video_id = video_swipe_card_id_hyphon_split_array[0]
+      
+      let youtube_video_unique_id;
+      if(video_swipe_card_id_hyphon_split_array.length === 2){
+        youtube_video_unique_id = video_swipe_card_id_hyphon_split_array[1]
+      }
+      else{
+        youtube_video_unique_id = video_swipe_card_id_hyphon_split_array[1] + video_swipe_card_id_hyphon_split_array[2]
+      }
+
       el.classList.remove('moving');
       swipeContainer.classList.remove('swipe_like');
       swipeContainer.classList.remove('swipe_dislike');
 
       let moveOutWidth = document.body.clientWidth;
 
-      let keep = Math.abs(event.deltaX) < 200
+      let keep = Math.abs(event.deltaX) < 100
       event.target.classList.toggle('removed', !keep);
 
-      let reaction = event.deltaX > 0 ? "like" : "dislike";
+      let favorite = event.deltaX > 0 ? "like" : "dislike";
 
       if (keep) {
         event.target.style.transform = '';
@@ -117,7 +134,7 @@ if(location.pathname.includes('/youtube/myvideos/')) {
         let yMulti = event.deltaY / 80;
         let rotate = xMulti * yMulti;
 
-        postReaction(el.id, reaction);
+        postReaction(youtube_video_id, youtube_video_unique_id,favorite);
 
         event.target.style.transform = 'translate(' + toX + 'px, ' + (toY + event.deltaY) + 'px) rotate(' + rotate + 'deg)';
 
