@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     namespace :videos do
     end
     namespace :myvideos do
-      resources :favorites, only: [:create]
+      resources :favorites, only: [:create, :update]
       namespace :status do
         resources :like
         resources :dislike
