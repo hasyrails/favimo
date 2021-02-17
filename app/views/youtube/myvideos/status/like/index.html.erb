@@ -1,27 +1,214 @@
-<% @like_myvideos.each do |like_myvideo| %>
-  <div
-    style="display:flex;"
-  > 
-    <div>
-      <iframe width="480" height="200" src="https://www.youtube.com/embed/<%= like_myvideo.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
+<div class="video-index-page">
+  <%= render "partial/videos_page_navbar" %>
+  
+  <%= form_with url:'/youtube/videos_search', method: :get, local: true do |f| %>
+    <div
+      style="text-align:center;"
+    >
+      <%= f.text_field :keyword %>
+      <%= f.submit '検索する' %> <%= link_to 'クリア',youtube_videos_search_index_path %>
     </div>
-    <div class="video-info" style="margin-top:10%;font-size:10px;color:black;">
-      <div id="video-title">
-        <%= like_myvideo.title %>
+  <% end %>
+
+  <% @like_myvideos.each do |like_myvideo| %>
+    <div
+      style="
+      display:flex;
+      "
+    > 
+      <div
+        style="
+        margin-left:15px;
+        margin-top:10px;
+        margin-bottom:10px;
+        "
+      >
+        <iframe width="300" height="200" src="https://www.youtube.com/embed/<%= like_myvideo.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
       </div>
-      <div id="video-title">
-        <%= like_myvideo.description %>
+      <div
+        class="video-info"
+        style="
+        margin-left:5px;
+        margin-left:5px;
+        margin-top:10px;
+        margin-bottom:10px;
+        "
+      >
+        <div
+        class="status-assigned-video-title"
+        style="
+        font-size:16px;
+        "
+        >
+            <%= like_myvideo.title.truncate(40) %>
+        </div>
+
+        <div
+        class="status-assigned-video-description"
+        style="font-size:10px;"
+        >
+          <%= like_myvideo.description.truncate(40) %>
+        </div>
+      
+        <div
+        class="status-assigned-video-buttons"
+        style="
+        display:flex;
+        "
+        >
+          <div
+            style="
+            background-color: #F5F5F5;
+            border-radius: 10px 10px 10px 10px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            height: 100%;
+            width: 125%;
+            font-size:20px;
+            "
+          >
+            <%= link_to youtube_myvideos_favorite_path(like_myvideo,params:{
+              id: like_myvideo.id,
+              favorite: 'dislike'
+              } 
+            ),
+            method: :patch,
+            style: "
+            color: black;
+            " do%>
+              <div
+                style="
+                display: flex;
+                justify-content: center;
+                "
+              >
+                <div
+                  style="margin-right: 5px;"
+                >
+                  <i class="fas fa-times fa-sm inherit", style="color:black;"></i>
+                </div>
+                <div>
+                  <i class="fas fa-play-circle fa-lg inherit"></i>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+          <div
+            style="
+            background-color: #F5F5F5;
+            border-radius: 10px 10px 10px 10px;
+            margin-right: 10px;
+            height: 100%;
+            width: 125%;
+            font-size:20px;
+            "
+          >
+            <%= link_to youtube_myvideos_status_dislike_index_path, 
+            style: "
+            color: black;
+            " do%>
+              <div
+                style="
+                display: flex;
+                justify-content: center;
+                "
+              >
+                <div
+                  style="margin-right: 5px;"
+                >
+                  <i class="fas fa-trash fa-sm inherit", style="color:black;"></i>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div
+          style="display: flex;"
+        >
+             <div
+            style="
+            background-color: #F5F5F5;
+            border-radius: 10px 10px 10px 10px;
+            margin-right: 10px;
+            height: 100%;
+            width: 125%;
+            font-size:20px;
+            "
+          >
+            <%= link_to youtube_myvideos_status_dislike_index_path, 
+            style: "
+            color: black;
+            " do%>
+              <div
+                style="
+                display: flex;
+                justify-content: center;
+                "
+              >
+                <div
+                  style="margin-right: 5px;"
+                >
+                  <i class="fas fa-comments fa-sm inherit", style="color:black;"></i>
+                </div>
+                <div
+                  style="
+                  margin-right: 5px;
+                  "
+                >
+                  <i class="fas fa-share-alt fa-sm inherit", style="color:black;"></i>
+                </div>
+              </div>
+            <% end %>
+          </div>
+             <div
+            style="
+            background-color: #F5F5F5;
+            border-radius: 10px 10px 10px 10px;
+            margin-right: 10px;
+            height: 100%;
+            width: 125%;
+            font-size:20px;
+            "
+          >
+            <%= link_to youtube_myvideos_status_dislike_index_path, 
+            style: "
+            color: black;
+            " do%>
+              <div
+                style="
+                display: flex;
+                justify-content: center;
+                "
+              >
+                <div
+                  style="margin-right: 5px;"
+                >
+                  <i class="fas fa-users fa-sm inherit", style="color:black;"></i>
+                </div>
+                <div
+                  style="margin-right: 5px;"
+                >
+                  <i class="fas fa-search fa-sm inherit", style="color:black;"></i>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      
       </div>
-      <div id="video-title">
-        <%= like_myvideo.description %>
-      </div>
-      <div id="video-title">
-        <%= like_myvideo.channel_id %>
-      </div>
-      <div id="video-title">
-        <%= like_myvideo.channel_title %>
-      </div>
+    
+    
     </div>
+
+
+  <% end %>
+
+
+  <div>
+    <%= render "partial/links_to_myvideos_status_like_or_dislike" %>
   </div>
-<% end %>
+  
+</div>

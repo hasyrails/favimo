@@ -15,4 +15,32 @@ class Youtube::Myvideos::FavoritesController < ApplicationController
       status: params[:favorite]
     )
   end
+
+  def update
+    @youtube_video = YoutubeVideo.find(params[:id])  
+    @youtube_video.update!(
+      status: params[:favorite]
+    )
+
+    @favorite = Favorite.find(@youtube_video.favorites.ids.first)
+    @favorite.update!(
+      status: params[:favorite]
+    )
+
+    if params[:favorite] == 'like'
+      redirect_to youtube_myvideos_status_dislike_index_path
+    elsif params[:favorite] == 'dislike'
+      redirect_to youtube_myvideos_status_like_index_path
+    end
+  end
+
+  private
+  
+  def youtube_video_params
+    params.require(:youtube_video).permit(:status)
+  end
+
+  def favorite_params
+    params.require(:favorite).permit(:status)
+  end
 end

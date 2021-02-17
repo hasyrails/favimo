@@ -9,5 +9,9 @@
       <%= f.submit '検索する' %> <%= link_to 'クリア',youtube_videos_search_index_path %>
     </div>
   <% end %>
+
+  <div>
+    <%= render "partial/links_to_myvideos_status_like_or_dislike" %>
+  </div>
   
 </div>

@@ -1,0 +1,72 @@
+<div
+    style="
+    display:flex;
+    text-align:center;
+    justify-content: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    "
+  >
+    <div
+      style="
+      background-color: #F5F5F5;
+      border-radius: 10px 10px 10px 10px;
+      margin-right: 10px;
+      "
+    >
+      <%= link_to youtube_myvideos_status_dislike_index_path, 
+      class: "nav-item nav-link", 
+      style: "
+      color: black;
+      font-size: 12px;
+      " do%>
+        <div>✖︎した動画リストへ</div>
+        <div
+          style="
+          display: flex;
+          justify-content: center;
+          "
+        >
+          <div
+            style="margin-right: 5px;"
+          >
+            <i class="fas fa-times fa-sm inherit", style="color:black;"></i>
+          </div>
+          <div>
+            <i class="fas fa-play-circle fa-lg inherit"></i>
+          </div>
+        </div>
+    </div>
+    <% end %>
+    <div
+      style="
+      background-color: lavenderblush;
+      border-radius: 10px 10px 10px 10px;
+      margin-left: 10px;
+      "
+    >
+      <%= link_to youtube_myvideos_status_like_index_path,
+      class: "nav-item nav-link",
+      style: "
+      color:black;
+      font-size: 12px;
+      " do %>
+        <div>❤︎した動画リストへ</div>
+       <div
+          style="
+          display: flex;
+          justify-content: center;
+          "
+        >
+          <div
+            style="margin-right: 5px;"
+          >
+            <i class="fas fa-heart fa-sm inherit"></i>
+          </div>
+          <div>
+            <i class="fas fa-play-circle fa-lg inherit"></i>
+          </div>
+        </div>
+        <% end %>
+    </div>
+  </div>
