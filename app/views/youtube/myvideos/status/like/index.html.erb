@@ -68,7 +68,10 @@
             font-size:20px;
             "
           >
-            <%= link_to youtube_myvideos_favorite_path(like_myvideo,params:{ favorite: 'dislike'} 
+            <%= link_to youtube_myvideos_favorite_path(like_myvideo,params:{
+              id: like_myvideo.id,
+              favorite: 'dislike'
+              } 
             ),
             method: :patch,
             style: "
