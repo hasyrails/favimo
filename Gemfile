@@ -65,3 +65,5 @@ gem 'google-api-client', '~> 0.11'
 
 # Qiita API
 gem 'qiita'
+
+gem 'pry-rails'
