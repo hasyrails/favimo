@@ -105,7 +105,8 @@
             font-size:20px;
             "
           >
-            <%= link_to youtube_myvideos_status_dislike_index_path, 
+            <%= link_to youtube_myvideos_status_like_path(like_myvideo), 
+            method: :delete,
             style: "
             color: black;
             " do%>
