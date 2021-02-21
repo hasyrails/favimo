@@ -10,6 +10,36 @@
     </div>
   <% end %>
 
+  <% @search_words.each do |search_word| %>
+    <div
+    style="
+    background-color: ghostwhite;
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    "
+    >
+        <div
+        style="
+        margin-right: 10px;
+        "
+        >
+          <i class="fas fa-search fa-sm inherit", style="color:black;"></i>
+        </div>
+        <div
+        style="
+          border-radius: 15px 15px 15px 15px;
+          text-align: center;
+        "
+        >
+          <%= link_to  youtube_myvideos_path(q: search_word) ,method: :get do %>
+            <%= search_word %>
+          <% end %>
+        </div>
+    </div>
+  <% end %>
+
   <div>
     <%= render "partial/links_to_myvideos_status_like_or_dislike" %>
   </div>
