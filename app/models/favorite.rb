@@ -4,5 +4,5 @@ class Favorite < ApplicationRecord
 
   enum status: { like: 0, dislike: 1 }
   
-  validates :youtube_video_id, uniqueness: true
+  validates :youtube_video_id, uniqueness: { scope: :user_id }
 end
