@@ -1,0 +1,51 @@
+<div class="video-index-page">
+  <%= render "partial/videos_page_navbar" %>
+  
+    <div
+      style="
+      display: flex;
+      justify-content: center;
+      "
+    > 
+      <div
+        style="
+        margin-left:15px;
+        margin-top:10px;
+        margin-bottom:10px;
+        "
+      >
+        <iframe width="300" height="200" src="https://www.youtube.com/embed/<%= params[:video_unique_id] %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <div
+    style="
+    display: flex;
+    justify-content: center;
+    "
+    >
+      <% @common_video_like_users.each do |user| %>
+        <%= link_to root_path do %>
+          <% if user.profile_image.url.nil? %>
+            <%= image_tag 'profile_default_img.png', class: "matching__person-img" %>
+          <% else %>
+            <%= image_tag user.profile_image.url, class: "matching__person-img" %>
+          <% end %>
+        <% end %>
+        
+        <div
+        style="
+        margin-top: 5%;
+        margin-left: 5%;
+        "
+        >
+          <%= user.name %>
+        </div>
+
+      <% end %>
+    </div>
+
+
+  
+</div>
