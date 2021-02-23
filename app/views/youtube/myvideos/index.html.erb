@@ -64,12 +64,13 @@
       margin-bottom:10%;
     "
   >
-    <%= form_with url:'/youtube/videos_search', method: :get, local: true do |f| %>
+    <%= form_with url:'/youtube/videos_search', method: :get, local: true, class: 'cp_iptxt' do |f| %>
       <div
         style="text-align:center;"
       >
         <%= f.text_field :keyword %>
-        <%= f.submit 'Search' %> <%= link_to 'Clear',youtube_myvideos_path %>
+        <%= f.submit '検索する', class: 'btn btn-primary' %>
+        <%= link_to 'クリア',youtube_myvideos_path, class: 'btn btn-secondary' %>
       </div>
     <% end %>
   </div>
