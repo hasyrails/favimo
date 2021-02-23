@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_07_215659) do
+ActiveRecord::Schema.define(version: 2021_02_21_143603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,17 @@ ActiveRecord::Schema.define(version: 2021_02_07_215659) do
     t.index ["to_user_id"], name: "index_reactions_on_to_user_id"
   end
 
+  create_table "share_videos", force: :cascade do |t|
+    t.bigint "youtube_video_id", null: false
+    t.bigint "to_user_id", null: false
+    t.bigint "from_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["from_user_id"], name: "index_share_videos_on_from_user_id"
+    t.index ["to_user_id"], name: "index_share_videos_on_to_user_id"
+    t.index ["youtube_video_id"], name: "index_share_videos_on_youtube_video_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -100,5 +111,8 @@ ActiveRecord::Schema.define(version: 2021_02_07_215659) do
   add_foreign_key "favorites", "youtube_videos"
   add_foreign_key "reactions", "users", column: "from_user_id"
   add_foreign_key "reactions", "users", column: "to_user_id"
+  add_foreign_key "share_videos", "users", column: "from_user_id"
+  add_foreign_key "share_videos", "users", column: "to_user_id"
+  add_foreign_key "share_videos", "youtube_videos"
   add_foreign_key "youtube_videos", "users"
 end

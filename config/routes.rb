@@ -21,7 +21,11 @@ Rails.application.routes.draw do
     namespace :myvideos do
       resources :favorites, only: [:create, :update]
       namespace :status do
-        resources :like
+        resources :like, only: [:index, :destroy]
+        namespace :like do
+          resources :share, only: [:create]
+        end
+        get 'like/:keyword', to: 'like#index'
         resources :dislike
       end
     end
