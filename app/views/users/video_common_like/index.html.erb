@@ -18,7 +18,17 @@
         </iframe>
       </div>
     </div>
-
+  
+    <div
+    style="
+    display:flex;
+    justify-content:center;
+    margin-top: 5%;
+    "
+    >
+      この動画をLikeしたユーザー
+    </div>
+    
     <div
     style="
     display: flex;
@@ -44,8 +54,22 @@
         </div>
 
       <% end %>
+
+      <% if @common_video_like_users.length == 0 %>
+        <div
+        style="
+        margin-top:20%;
+        margin-bottom:40%;
+        color: lightgray;
+        "
+        >
+          この動画をLikeしたユーザーはいません
+        </div>
+      <% end %>
     </div>
 
-
+    <div>
+      <%= render "partial/links_to_myvideos_status_like_or_dislike" %>
+    </div>
   
 </div>

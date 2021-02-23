@@ -1,12 +1,21 @@
 <div class="video-index-page">
   <%= render "partial/videos_page_navbar" %>
+
+  <div
+  style="
+  text-align: center;
+  font-size:20px;
+  "
+  >
+    Likeした動画
+  </div>
   
-  <%= form_with url:'/youtube/videos_search', method: :get, local: true do |f| %>
+  <%= form_with url:'/youtube/myvideos/status/like', method: :get, local: true, class: 'cp_iptxt', style:'text-align: center;' do |f| %>
     <div
-      style="text-align:center;"
     >
       <%= f.text_field :keyword %>
-      <%= f.submit '検索する' %> <%= link_to 'クリア',youtube_videos_search_index_path %>
+      <%= f.submit '検索する', class: 'btn btn-primary' %>
+      <%= link_to 'クリア',youtube_myvideos_status_like_index_path, class: 'btn btn-secondary' %>
     </div>
   <% end %>
 
@@ -139,7 +148,7 @@
             font-size:20px;
             "
           >
-            <%= link_to youtube_myvideos_status_dislike_index_path, 
+            <%= link_to   new_youtube_myvideos_status_like_share_path(params:{id: like_myvideo.id}),
             style: "
             color: black;
             " do%>
