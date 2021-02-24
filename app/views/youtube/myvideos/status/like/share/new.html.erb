@@ -1,0 +1,54 @@
+<div class="matching-index-page">
+  <%= render "partial/users_page_navbar", locals: { user: @user } %>
+  
+  <div>
+    <div
+        style="
+        margin-top:10px;
+        margin-bottom:10px;
+        display: flex;
+        justify-content: center;
+        "
+      >
+      <iframe width="300" height="200" src="https://www.youtube.com/embed/<%= @share_video.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <div class="matching">
+    <p class="matching-title ml-3">動画を共有する</p>
+    
+    <div style="
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 5px;
+    margin-right: 5px;
+    ">
+      <% @users_liked_by_current_user.each do |user| %>
+      <div style="
+      display:block;
+      margin-left: 5px;
+      margin-right: 5px;
+      ">
+        <div>
+          <%= link_to user_path(user, params: {
+            share_video_unique_id: @share_video.video_id,
+          }) do %>
+            <% if user.profile_image.url.nil? %>
+              <%= image_tag 'profile_default_img.png', class: "matching__person-img" %>
+            <% else %>
+              <%= image_tag user.profile_image.url, class: "matching__person-img" %>
+            <% end %>
+          <% end %>
+        </div>
+        
+        <div style="text-align: center;">
+          <%= user.name %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  
+  </div>
+
+</div>

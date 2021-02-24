@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :chat_rooms, through: :chat_room_users
   has_many :favorites
   has_many :youtube_videos, through: :favorites
+  has_many :share_videos
+  has_many :youtube_videos, through: :share_videos
   has_many :chat_messages
 
   # Include default devise modules. Others available are:

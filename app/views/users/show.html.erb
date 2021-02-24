@@ -38,4 +38,24 @@
     </div>
   <% end %>
 
+  <% if params[:share_video_unique_id].present? %>
+    <div
+    style="
+    display: flex;
+    justify-content: center;
+    ">
+      <iframe width="300" height="200" src="https://www.youtube.com/embed/<%= params[:share_video_unique_id] %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+      </iframe>
+    </div>
+    
+    <div
+    style="
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    ">
+      <%= link_to'共有する', youtube_myvideos_status_like_share_index_path(@user ,params: {youtube_video_id: params[:share_video_unique_id], from_user_id: current_user.id, to_user_id: params[:id]}), method: :post %>
+    </div>
+  <% end %>
+
 </div>
