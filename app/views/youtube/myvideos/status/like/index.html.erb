@@ -15,7 +15,7 @@
     >
       <%= f.text_field :keyword %>
       <%= f.submit '検索する', class: 'btn btn-primary' %>
-      <%= link_to 'クリア',youtube_myvideos_status_like_index_path, class: 'btn btn-secondary' %>
+      <%= link_to 'クリア', youtube_myvideos_status_like_index_path, class: 'btn btn-secondary' %>
     </div>
   <% end %>
 
@@ -148,7 +148,7 @@
             font-size:20px;
             "
           >
-            <%= link_to   new_youtube_myvideos_status_like_share_path(params:{id: like_myvideo.id}),
+            <%= link_to new_youtube_myvideos_status_like_share_path(params:{id: like_myvideo.id}),
             style: "
             color: black;
             " do%>

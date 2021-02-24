@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       namespace :status do
         resources :like, only: [:index, :destroy]
         namespace :like do
-          resources :share, only: [:create]
+          resources :share, only: [:new, :create]
         end
         get 'like/:keyword', to: 'like#index'
         resources :dislike
