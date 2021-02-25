@@ -40,6 +40,23 @@
       font-weight: bold;
       color: #616161;
     }
+    &-last-chat-message {
+      margin-left: 30px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: lightgray;
+    }
+    &-last-chat-message-date {
+      margin-left: 60px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: lightgray;
+    }
+    &-chatroom-create-button {
+      margin-left: 30px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
   }
 }
 
