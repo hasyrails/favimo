@@ -2,27 +2,69 @@
   <%= render "partial/users_page_navbar" %>
 
   <div class="matching">
-    <p class="matching-title ml-3">メッセージ</p>
-    <p class="matching-num">マッチング中のお相手 <%= @match_users.size %>人</p>
+    <p class="matching-title ml-3">チャットルーム</p>
+    <p class="matching-num">マッチングしたお相手とチャットすることができます </p>
+    <p class="matching-num">マッチング中のお相手:
+    <%= @match_users.size %>人</p>
 
     <div class="matching__list">
       <% unless @match_users.empty? %>
         <% @match_users.each do |user| %>
           <%= link_to chat_rooms_path(params: { user_id: user.id }), method: :post do %>
-          <div class="matching__person">
+            <div class="matching__person">
+              <% if user.profile_image.url.nil? %>
+                <div class="matching__person-default-img"></div>
+              <% else %>
+                <%= image_tag user.profile_image.url, class: "matching__person-img" %>
+              <% end %>
 
-            <% if user.profile_image.url.nil? %>
-              <div class="matching__person-default-img"></div>
-            <% else %>
-              <%= image_tag user.profile_image.url, class: "matching__person-img" %>
-            <% end %>
-
-            <div class="matching__person-name">
+            <div
+            class="matching__person-name"
+            >
               <%= user.name %>
             </div>
+          <% end %>
+          
+          <% if ChatRoom.find(user.chat_room_users.first.chat_room_id).chat_messages.last.present? %>
+            <div
+            class="matching__person-last-chat-message"
+            >
+              <%= ChatRoom.find(user.chat_room_users.first.chat_room_id).chat_messages.last.content.truncate(15) %>
+            </div>
+            <div
+            class="matching__person-last-chat-message-date"
+            >
+              <%= ChatRoom.find(user.chat_room_users.first.chat_room_id).chat_messages.last.created_at.strftime('%Y/%m/%d %H:%M') %>
+            </div>
+          <% else %>
+            <div
+            class="matching__person-chatroom-create-button"
+            style="justify-content: center;"
+            >
+              <%= link_to chat_rooms_path(params: { user_id: user.id }), method: :post do %>
+                <div 
+                class="btn btn-info"
+                style="height: 40px;"
+                >
+                  <p 
+                  style="
+                  margin-bottom: -5px;
+                  margin-left: 5px;
+                  "
+                  >
+                    チャットルームを作る
+                  </p>
+                </div>
+              <% end %>
+            </div>
+            <div
+            class="matching__person-last-chat-message-date"
+            >
+            </div>
+          <% end %>
 
           </div>
-          <% end %>
+          
         <% end %>
       <% end %>
     </div>
