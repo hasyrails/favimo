@@ -1,6 +1,7 @@
 class Youtube::VideosSearchController < ApplicationController
   before_action :authenticate_user!
   require 'google/apis/youtube_v3'
+  # require 'kaminari'
   GOOGLE_API_KEY = Rails.application.credentials.google[:api_key]
 
   def create
@@ -62,13 +63,14 @@ class Youtube::VideosSearchController < ApplicationController
 
     search_words = []
     @search_words = []
-    youtube_videos = YoutubeVideo.order(:created_at).limit(20)
+    youtube_videos = YoutubeVideo.order(created_at: 'ASC')
 
     youtube_videos.each do |youtube_video|
       search_word = youtube_video.search_keyword
       search_words << search_word
       @search_words = search_words.uniq
     end
+    @search_words = Kaminari.paginate_array(@search_words).page(params[:page]).per(5)
   end
 
   private

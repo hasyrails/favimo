@@ -3,9 +3,11 @@
 
   <div class="matching">
     <p class="matching-title ml-3">チャットルーム</p>
-    <p class="matching-num">マッチングしたお相手とチャットすることができます </p>
-    <p class="matching-num">マッチング中のお相手:
-    <%= @match_users.size %>人</p>
+    <p class="matching-num" style="font-size: 8px;">マッチングした相手とチャットすることができます </p>
+    <p class="matching-num" style="margin-top: 10%;">
+      マッチング中のお相手:
+    <%= @match_users.size %>人
+    </p>
 
     <div class="matching__list">
       <% unless @match_users.empty? %>
@@ -44,16 +46,8 @@
               <%= link_to chat_rooms_path(params: { user_id: user.id }), method: :post do %>
                 <div 
                 class="btn btn-info"
-                style="height: 40px;"
                 >
-                  <p 
-                  style="
-                  margin-bottom: -5px;
-                  margin-left: 5px;
-                  "
-                  >
-                    チャットルームを作る
-                  </p>
+                  チャットルームを作る
                 </div>
               <% end %>
             </div>

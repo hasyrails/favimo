@@ -1,4 +1,6 @@
 class Youtube::Myvideos::Status::LikeController < ApplicationController
+  require 'kaminari'
+
   def index
     @like_myvideos = []
     keyword = params[:keyword]
@@ -9,6 +11,7 @@ class Youtube::Myvideos::Status::LikeController < ApplicationController
         like_myvideo = YoutubeVideo.find_by(video_id: like_state_record_unique_id)
         @like_myvideos << like_myvideo
       end
+
     else
       like_state_records = current_user.favorites.where(status: 'like')
       like_state_records.each do |like_state_record|
@@ -17,6 +20,7 @@ class Youtube::Myvideos::Status::LikeController < ApplicationController
         @like_myvideos << like_myvideo
       end
     end
+    @like_myvideos = Kaminari.paginate_array(@like_myvideos).page(params[:page]).per(5)
   end
 
   def destroy

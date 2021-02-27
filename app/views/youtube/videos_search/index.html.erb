@@ -5,12 +5,17 @@
     <div
       style="text-align:center;"
     >
-      <%= f.text_field :keyword %>
-      <%= f.submit '検索する', class: 'btn btn-primary' %> 
-      <%= link_to 'クリア',youtube_videos_search_index_path, class: 'btn btn-secondary' %>
+      <%= f.text_field :keyword, style: 'margin-left: 10%;' %>
+      <%= f.submit '検索する', class: 'btn btn-primary', style: 'margin-left: 15%; font-size: 16px;' %> 
+      <%= link_to 'クリア',youtube_videos_search_index_path, class: 'btn btn-secondary', style: 'margin-left: 15%; font-size: 16px;' %>
     </div>
   <% end %>
 
+  <div
+  style="font-size: 16px;"
+  >
+    検索された動画キーワード
+  </div>
   <% @search_words.each do |search_word| %>
     <div
     style="
@@ -32,6 +37,7 @@
         style="
           border-radius: 15px 15px 15px 15px;
           text-align: center;
+          font-size: 16px;
         "
         >
           <%= link_to  youtube_myvideos_path(q: search_word) ,method: :get do %>
@@ -40,6 +46,8 @@
         </div>
     </div>
   <% end %>
+
+  <%= paginate @search_words, class: "pagination" %>
 
   <div>
     <%= render "partial/links_to_myvideos_status_like_or_dislike" %>

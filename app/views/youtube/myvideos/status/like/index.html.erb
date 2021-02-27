@@ -10,12 +10,14 @@
     Likeした動画
   </div>
   
-  <%= form_with url:'/youtube/myvideos/status/like', method: :get, local: true, class: 'cp_iptxt', style:'text-align: center;' do |f| %>
+  <%= form_with url:'/youtube/myvideos/status/like', method: :get, local: true, class: 'cp_iptxt' do |f| %>
     <div
     >
-      <%= f.text_field :keyword %>
-      <%= f.submit '検索する', class: 'btn btn-primary' %>
-      <%= link_to 'クリア', youtube_myvideos_status_like_index_path, class: 'btn btn-secondary' %>
+      <%= f.text_field :keyword, style: 'margin-left: 10%;' %>
+      <div style="display: flex; justify-content: center;">
+        <%= f.submit '検索する', class: 'btn btn-primary', style: 'margin-left: 15%; font-size: 16px;' %>
+        <%= link_to 'クリア', youtube_myvideos_status_like_index_path, class: 'btn btn-secondary', style: 'margin-left: 15%; font-size: 16px;' %>
+      </div>
     </div>
   <% end %>
 
@@ -140,7 +142,7 @@
         >
              <div
             style="
-            background-color: #F5F5F5;
+            background-color: #FFEEFF;
             border-radius: 10px 10px 10px 10px;
             margin-right: 10px;
             height: 100%;
@@ -175,7 +177,7 @@
           </div>
              <div
             style="
-            background-color: #F5F5F5;
+            background-color: #FFEEFF;
             border-radius: 10px 10px 10px 10px;
             margin-right: 10px;
             height: 100%;
@@ -215,6 +217,8 @@
 
 
   <% end %>
+
+  <%= paginate @like_myvideos %>
 
 
   <div>
