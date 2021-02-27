@@ -1,5 +1,4 @@
 class Youtube::Myvideos::Status::LikeController < ApplicationController
-  require 'kaminari'
 
   def index
     @like_myvideos = []

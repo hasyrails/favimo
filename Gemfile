@@ -69,3 +69,4 @@ gem 'qiita'
 gem 'pry-rails'
 
 gem 'kaminari'
+
