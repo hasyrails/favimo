@@ -67,3 +67,5 @@ gem 'google-api-client', '~> 0.11'
 gem 'qiita'
 
 gem 'pry-rails'
+
+gem 'kaminari'
