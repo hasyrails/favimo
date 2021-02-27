@@ -47,7 +47,10 @@
           </div>
         </div>
       <% end %>
-      <div class="no-user">動画がありません</div>
+      <div 
+      class="no-user"
+      style="font-size: 16px;"
+      >動画がありません</div>
     </div>
   </div>
   
@@ -60,21 +63,52 @@
 
   <div
     style="
-      margin-top:10%;
-      margin-bottom:10%;
+      margin-top:3%;
+      margin-bottom:3%;
     "
   >
     <%= form_with url:'/youtube/videos_search', method: :get, local: true, class: 'cp_iptxt' do |f| %>
       <div
-        style="text-align:center;"
+        style="justify-content:center; text-align: center;"
       >
-        <%= f.text_field :keyword %>
-        <%= f.submit '検索する', class: 'btn btn-primary' %>
-        <%= link_to 'クリア',youtube_myvideos_path, class: 'btn btn-secondary' %>
+        <%= f.text_field :keyword, style: 'margin-left: 10%;' %>
+        <%= f.submit '検索する', class: 'btn btn-primary', style: 'margin-left: 15%; font-size: 16px;' %>
+        <%= link_to 'クリア', youtube_myvideos_path, class: 'btn btn-secondary', style: 'font-size: 16px;' %>
       </div>
     <% end %>
   </div>
-  
+
+  <% @search_words.each do |search_word| %>
+    <div
+    style="
+    background-color: ghostwhite;
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    "
+    >
+        <div
+        style="
+        margin-right: 10px;
+        "
+        >
+          <i class="fas fa-search fa-sm inherit", style="color:black;"></i>
+        </div>
+        <div
+        style="
+          border-radius: 15px 15px 15px 15px;
+          text-align: center;
+          font-size: 16px;
+        "
+        >
+          <%= link_to  youtube_myvideos_path(q: search_word) ,method: :get do %>
+            <%= search_word %>
+          <% end %>
+        </div>
+    </div>
+  <% end %>
+
   <div>
       <%= render "partial/links_to_myvideos_status_like_or_dislike" %>
   </div>
