@@ -1,4 +1,6 @@
 class Youtube::Myvideos::Status::DislikeController < ApplicationController
+  before_action :expired_dislike_myvideos_destroy_setting, only: [:index]
+
   def index
     @dislike_myvideos = []
     keyword = params[:keyword]
@@ -27,6 +29,19 @@ class Youtube::Myvideos::Status::DislikeController < ApplicationController
       dislike_myvideo.destroy
       dislike_myvideo.favorites.destroy
       redirect_to youtube_myvideos_status_dislike_index_path
+    end
+  end
+
+  private
+
+  def expired_dislike_myvideos_destroy_setting
+    time = Time.now
+    dislike_youtube_videos = YoutubeVideo.where(status: 'dislike')
+    dislike_youtube_videos.each do |dislike_youtube_video|
+      if dislike_youtube_video.is_remaining &&  dislike_youtube_video.updated_at < time.ago(7.days)
+        dislike_youtube_video.update(is_remaining: 'false')
+        dislike_youtube_video.save!
+      end
     end
   end
 end
