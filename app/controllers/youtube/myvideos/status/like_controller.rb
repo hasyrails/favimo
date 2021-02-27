@@ -20,7 +20,7 @@ class Youtube::Myvideos::Status::LikeController < ApplicationController
         @like_myvideos << like_myvideo
       end
     end
-    @like_myvideos = Kaminari.paginate_array(@like_myvideos).page(params[:page]).per(5)
+    @like_myvideos = Kaminari.paginate_array(@like_myvideos).page(params[:page]).per(3)
   end
 
   def destroy
