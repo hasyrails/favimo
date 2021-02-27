@@ -26,7 +26,7 @@ Rails.application.routes.draw do
           resources :share, only: [:new, :create]
         end
         get 'like/:keyword', to: 'like#index'
-        resources :dislike
+        resources :dislike, only: [:index, :destroy]
       end
     end
   end
