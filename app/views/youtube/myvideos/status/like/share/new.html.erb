@@ -13,9 +13,36 @@
       <iframe width="300" height="200" src="https://www.youtube.com/embed/<%= @share_video.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
       </iframe>
     </div>
+    <div
+    style="
+    display: inblock;
+    "
+    >
+      <div
+      style="
+      font-size: 16px;
+      margin-left: 5%;
+      text-align: center;
+      font-weight: bold;
+      "
+      >
+        <%= @share_video.title %>
+      </div>
+      <div
+      style="
+      font-size: 8px;
+      margin-left: 5%;
+      "
+      >
+        <%= @share_video.description.truncate(50) %>
+      </div>
+    </div>
   </div>
 
-  <div class="matching">
+  <div 
+  class="matching"
+  style="margin-top: 5%;"
+  >
     <p class="matching-title ml-3">動画を共有する</p>
     
     <div style="
@@ -42,7 +69,11 @@
           <% end %>
         </div>
         
-        <div style="text-align: center;">
+        <div 
+        style="
+        text-align: center;
+        font-size: 12px;
+        ">
           <%= user.name %>
         </div>
       </div>
