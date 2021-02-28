@@ -1,16 +1,29 @@
 <nav class="navbar navbar-light">
-  <%= link_to youtube_videos_search_index_path, class: "nav-item nav-link", data: { turbolinks: :false } do %>
-    <span class="<%= 'active' if current_page?(users_path) %>">
-      <i class="fas fa-play-circle fa-2x inherit"></i>
-    </span>
-  <% end %>
+  <div
+    style="
+    margin-left: -3%;
+    display: flex;
+    "
+  >
+    <%= link_to youtube_videos_search_index_path, class: "nav-item nav-link", data: { turbolinks: :false } do %>
+      <div class="<%= 'active' if current_page?(youtube_videos_search_index_path) %>">
+        <i class="fas fa-play-circle fa-2x inherit"></i>
+      </div>
+    <% end %>
+    <div style="font-size: 20px;">|</div>
+    <%= link_to users_path, class: "nav-item nav-link", data: { turbolinks: :false } do %>
+      <div class="<%= 'active' if current_page?(users_path) %>">
+        <i class="fas fa-user-friends fa-2x inherit"></i>
+      </div>
+    <% end %>
+  </div>
 
   <%= link_to matching_index_path, class: "nav-item nav-link" do %>
     <i class="fas fa-comments fa-2x inherit"></i>
   <% end %>
   
-  <%= link_to user_path(@user), class: "nav-item nav-link" do %>
-    <span class="<%= 'active' if current_page?(user_path(@user)) || current_page?(edit_user_registration_path) %>">
+  <%= link_to user_path(current_user), class: "nav-item nav-link" do %>
+    <span class="<%= 'active' if current_page?(user_path(current_user)) || current_page?(edit_user_registration_path) %>">
         <i class="fas fa-portrait fa-2x inherit"></i>
     </span>
   <% end %>
