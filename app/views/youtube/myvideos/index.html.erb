@@ -1,6 +1,12 @@
 <div class="video-index-page">
   <%= render "partial/videos_page_navbar" %>
 
+  <div>
+    <% breadcrumb :search_result %>
+    <%= breadcrumbs separator: " &rsaquo; "%>
+  </div>
+
+
   <div class="video-swipe">
     <div class="video-swipe--status">
       <i class="fa fa-times"></i>

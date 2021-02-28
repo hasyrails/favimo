@@ -2,6 +2,20 @@
 
   <%= render "partial/users_page_navbar" %>
 
+  <% if params[:share_video_unique_id].present? %>
+    <div>
+      <% breadcrumb :video_share_user_page, @user, class: "logo"%>
+      <%= breadcrumbs separator: " &rsaquo; "%>
+    </div>
+  <% else %>
+    <div>
+      <% breadcrumb :user, @user %>
+      <%= breadcrumbs separator: " &rsaquo; "%>
+    </div>
+  <% end %>
+  
+
+
   <div class="profile mt-4">
     <% if @user.profile_image.url.nil? %>
       <div class="profile-default-img"></div>

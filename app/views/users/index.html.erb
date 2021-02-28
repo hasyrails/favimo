@@ -1,6 +1,9 @@
 <div class="user-index-page">
   <%= render "partial/users_page_navbar" %>
 
+  <% breadcrumb :users %>
+  <%= breadcrumbs separator: " &rsaquo; " %>
+
   <div class="swipe">
     <div class="swipe--status">
       <i class="fa fa-times"></i>

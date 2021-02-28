@@ -1,5 +1,11 @@
 <div class="video-index-page">
   <%= render "partial/videos_page_navbar" %>
+
+  <div>
+    <% breadcrumb :common_video_like_users %>
+    <%= breadcrumbs separator: " &rsaquo; "%>
+  </div>
+
   
     <div
       style="

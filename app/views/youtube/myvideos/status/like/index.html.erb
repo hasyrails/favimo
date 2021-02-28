@@ -1,6 +1,11 @@
 <div class="video-index-page">
   <%= render "partial/videos_page_navbar" %>
 
+  <div>
+    <% breadcrumb :like_myvideos %>
+    <%= breadcrumbs separator: " &rsaquo; "%>
+  </div>
+
   <div
   style="
   text-align: center;

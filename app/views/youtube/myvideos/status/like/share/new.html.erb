@@ -2,6 +2,12 @@
   <%= render "partial/users_page_navbar", locals: { user: @user } %>
   
   <div>
+    <% breadcrumb :select_video_share_user %>
+    <%= breadcrumbs separator: " &rsaquo; "%>
+  </div>
+
+
+  <div>
     <div
         style="
         margin-top:10px;
@@ -44,7 +50,9 @@
   style="margin-top: 5%;"
   >
     <p class="matching-title ml-3">動画を共有する</p>
+    <p style="font-size: 10px; margin-left: 3%;">タイプした人へ動画を共有することができます</p>
     
+    <% if @users_liked_by_current_user.present? %>
     <div style="
     display: flex;
     flex-wrap: wrap;
@@ -77,6 +85,38 @@
           <%= user.name %>
         </div>
       </div>
+      <% end %>
+      <% else %>
+        <div
+          class="matching-title"
+          style="
+          font-size: 16px;
+          text-align: center;
+          "
+        >
+          タイプしているユーザーがいません
+        </div>
+        <%= link_to users_path do %>
+          
+          <div
+            class="user-edit__submit-btn btn btn-block text-white"
+            style="font-size: 12px; height: 30px; display: flex;"
+          >
+            <div style="display: flex;">
+              <i class="fas fa-heart fa-2x inherit"></i>
+              <i class="fas fa-user-friends fa-2x inherit"></i>
+            </div>
+            <div
+              style="
+              margin-top: 3px;
+              margin-left: 20px;
+              "
+            >
+              気になる人をタイプして
+              動画を共有してみましょう 
+            </div>
+          </div>
+        <% end %>
       <% end %>
     </div>
   

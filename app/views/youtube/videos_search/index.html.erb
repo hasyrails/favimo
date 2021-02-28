@@ -1,5 +1,12 @@
 <div class="video-index-page">
   <%= render "partial/videos_page_navbar" %>
+
+  
+  <div>
+    <% breadcrumb :videos_search %>
+    <%= breadcrumbs separator: " &rsaquo; "%>
+  </div>
+
   
   <%= form_with url:'/youtube/videos_search', method: :get, local: true, class: 'cp_iptxt' do |f| %>
     <div

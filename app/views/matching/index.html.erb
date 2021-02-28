@@ -1,6 +1,11 @@
 <div class="matching-index-page">
   <%= render "partial/users_page_navbar" %>
 
+  <div>
+    <% breadcrumb :chat_rooms %>
+    <%= breadcrumbs separator: " &rsaquo; "%>
+  </div>
+
   <div class="matching">
     <p class="matching-title ml-3">チャットルーム</p>
     <p class="matching-num" style="font-size: 8px;">マッチングした相手とチャットすることができます </p>
