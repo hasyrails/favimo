@@ -19,7 +19,9 @@
   </div>
 
   <%= link_to matching_index_path, class: "nav-item nav-link" do %>
-    <i class="fas fa-comments fa-2x inherit"></i>
+    <span class="<%= 'active' if current_page?(matching_index_path) %>">
+      <i class="fas fa-comments fa-2x inherit"></i>
+    </span>
   <% end %>
   
   <%= link_to user_path(current_user), class: "nav-item nav-link" do %>
