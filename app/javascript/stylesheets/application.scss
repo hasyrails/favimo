@@ -11,8 +11,7 @@
 @import "users/edit";
 @import "users/index";
 
-@import "/youtube/videos/index";
-@import "/youtube/myvideos/index";
+@import "/youtube/videos_search/index";
 @import "/youtube/myvideos/status/like/index";
 
 @import "matching/index";
@@ -39,4 +38,32 @@
 /*ホバー時のデザイン*/
 .pagination>li>a:hover {        
   border-radius: 15px;    /*角を丸くする*/
+}
+
+.breadcrumb{
+  .breadcrumb-item{
+    &:first-child {
+      &:before{
+        color: #343a40;
+        font-family: FontAwesome;
+        content: "\f015";
+      }
+    }
+    &:before{
+      padding: 0 .2em;
+     }
+  }
+}
+
+
+.current {
+  font-weight: bold;
+  margin-right: 1vw;
+}
+
+a{
+  list-style: none;
+  color: #38aef0 ;
+  text-decoration: none;
+  color: grey ;
 }
