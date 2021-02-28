@@ -10,6 +10,7 @@ class CreateYoutubeVideos < ActiveRecord::Migration[6.0]
       t.string :channel_title
       t.string :thumbnail_url
       t.integer :status, null: false, default: 0
+      t.integer :is_remaining, null: false, default: 0
       t.string :search_keyword
       t.references :user, null: false, foreign_key: true
 
