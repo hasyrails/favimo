@@ -70,3 +70,4 @@ gem 'pry-rails'
 
 gem 'kaminari'
 
+gem 'gretel'
