@@ -23,6 +23,9 @@
         </div>
         <div 
         class="video-swipe--card"
+        style="
+        margin-left: 10%;
+        "
         id="<%= myvideo_id + '-' + myvideo_unique_id %>"
         >
           <iframe width="100%" height="200" src="https://www.youtube.com/embed/<%= my_video.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
@@ -88,7 +91,6 @@
     <div
     style="
     background-color: ghostwhite;
-    display: flex;
     justify-content: center;
     margin-top: 3%;
     margin-bottom: 3%;
@@ -99,12 +101,16 @@
         margin-right: 10px;
         "
         >
-          <i class="fas fa-search fa-sm inherit", style="color:black;"></i>
+          <i class="fas fa-search fa-lg inherit", 
+          style="
+          color:black;
+          "></i>
         </div>
         <div
         style="
           border-radius: 15px 15px 15px 15px;
           text-align: center;
+          margin-bottom: 1%;
           font-size: 16px;
         "
         >
