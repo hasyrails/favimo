@@ -41,14 +41,14 @@ class Youtube::Myvideos::Status::DislikeController < ApplicationController
     dislike_youtube_videos = YoutubeVideo.where(status: 'dislike')
     dislike_youtube_videos.each do |dislike_youtube_video|
       if dislike_youtube_video.is_remaining &&  dislike_youtube_video.updated_at < time.ago(7.days)
-        dislike_youtube_video.update(is_remaining: 'false')
+        dislike_youtube_video.update(is_remaining: 'not_remaining')
         dislike_youtube_video.save!
       end
     end
   end
   
   def expired_dislike_myvideos_destroy!
-    expired_dislike_youtube_videos = YoutubeVideo.where(status: 'dislike', is_remaining: 'false')
+    expired_dislike_youtube_videos = YoutubeVideo.where(status: 'dislike', is_remaining: 'not_remaining')
     expired_dislike_youtube_videos.destroy_all
   end
   

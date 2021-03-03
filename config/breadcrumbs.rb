@@ -42,6 +42,11 @@ crumb :like_myvideos do
   parent :videos_search
 end
 
+crumb :sharing_myvideos do
+  link "あなたが共有した動画", youtube_myvideos_status_like_sharing_videos_path
+  parent :like_myvideos
+end
+
 crumb :common_video_like_users do
   link "動画をLikeした他のユーザー", users_video_common_like_path
   parent :like_myvideos
