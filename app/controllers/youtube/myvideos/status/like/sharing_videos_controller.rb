@@ -23,6 +23,16 @@ class Youtube::Myvideos::Status::Like::SharingVideosController < ApplicationCont
         sharing_users_each_sharing_video = ShareVideo.where(from_user_id: current_user.id, youtube_video_id: sharing_video_id).map(&:to_user)
         sharing_users << sharing_users_each_sharing_video.uniq
       end
+
+      sharing_users.each do |sharing_users_each_by_sharing_video|
+        while sharing_users_each_by_sharing_video.size > 3
+          sharing_users_each_by_sharing_video.pop
+        end
+      end
+      # 表示する共有ユーザーは３人とする
+      
+      # binding.pry
+
       @sharing_users = sharing_users
       # 各共有動画レコードごとの共有ユーザーを出力成功
       # @sharing_userは入れ子構造[[],[],...]
