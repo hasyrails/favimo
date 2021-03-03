@@ -31,7 +31,8 @@
               <%= user.name %>
             </div>
           <% end %>
-          
+
+          <% if !user.chat_room_users.first.blank? %>
           <% if ChatRoom.find(user.chat_room_users.first.chat_room_id).chat_messages.last.present? %>
             <div
             class="matching__person-last-chat-message"
@@ -60,6 +61,7 @@
             class="matching__person-last-chat-message-date"
             >
             </div>
+          <% end %>
           <% end %>
 
           </div>
