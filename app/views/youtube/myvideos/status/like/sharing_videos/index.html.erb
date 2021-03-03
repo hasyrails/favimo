@@ -1,0 +1,97 @@
+<div class="video-index-page">
+  <%= render "partial/videos_page_navbar" %>
+
+  <div>
+    <% breadcrumb :sharing_myvideos %>
+    <%= breadcrumbs separator: " &rsaquo; "%>
+  </div>
+
+  <div
+  style="
+  text-align: center;
+  font-size:20px;
+  "
+  >
+    あなたが共有した動画
+  </div>
+  
+  <%= form_with url:'/youtube/myvideos/status/like/sharing_videos', method: :get, local: true, class: 'cp_iptxt' do |f| %>
+    <div
+    >
+      <%= f.text_field :keyword, style: 'margin-left: 10%;' %>
+      <div style="display: flex; justify-content: center;">
+        <%= f.submit '検索する', class: 'btn btn-primary', style: 'margin-left: 15%; font-size: 16px;' %>
+        <%= link_to 'クリア', youtube_myvideos_status_like_index_path, class: 'btn btn-secondary', style: 'margin-left: 15%; font-size: 16px;' %>
+      </div>
+    </div>
+  <% end %>
+
+  <% n = 0 %>
+  <% while n < @sharing_users.size %>
+
+  <% @sharing_videos.each do |sharing_video| %>
+    <div
+      style="
+      display:flex;
+      "
+    > 
+      <div
+        style="
+        margin-left:15px;
+        margin-top:10px;
+        margin-bottom:10px;
+        "
+      >
+        <iframe width="300" height="200" src="https://www.youtube.com/embed/<%= sharing_video.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
+      </div>
+      <div
+        class="video-info"
+        style="
+        margin-left:5px;
+        margin-left:5px;
+        margin-top:10px;
+        margin-bottom:10px;
+        display: block;
+        "
+      >
+        <div
+        class="status-assigned-video-title"
+        style="
+        font-size:16px;
+        "
+        >
+            <%= sharing_video.title.truncate(30) %>
+        </div>
+
+        <div
+        class="status-assigned-video-description"
+        style="font-size:10px;"
+        >
+          <%= sharing_video.description.truncate(30) %>
+        </div>
+        
+        <div>
+            <% @sharing_users[n].each do |sharing_users| %>
+                <%= image_tag sharing_users.profile_image.url, style: 'width: 50px; height: 50px; border-radius: 25px 25px 25px 25px; margin-bottom: 5px;' %>
+            <% end %>
+            <% n = n+1 %>
+        </div>
+      
+      </div>
+    </div>
+
+
+
+    <% end %>
+  <% end %>
+
+
+  <%= paginate @sharing_videos %>
+
+
+  <div>
+    <%= render "partial/links_to_myvideos_status_like_or_dislike" %>
+  </div>
+  
+</div>

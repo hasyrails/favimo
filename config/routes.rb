@@ -20,10 +20,12 @@ Rails.application.routes.draw do
     get '/myvideos/:q', to: 'myvideos#index', as: 'myvideos'
     namespace :myvideos do
       resources :favorites, only: [:create, :update]
-      namespace :status do
+      namespace :status   do
         resources :like, only: [:index, :destroy]
         namespace :like do
           resources :share, only: [:new, :create]
+          resources :sharing_videos, only: [:index]
+          resources :shared_videos, only: [:index]
         end
         get 'like/:keyword', to: 'like#index'
         resources :dislike, only: [:index, :destroy]
