@@ -12,7 +12,7 @@ User.create!(
   email: 'fuga@mail.com',
   password: 'demopass',
   name: 'fuga',
-  self_introduction: 'hogeです',
+  self_introduction: 'fugaです',
   gender: 0,
   profile_image: open("#{Rails.root}/db/dummy_images/6.jpg")
 )
@@ -20,7 +20,7 @@ User.create!(
   email: 'gege@mail.com',
   password: 'demopass',
   name: 'gege',
-  self_introduction: 'hogeです',
+  self_introduction: 'gegeです',
   gender: 0,
   profile_image: open("#{Rails.root}/db/dummy_images/6.jpg")
 )
