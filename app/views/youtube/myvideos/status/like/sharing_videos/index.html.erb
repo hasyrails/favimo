@@ -91,6 +91,7 @@
           <% end %>
           <% n = n+1 %>
           
+          <%= link_to youtube_myvideos_status_like_sharing_video_path(sharing_video.video_id) do %>
           <div
           class="btn btn-primary"
           style="
@@ -99,6 +100,8 @@
           >
             さらに見る
           </div>
+          <% end %>
+
         </div>
       
       </div>

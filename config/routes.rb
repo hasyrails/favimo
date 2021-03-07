@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         namespace :like do
           resources :share, only: [:new, :create]
           resources :sharing_videos, only: [:index]
+          resources :sharing_videos, param: :video_unique_id, only: [:show]
           resources :shared_videos, only: [:index]
         end
         get 'like/:keyword', to: 'like#index'

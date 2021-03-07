@@ -1,0 +1,124 @@
+<div class="video-index-page", style="
+  max-height: fit-content;
+">
+  <%= render "partial/videos_page_navbar" %>
+
+  <div style="margin-bottom: 10px;">
+    <% breadcrumb :sharing_myvideo_detail, @sharing_video %>
+    <%= breadcrumbs separator: " &rsaquo; " %>
+  </div>
+
+
+  <div class="video">
+
+    <div class="video-swipe--cards">
+        <div
+          style="display:none;"
+        >
+        </div>
+        <div 
+        class="video-swipe--card"
+        style="
+        margin-left: 10%;
+        "
+        >
+          <iframe width="80%" height="200" src="https://www.youtube.com/embed/<%= @sharing_video.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
+          <div class="video-info" style="margin-top:10%;font-size:10px;color:black;">
+            <div
+              style="
+              font-size:16px;
+              font-weight: bold;
+              color: #BBBBBB;
+              "
+            >
+              動画のタイトル
+            </div>
+            <div
+              style="
+              text-align:center;
+              margin-bottom: 10px;
+              "
+            >
+              <%= @sharing_video.title %>
+            </div>
+            <div
+              style="
+              font-size:16px;
+              font-weight: bold;
+              color: #BBBBBB;
+              "
+            >
+              動画の説明
+            </div>
+            <div
+              style="
+              text-align:center;
+              margin-bottom: 10px;
+              "
+            >
+              <%= @sharing_video.description %>
+            </div>
+      
+            <div
+              style="
+              font-size:16px;
+              font-weight: bold;
+              color: #BBBBBB;
+              margin-bottom: 10px;
+              "
+            >
+            この動画を共有したユーザー
+            </div>
+
+            <div>
+              <div>
+                <% @sharing_users.zip(@created_at_dates) do |sharing_user, created_at_date| %>
+                  <div style="display: flex;">
+                    <div>
+                      <%= link_to user_path(sharing_user) do %>
+                        <%= image_tag sharing_user.profile_image.url, style: 'width: 50px; height: 50px; border-radius: 25px 25px 25px 25px; margin-bottom: 5px;' %>
+                      <% end %>
+                    </div>
+
+                    <div style="
+                    margin-top: 15px;
+                    margin-left: 10px;
+                    font-weight: bold;
+                    width: 70px;
+                    ">
+                      <%= sharing_user.name %>
+                    </div>
+
+                    <div style="
+                    margin-top: 15px;
+                    margin-left: 10px;
+                    font-weight: bold;
+                    display: flex;
+                    ">
+                      <p>
+                        <%= created_at_date.strftime('%Y/%m/%d') %>
+                      </p>
+                      <p style="margin-left: 5px;">
+                        に共有しました
+                      </p>
+                    </div>
+                  </div>
+                <% end %>
+                
+              </div>
+
+              <div>
+                <%= paginate @sharing_users %>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+    </div>
+  </div>
+  
+</div>

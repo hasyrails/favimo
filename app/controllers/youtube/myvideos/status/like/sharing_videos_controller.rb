@@ -39,9 +39,20 @@ class Youtube::Myvideos::Status::Like::SharingVideosController < ApplicationCont
 
     end
 
-    # binding.pry
-
+    
     @sharing_videos = Kaminari.paginate_array(@sharing_videos).page(params[:page]).per(3)
+  end
+  
+  def show
+    @sharing_video = YoutubeVideo.find_by(video_id: params[:video_unique_id])
 
+    to_user_ids = ShareVideo.where(from_user_id: current_user.id, youtube_video_id: @sharing_video.id).map(&:to_user_id)
+    @created_at_dates = ShareVideo.where(from_user_id: current_user.id, youtube_video_id: @sharing_video.id).map(&:created_at)
+
+    @sharing_users = User.find(to_user_ids)
+
+    @sharing_users = Kaminari.paginate_array(@sharing_users).page(params[:page]).per(5)
+
+    # binding.pry
   end
 end
