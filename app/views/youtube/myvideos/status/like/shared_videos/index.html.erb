@@ -1,0 +1,80 @@
+<div class="video-index-page">
+  <%= render "partial/videos_page_navbar" %>
+
+  <div>
+    <% breadcrumb :shared_myvideos %>
+    <%= breadcrumbs separator: " &rsaquo; "%>
+  </div>
+
+  <div
+  style="
+  text-align: center;
+  font-size:20px;
+  "
+  >
+    あなたへ共有されている動画
+  </div>
+  
+  <%= form_with url:'/youtube/myvideos/status/like/sharing_videos', method: :get, local: true, class: 'cp_iptxt' do |f| %>
+    <div
+    >
+      <%= f.text_field :keyword, style: 'margin-left: 10%;' %>
+      <div style="display: flex; justify-content: center;">
+        <%= f.submit '検索する', class: 'btn btn-primary', style: 'margin-left: 15%; font-size: 16px;' %>
+        <%= link_to 'クリア', youtube_myvideos_status_like_index_path, class: 'btn btn-secondary', style: 'margin-left: 15%; font-size: 16px;' %>
+      </div>
+    </div>
+  <% end %>
+
+  <div>
+    <% @sharing_users.zip(@shared_youtube_videos, @shared_dates).zip do |sharing_user, shared_youtube_video, shared_date| %>
+      <div
+      style="
+      display: flex;
+      margin-left: 20px;
+      "
+      >
+        <div style="
+        margin-top: 20px;
+        ">
+          <div>
+            <% if sharing_user.profile_image.present? %>
+              <div>
+              <%= image_tag sharing_user.profile_image.url, style: 'width: 50px; height: 50px; border-radius: 25px 25px 25px 25px; margin-bottom: 5px;' %>
+              </div>
+            <% else %>
+              <div class="profile-default-img" style= 'width: 50px; height: 50px; border-radius: 25px 25px 25px 25px; margin-bottom: 5px;'></div>
+            <% end %>
+          </div>
+          <div
+          style="
+          margin-top: 10px;
+          margin-left: 10px;
+          "
+          >
+            <p><%= sharing_user.name %></p>
+          </div>
+        </div>
+        <div style="
+        margin-top: 20px;
+        margin-left: 30px;
+        ">
+          <div>
+            <%= shared_date.strftime('%Y/%m/%d') %>に共有されました
+          </div>
+          <iframe width="300" height="200" src="https://www.youtube.com/embed/<%= shared_youtube_video.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= paginate @sharing_users %>
+  </div>
+
+  <div>
+    <%= render "partial/links_to_myvideos_status_like_or_dislike" %>
+  </div>
+  
+</div>

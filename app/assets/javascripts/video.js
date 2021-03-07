@@ -1,4 +1,4 @@
-if(location.pathname == "/youtube/videos") {
+if(location.pathname.includes("/youtube/myvideos")) {
   $(function () {
     let allCards = document.querySelectorAll('.video-swipe--card');
     let swipeContainer = document.querySelector('.video-swipe');
