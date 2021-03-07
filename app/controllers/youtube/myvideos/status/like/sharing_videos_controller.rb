@@ -48,8 +48,9 @@ class Youtube::Myvideos::Status::Like::SharingVideosController < ApplicationCont
 
     to_user_ids = ShareVideo.where(from_user_id: current_user.id, youtube_video_id: @sharing_video.id).map(&:to_user_id)
     @created_at_dates = ShareVideo.where(from_user_id: current_user.id, youtube_video_id: @sharing_video.id).map(&:created_at)
-
+    @created_at_dates = @created_at_dates.reverse
     @sharing_users = User.find(to_user_ids)
+    @sharing_users = @sharing_users.reverse
 
     @sharing_users = Kaminari.paginate_array(@sharing_users).page(params[:page]).per(5)
 
