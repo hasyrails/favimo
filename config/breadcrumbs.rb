@@ -47,6 +47,11 @@ crumb :sharing_myvideos do
   parent :like_myvideos
 end
 
+crumb :shared_myvideos do
+  link "あなたへ共有されている動画", youtube_myvideos_status_like_shared_videos_path
+  parent :like_myvideos
+end
+
 crumb :sharing_myvideo_detail do |sharing_video|
   link "#{sharing_video.title.truncate(10)}", youtube_myvideos_status_like_sharing_videos_path
   parent :sharing_myvideos
