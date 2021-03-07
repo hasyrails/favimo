@@ -30,7 +30,7 @@
   }
 }
 
-.video-swipe {
+.video {
   // height: 10vh;
   overflow: hidden;
   display: flex;
@@ -75,6 +75,7 @@
     display: inline-block;
     width: 90vw;
     max-width: 340px;
+    max-height: max-content;
     background: #FFFFFF;
     border-radius: 8px;
     overflow: hidden;
