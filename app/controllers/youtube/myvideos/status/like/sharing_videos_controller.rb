@@ -33,7 +33,7 @@ class Youtube::Myvideos::Status::Like::SharingVideosController < ApplicationCont
       
       # binding.pry
 
-      @sharing_users = sharing_users
+      @sharing_users = sharing_users.flatten
       # 各共有動画レコードごとの共有ユーザーを出力成功
       # @sharing_userは入れ子構造[[],[],...]
 
@@ -41,6 +41,8 @@ class Youtube::Myvideos::Status::Like::SharingVideosController < ApplicationCont
 
     
     @sharing_videos = Kaminari.paginate_array(@sharing_videos).page(params[:page]).per(3)
+
+    # binding.pry
   end
   
   def show
