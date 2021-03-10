@@ -8,7 +8,12 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.where.not(id: current_user.id)
+    not_like_reactions = Reaction.where.not(status: 'like').where( from_user_id: current_user.id)
+    not_like_reaction_to_user_ids = Reaction.where.not(status: 'like').where(from_user_id: current_user.id).map(&:to_user_id)
+
+    @users = User.find(not_like_reaction_to_user_ids).shuffle
+    
     @user = User.find(current_user.id)
+
   end
 end

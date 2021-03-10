@@ -30,7 +30,11 @@ crumb :shared_and_sharing_videos_with_chat_room_user do |user|
 end
 
 crumb :user do |user|
+  if user == current_user
+    link "プロフィール : #{user.name}さん", user_path(user)
+  else
   link "#{user.name}さん", user_path(user)
+  end
   parent :root
 end
 

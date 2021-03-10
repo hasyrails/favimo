@@ -32,5 +32,8 @@
     <textarea data-behavior="chat_room_speaker" data-chat_room_id="<%= @chat_room.id %>" placeholder="メッセージを入力" class="chat-room__message-form_textarea"></textarea>
   </form>
 
-  <%= link_to '共有されている動画',youtube_myvideos_status_like_shared_and_sharing_video_path(@chat_room) %>
+  <%= link_to '共有している動画を見る' ,youtube_myvideos_status_like_shared_and_sharing_video_path(@chat_room), 
+  class: 'btn btn-primary',
+  style: 'margin-top: 5px;'
+  %>
 </div>
