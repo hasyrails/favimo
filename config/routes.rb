@@ -26,7 +26,8 @@ Rails.application.routes.draw do
           resources :share, only: [:new, :create]
           resources :sharing_videos, only: [:index]
           resources :sharing_videos, param: :video_unique_id, only: [:show]
-          resources :shared_videos, only: [:index]
+          resources :shared_and_sharing_videos, only: [:show]
+          # get '/shared_videos_by/:user_name', to: 'shared_videos_by#show', as: 'shared_videos_by'
         end
         get 'like/:keyword', to: 'like#index'
         resources :dislike, only: [:index, :destroy]

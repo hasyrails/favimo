@@ -26,9 +26,6 @@
     </div>
   <% end %>
 
-  <% n = 0 %>
-  <% while n < @sharing_users.size %>
-
   <% @sharing_videos.each do |sharing_video| %>
     <div
       style="
@@ -87,10 +84,10 @@
             この動画を共有したユーザー
           </div>
 
-          <% @sharing_users[n].each do |sharing_users| %>
-              <%= image_tag sharing_users.profile_image.url, style: 'width: 50px; height: 50px; border-radius: 25px 25px 25px 25px; margin-bottom: 5px;' %>
+          <% @sharing_users.each do |sharing_user| %>
+              <%= image_tag sharing_user.profile_image.url, style: 'width: 50px; height: 50px; border-radius: 25px 25px 25px 25px; margin-bottom: 5px;' %>
+              <%# <%= sharing_user.name %> 
           <% end %>
-          <% n = n+1 %>
           
           <%= link_to youtube_myvideos_status_like_sharing_video_path(sharing_video.video_id) do %>
           <div
@@ -107,8 +104,6 @@
       </div>
     </div>
     <% end %>
-  <% end %>
-
 
   <%= paginate @sharing_videos %>
 

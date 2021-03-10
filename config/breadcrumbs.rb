@@ -17,6 +17,18 @@ crumb :chat_rooms do
   parent :root
 end
 
+crumb :chat_room do |user|
+  chat_user_id = ChatRoom.find(params[:id]).chat_room_users.where.not(user_id: current_user.id).first.user_id
+  user = User.find(chat_user_id)
+  link "#{user.name}さん", chat_room_path
+  parent :chat_rooms
+end
+
+crumb :shared_and_sharing_videos_with_chat_room_user do |user|
+  link "#{user.name}さんと共有している動画", youtube_myvideos_status_like_shared_and_sharing_video_path
+  parent :chat_room
+end
+
 crumb :user do |user|
   link "#{user.name}さん", user_path(user)
   parent :root

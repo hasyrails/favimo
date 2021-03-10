@@ -1,0 +1,142 @@
+<div class="video-index-page", style="
+  max-height: fit-content;
+">
+  <%= render "partial/videos_page_navbar" %>
+
+  <div style="margin-bottom: 10px;">
+    <% breadcrumb :shared_and_sharing_videos_with_chat_room_user, @share_user %>
+    <%= breadcrumbs separator: " &rsaquo; " %>
+  </div>
+
+  <div
+  style="
+  display: block;
+  "
+  >
+    <% @shared_and_sharing_videos.zip(@from_users, @shared_and_sharing_dates) do | video, from_user, date| %>
+      <% if from_user == current_user %>
+        <div
+        >
+          <div
+          style="
+          text-align: right;
+          font-weight: bold;
+          font-size: 12px;
+          color: #BBBBBB;
+          margin-right: 5px;
+          "
+          >
+            <div>
+              <%= date.strftime('%Y/%m/%d %H:%M') %>
+            </div>
+            <div>
+              あなたが共有しました
+            </div>
+          </div>
+          <div
+          style="
+          display:flex;
+          "
+          >
+            <div
+            style="
+            display: block;
+            margin-top: 40px;
+            "
+            >
+              <div
+              style="
+              font-size: 12px;
+              font-weight: bold;
+              "
+              >
+                <%= video.title.truncate(40) %>
+              </div>
+              <div
+              style="font-size: 12px;"
+              >
+                <%= video.description.truncate(40) %>
+              </div>
+            </div>
+            <div
+            style="
+            margin-left: 5px;
+            margin-right: 5px;
+            "
+            >
+              <iframe width="300" height="200" src="https://www.youtube.com/embed/<%= video.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </div>
+      <% else %>
+         <div
+         style="
+         margin-left: 5px;
+         font-weight: bold;
+         color: #BBBBBB;
+         font-size: 12px;
+         "
+         >
+          <div>
+            <%= date.strftime('%Y/%m/%d %H:%M') %>
+          </div>
+          <div>
+            <%= from_user.name %>さんが共有しました
+          </div>
+        </div>
+        <div
+        style="
+        width: 100%;
+        display: flex;
+        text-align: left;
+        "
+        >
+          <div
+          style="
+          margin-left: 5px;
+          margin-right: 5px;
+          "
+          >
+            <%= link_to user_path(from_user) do %>
+              <%= image_tag from_user.profile_image.url, style: 'width: 50px; height: 50px; border-radius: 25px 25px 25px 25px; margin-bottom: 5px;' %>
+            <% end %>
+          </div>
+          <div
+          style="
+          margin-right: 5px;
+          "
+          >
+            <iframe width="300" height="200" src="https://www.youtube.com/embed/<%= video.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+          </div>
+          <div
+          style="
+          display: block;
+          margin-top: 40px;
+          "
+          >
+            <div
+            style="
+            font-size: 12px;
+            font-weight: bold;
+            "
+            >
+              <%= video.title.truncate(40) %>
+            </div>
+            <div
+            style="font-size: 12px;"
+            >
+              <%= video.description.truncate(40) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  
+  <%= paginate @shared_and_sharing_videos %>
+
+
+  
+</div>
