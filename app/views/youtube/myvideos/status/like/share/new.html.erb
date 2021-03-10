@@ -96,11 +96,15 @@
         >
           タイプしているユーザーがいません
         </div>
-        <%= link_to users_path do %>
+        <%= link_to users_path, style: 'text-decoration: none;' do %>
           
           <div
             class="user-edit__submit-btn btn btn-block text-white"
-            style="font-size: 12px; height: 30px; display: flex;"
+            style="
+            font-size: 12px;
+             height: 30px; 
+             display: flex;
+             "
           >
             <div style="display: flex;">
               <i class="fas fa-heart fa-2x inherit"></i>
