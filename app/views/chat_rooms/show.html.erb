@@ -1,5 +1,12 @@
 <div class="chat-room-show-page">
+  <div style="margin-bottom: 10px;">
+    <% breadcrumb :chat_room, @chat_room_user %>
+    <%= breadcrumbs separator: " &rsaquo; " %>
+  </div>
+
   <nav class="navbar navbar-light chat-room__header">
+
+
     <%= link_to matching_index_path, class: "nav-item nav-link" do%>
       <i class="fas fa-chevron-left"></i>
     <% end %>
@@ -24,4 +31,6 @@
   <form class="chat-room__message-form">
     <textarea data-behavior="chat_room_speaker" data-chat_room_id="<%= @chat_room.id %>" placeholder="メッセージを入力" class="chat-room__message-form_textarea"></textarea>
   </form>
+
+  <%= link_to '共有されている動画',youtube_myvideos_status_like_shared_and_sharing_video_path(@chat_room) %>
 </div>
