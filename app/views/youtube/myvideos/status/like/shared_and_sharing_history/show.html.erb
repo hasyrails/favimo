@@ -1,0 +1,144 @@
+<div class="video-index-page", style="
+  max-height: fit-content;
+">
+  <%= render "partial/videos_page_navbar" %>
+
+  <div style="margin-bottom: 10px;">
+    <% breadcrumb :shared_and_sharing_history, current_user %>
+    <%= breadcrumbs separator: " &rsaquo; " %>
+  </div>
+
+  <div
+  style="
+  display: block;
+  "
+  >
+    <% @videos.zip(@from_users, @to_users, @share_dates) do | video, from_user, to_user, date| %>
+      <% if from_user == current_user && to_user != current_user %>
+        <div
+        >
+          <div
+          style="
+          text-align: right;
+          font-weight: bold;
+          font-size: 12px;
+          color: #BBBBBB;
+          margin-right: 5px;
+          "
+          >
+            <div>
+              <%= date.strftime('%Y/%m/%d %H:%M') %>
+            </div>
+            <div>
+              あなたが
+              <%= link_to user_path(to_user), style: 'text-decoration: none;'  do  %>
+              <%= to_user.name %>さん
+              <%= image_tag to_user.profile_image.url,
+                style: 'width: 30px; height: 30px; border-radius: 15px 15px 15px 15px; margin-bottom: 5px;' %>
+              <% end %>
+                
+                へ共有しました
+            </div>
+          </div>
+          <div
+          style="
+          display:flex;
+          "
+          >
+            <div
+            style="
+            display: block;
+            margin-top: 40px;
+            "
+            >
+              <div
+              style="
+              font-size: 12px;
+              font-weight: bold;
+              "
+              >
+                <%= video.title.truncate(40) %>
+              </div>
+              <div
+              style="font-size: 12px;"
+              >
+                <%= video.description.truncate(40) %>
+              </div>
+            </div>
+            <div
+            style="
+            margin-left: 5px;
+            margin-right: 5px;
+            "
+            >
+              <iframe width="300" height="200" src="https://www.youtube.com/embed/<%= video.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </div>
+      <% else %>
+         <div
+         style="
+         margin-left: 5px;
+         font-weight: bold;
+         color: #BBBBBB;
+         font-size: 12px;
+         "
+         >
+          <div>
+            <%= date.strftime('%Y/%m/%d %H:%M') %>
+          </div>
+          <div>
+            <%= link_to user_path(from_user), style: 'text-decoration: none;' do %>
+              <%= from_user.name %>さん<%= image_tag from_user.profile_image.url,
+                  style: 'width: 30px; height: 30px; border-radius: 15px 15px 15px 15px; margin-bottom: 5px;' %>
+            <% end %>
+              があなたへ共有しました
+          </div>
+        </div>
+        <div
+        style="
+        width: 100%;
+        display: flex;
+        text-align: left;
+        "
+        >
+          <div
+          style="
+          margin-left: 5px;
+          margin-right: 5px;
+          "
+          >
+            <iframe width="300" height="200" src="https://www.youtube.com/embed/<%= video.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+          </div>
+          <div
+          style="
+          display: block;
+          margin-top: 40px;
+          "
+          >
+            <div
+            style="
+            font-size: 12px;
+            font-weight: bold;
+            "
+            >
+              <%= video.title.truncate(40) %>
+            </div>
+            <div
+            style="font-size: 12px;"
+            >
+              <%= video.description.truncate(40) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  
+  <%= paginate @videos %>
+
+
+  
+</div>

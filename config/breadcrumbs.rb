@@ -30,12 +30,18 @@ crumb :shared_and_sharing_videos_with_chat_room_user do |user|
 end
 
 crumb :user do |user|
+  user = User.find(params[:id])
   if user == current_user
     link "プロフィール : #{user.name}さん", user_path(user)
   else
   link "#{user.name}さん", user_path(user)
   end
   parent :root
+end
+
+crumb :shared_and_sharing_history  do |user|
+  link "動画の共有履歴", youtube_myvideos_status_like_shared_and_sharing_history_path(user)
+  parent :user
 end
 
 crumb :edit_user do |user|
