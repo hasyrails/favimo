@@ -40,7 +40,7 @@ crumb :user do |user|
 end
 
 crumb :shared_and_sharing_history  do |user|
-  link "動画の共有履歴", youtube_myvideos_status_like_shared_and_sharing_history_path(user)
+  link "共有している動画をみる", youtube_myvideos_status_like_shared_and_sharing_history_path(user)
   parent :user
 end
 
