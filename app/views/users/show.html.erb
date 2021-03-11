@@ -32,6 +32,74 @@
     </div>
   </div>
 
+  <div
+  >
+    <div
+    class="user-action"
+    style="
+    display: flex;
+    justify-content: space-between;
+    "
+    >
+      <div>
+        <div
+         class="user-action-common"
+        >
+          <%=link_to user_path(@user) do %>
+            <i class="fas fa-heart fa-2x"></i>
+            <i class="fas fa-user-alt fa-2x"></i>
+          <% end %>
+        </div>
+        <div
+        style="
+        color: grey;
+        text-align: center;
+        margin-top: 5px;
+        "
+        >
+          <p>タイプした</p>
+          <p style="margin-top: -10px;">ユーザーをみる</p>
+        </div>
+      </div>
+      <div>
+        <div class="user-action-common">
+          <%=link_to youtube_myvideos_status_like_index_path do %>
+            <i class="fas fa-heart fa-2x"></i>
+            <i class="fas fa-play-circle fa-2x"></i>
+          <% end %>
+        </div>
+        <div
+        style="
+        text-align: center;
+        color: grey;
+        margin-top: 5px;
+        "
+        >
+          <p>Likeした</p>
+          <p style="margin-top: -10px;">動画をみる</p>
+        </div>
+      </div>
+      <div>
+        <div class="user-action-common">
+          <%=link_to youtube_myvideos_status_like_shared_and_sharing_history_path do %>
+            <i class="fas fa-share-alt fa-2x"></i>
+            <i class="fas fa-play-circle fa-2x"></i>
+          <% end %>
+        </div>
+        <div
+        style="
+        text-align: center;
+        color: grey;
+        margin-top: 5px;
+        "
+        >
+          <p>共有している</p>
+          <p style="margin-top: -10px;">動画をみる</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <% if current_user.id == @user.id %>
     <div class="user-action">
       <div class="user-action-common">
