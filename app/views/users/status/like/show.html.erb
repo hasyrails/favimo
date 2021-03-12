@@ -1,0 +1,231 @@
+<div class="video-index-page", style="
+  max-height: fit-content;
+">
+  <%= render "partial/videos_page_navbar" %>
+
+  <div style="margin-bottom: 10px;">
+    <% breadcrumb :like_users %>
+    <%= breadcrumbs separator: " &rsaquo; " %>
+  </div>
+
+  <div
+  style="
+  display: block;
+  margin-left: 25px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  "
+  >
+    <%= @like_users.zip(@like_reaction_dates) do |like_user, date| %>
+      <div
+      style="
+      display: flex;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      "
+      >
+        <div
+          style="
+          margin-top: 30px;
+          font-weight: bold;
+          color: grey;
+          font-size: 16px;
+          "
+        >
+          <p>
+            <%= date.strftime("%Y/%m/%d") %>
+          </p>
+          <p
+          style="margin-top: -10px;"
+          >
+            <%= date.strftime("%H:%M") %>
+          </p>
+          <p
+          style="margin-top: -10px;"
+          >
+            タイプしました
+          </p>
+        </div>
+        <div
+        style="
+        margin-left: 30px;
+        margin-right: 10px;
+        display: block;
+        "
+        >
+          <%= link_to user_path(like_user),
+          style: 'text-decoration: none;' do %>
+            <% if like_user.profile_image.present? %>
+              <%= image_tag like_user.profile_image.url, style: "
+              width: 100px;
+              height: 100px;
+              border-radius: 50%;
+              " %>
+            <% else %>
+              <div 
+              class="profile-default-img",
+              style="
+              width: 100px;
+              height: 100px;
+              border-radius: 50%;
+              ">
+              </div>
+            <% end %>
+          <% end %>
+          <div
+          style="
+          margin-top: 5px;
+          margin-left: 30%;
+          font-size: 16px;
+          font-weight: bold;
+          color: grey;
+          width: 100px;
+          "
+          >
+            <p>
+              <%= like_user.name %>
+            </p>
+            <p
+            style="margin-top: -10px;"
+            >
+              さん
+            </p>
+          </div>
+        </div>
+        <div
+        style="
+        margin-top: 10px;
+        margin-left: 3px;
+        display: flex;
+        "
+        >
+          <% @match_users.each do |match_user| %>
+            <% if match_user == like_user %>
+              <div
+              style="
+              margin-top: -10px;
+              "
+              >
+                <div
+                style="
+                font-weight: bold;
+                font-size: 3px;
+                "
+                >
+                  <p>
+                    チャット
+                  </p>
+                  <p
+                  style="
+                  margin-top: -10px;
+                  "
+                  >
+                    しましょう！
+                  </p>
+                </div>
+              <%= link_to chat_rooms_path(params: { user_id: match_user.id }), style: 'text-decoration: none;',method: :post do %>
+                <div
+                style="
+                width: 50px;
+                height: 50px;
+                margin-top: -10px;
+                border: solid;
+                border-color: pink;
+                border-radius: 50%;
+                "
+                >
+                  <i class="fas fa-user-friends fa-2x"
+                  style="
+                  margin-left: 20%;
+                  margin-top: 25%;
+                  color: pink; 
+                  ">
+                  </i>
+                </div>
+              <% end %>
+                <div
+                style="
+                width: 50px;
+                height: 50px;
+                text-align: center;
+                margin-top: 5px;
+                font-size: 12px;
+                font-weight: bold;
+                color: grey;
+                "
+                >
+                  マッチ中
+                </div>
+              </div>
+            <% else %>
+              <div
+              style="
+              display: none;
+              width: 50px;
+              height: 50px;
+              "
+              >
+              </div>
+            <% end %>
+          <% end %>
+          <div
+          style="
+          margin-top: 20px;
+          margin-left: 10px;
+          margin-right: 10px;
+          display: block;
+          "
+          >
+            <%=link_to user_path(like_user), style: 'text-decoration: none;' do%>
+            <div
+            style="
+            width: 75px;
+            height: 50px;
+            border: solid;
+            border-radius: 10px 10px 10px 10px;
+            "
+            >
+              <i class="fas fa-share-alt fa-2x"
+              style="
+              margin-left: 15%;
+              margin-right: 5%;
+              "
+              >
+              </i>
+              <i class="fas fa-play-circle fa-2x"
+              style="
+              margin-left: 1%;
+              margin-top: 10px;
+              ">
+              </i>
+            </div>
+            <% end %>
+            <div
+            style="
+            text-align: center;
+            margin-top: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            color: grey;
+            "
+            >
+              <p>
+                動画を
+              </p>
+              <p
+              style="margin-top: -10px;"
+              >
+                共有する
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= paginate @like_users %>
+  </div>
+
+</div>

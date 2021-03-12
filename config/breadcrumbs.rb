@@ -39,6 +39,11 @@ crumb :user do |user|
   parent :root
 end
 
+crumb :like_users do |user|
+  link "タイプした人をみる", users_status_like_path
+  parent :user
+end
+
 crumb :shared_and_sharing_history  do |user|
   link "共有している動画をみる", youtube_myvideos_status_like_shared_and_sharing_history_path(user)
   parent :user

@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resources :chat_rooms, only: [:create, :show]
   namespace :users do
     get 'video_common_like/:video_unique_id',  to: 'video_common_like#index', as: 'video_common_like'
+    namespace :status do
+      resources :like, only: [:show]
+    end
   end
   resources :qiitas
   namespace :youtube do
