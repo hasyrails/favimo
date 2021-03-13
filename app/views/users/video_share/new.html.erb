@@ -1,0 +1,129 @@
+<div class="user-index-page">
+  <%= render "partial/users_page_navbar", locals: { user: @user } %>
+  
+  <div>
+    <% breadcrumb :share_video_select, @user %>
+    <%= breadcrumbs separator: " &rsaquo; "%>
+  </div>
+
+  <div>
+    <div class="profile mt-4">
+      <% if @user.profile_image.present? %>
+        <%= image_tag @user.profile_image.url %>
+      <% else %>
+        <div 
+        class="profile-default-img",
+        style="
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        ">
+        </div>
+      <% end %>
+    </div>
+    <div
+    style="
+    font-weight: bold;
+    text-align: center;
+    "
+    >
+      <p>
+        <%= @user.name %>さんへ
+      </p>
+      <p
+      style="
+      margin-top: -10px;
+      "
+      >
+        動画を共有する
+      </p>
+    </div>
+
+    <%= form_with url: new_user_video_share_path, method: :get, local: true, class: 'cp_iptxt' do |f| %>
+      <div
+      >
+        <%= f.text_field :keyword, style: 'margin-left: 10%;', placeholder: "Likeした動画の中から検索" %>
+        <div style="display: flex; justify-content: center;">
+          <%= f.submit '検索する', class: 'btn btn-primary', style: 'margin-left: 15%; font-size: 16px;' %>
+          <%= link_to 'クリア', new_user_video_share_path, class: 'btn btn-secondary', style: 'margin-left: 15%; font-size: 16px;' %>
+        </div>
+      </div>
+    <% end %>
+
+
+    <div
+    style="
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    "
+    >
+      <% @like_myvideos.each do |like_myvideo| %>
+        <div
+        style="
+        margin-top: 15px;
+        margin-bottom: 15px;
+        "
+        >
+          <div
+          style="
+          display: flex;
+          "
+          >
+            <div>
+              <iframe width="300" height="200" src="https://www.youtube.com/embed/<%= like_myvideo.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+              </iframe>
+            </div>
+            <%=link_to user_path(@user ,params: { 
+            share_video_unique_id: like_myvideo.video_id
+            }) do %>
+              <div
+              class="btn btn-primary"
+              style="
+              margin-top: 85px;
+              margin-left: 10px;
+              height: 30px;
+              font-size: 16px;
+              "
+              >
+                共有する
+              </div>
+            <% end  %>
+          </div>
+          <div
+          style="
+          margin-left: 15px;
+          margin-right: 15px;
+          "
+          >
+            <div
+            style="
+            font-weight: bold;
+            "
+            >
+              <%= like_myvideo.title %>
+            </div>
+            <div
+            style="
+            margin-left: 15px;
+            margin-right: 15px;
+            "
+            >
+              <%= like_myvideo.description %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div>
+    <%= paginate @like_myvideos %>
+  </div>
+
+
+
+
+
+</div>
