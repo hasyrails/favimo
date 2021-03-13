@@ -95,8 +95,10 @@ crumb :common_video_like_users do
   parent :like_myvideos
 end
 
-crumb :select_video_share_user do
-  link "共有するユーザーを選ぶ", new_youtube_myvideos_status_like_share_path
+crumb :select_video_share_user do |share_video|
+  link "共有するユーザーを選ぶ", new_youtube_myvideos_status_like_share_path(
+    params: {id: share_video.id}
+  )
   parent :like_myvideos
 end
 

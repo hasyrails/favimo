@@ -11,6 +11,8 @@ class Youtube::Myvideos::Status::Like::ShareController < ApplicationController
       user_liked_by_current_user = User.find(like_reaction.to_user_id)
       @users_liked_by_current_user << user_liked_by_current_user
     end
+
+    @users_liked_by_current_user = Kaminari.paginate_array(@users_liked_by_current_user).page(params[:page]).per(8)
   end
 
   def create

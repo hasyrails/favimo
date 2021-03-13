@@ -1,6 +1,6 @@
 class Users::Status::LikeController < ApplicationController
   def index
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
 
     like_reactions = Reaction.where(from_user_id: @user.id, status: "like").order(created_at: "DESC")
 

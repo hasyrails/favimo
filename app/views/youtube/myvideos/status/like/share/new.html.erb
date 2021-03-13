@@ -2,7 +2,7 @@
   <%= render "partial/users_page_navbar", locals: { user: @user } %>
   
   <div>
-    <% breadcrumb :select_video_share_user %>
+    <% breadcrumb :select_video_share_user, @share_video %>
     <%= breadcrumbs separator: " &rsaquo; "%>
   </div>
 
@@ -122,6 +122,10 @@
           </div>
         <% end %>
       <% end %>
+    </div>
+
+    <div>
+      <%= paginate @users_liked_by_current_user %>
     </div>
   
   </div>
