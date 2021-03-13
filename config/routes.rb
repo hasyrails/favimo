@@ -6,15 +6,21 @@ Rails.application.routes.draw do
     }
     
   root 'top#index'
-  resources :users, only: [:show, :index]
+  resources :users, only: [:show, :index], param: :user_id
+  resources :users do
+    resources :video_share, only: [:new, :create], controller: 'users/video_share'
+    namespace :status do
+      resources :like, only: [:index], controller: 'users/status/like'
+    end
+  end
   resources :reactions, only: [:create]
   resources :matching, only: [:index]
   resources :chat_rooms, only: [:create, :show]
   namespace :users do
     get 'video_common_like/:video_unique_id',  to: 'video_common_like#index', as: 'video_common_like'
-    namespace :status do
-      resources :like, only: [:show]
-    end
+    # namespace :status do
+    #   resources :like, only: [:show]
+    # end
   end
   resources :qiitas
   namespace :youtube do
@@ -27,7 +33,7 @@ Rails.application.routes.draw do
         resources :like, only: [:index, :destroy]
         namespace :like do
           resources :share, only: [:new, :create]
-          resources :shared_and_sharing_history, only: [:show]
+          resources :shared_and_sharing_history, only: [:show], param: :user_id
           resources :sharing_videos, only: [:index]
           resources :sharing_videos, param: :video_unique_id, only: [:show]
           resources :shared_and_sharing_videos, only: [:show]

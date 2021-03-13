@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
 
     @share_video = YoutubeVideo.where(video_id: params[:share_video_unique_id]).first
   end

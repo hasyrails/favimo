@@ -30,7 +30,7 @@ crumb :shared_and_sharing_videos_with_chat_room_user do |user|
 end
 
 crumb :user do |user|
-  user = User.find(params[:id])
+  user = User.find(params[:user_id])
   if user == current_user
     link "プロフィール : #{user.name}さん", user_path(user)
   else
@@ -40,8 +40,14 @@ crumb :user do |user|
 end
 
 crumb :like_users do |user|
-  link "タイプした人をみる", users_status_like_path
+  user = User.find(params[:user_id])
+  link "タイプした人をみる", user_status_like_index_path
   parent :user
+end
+
+crumb :share_video_select do |user|
+  link "#{user.name}さんと動画を共有する", new_user_video_share_path
+  parent :like_users
 end
 
 crumb :shared_and_sharing_history  do |user|
