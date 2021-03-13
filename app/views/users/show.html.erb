@@ -4,7 +4,7 @@
 
   <% if params[:share_video_unique_id].present? %>
     <div>
-      <% breadcrumb :video_share_user_page, @user, class: "logo"%>
+      <% breadcrumb :video_share_user_page, @share_video, class: "logo"%>
       <%= breadcrumbs separator: " &rsaquo; "%>
     </div>
   <% else %>

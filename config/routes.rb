@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index], param: :user_id
   resources :users do
     resources :video_share, only: [:new, :create], controller: 'users/video_share'
-    namespace :status do
+    resource :status do
       resources :like, only: [:index], controller: 'users/status/like'
     end
   end
