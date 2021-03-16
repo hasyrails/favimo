@@ -60,8 +60,11 @@
       margin-top: 1%;
       "
       >
-        <table border="1">
-          <thead>
+        <table 
+        border="1">
+          <thead
+          class="table-dark"
+          >
             <tr>
               <th>
                 <div
@@ -101,15 +104,20 @@
     margin-right: 1%;
     "
     >
-      <table border="1">
-        <thead>
+      <table
+      class="table" 
+      border="1"
+      >
+        <thead
+        class="table-dark"
+        >
           <tr>
           <% @column_names.each do |column_name| %>
             <th>
               <div
               style="
               text-align: center;
-              font-size: 20px;
+              font-size: 10px;
               "
               >
               <%= column_name.truncate(10) %>
@@ -118,13 +126,13 @@
           <% end %>
             <th
             style="
-              width: 200px;
+              width: 100px;
             "
             >
               <div
               style="
               text-align: center;
-              font-size: 20px;
+              font-size: 10px;
               "
               >
               レコード操作
