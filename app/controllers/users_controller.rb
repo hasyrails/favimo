@@ -11,9 +11,12 @@ class UsersController < ApplicationController
     not_like_reactions = Reaction.where.not(status: 'like').where( from_user_id: current_user.id)
     not_like_reaction_to_user_ids = Reaction.where.not(status: 'like').where(from_user_id: current_user.id).map(&:to_user_id)
 
-    @users = User.find(not_like_reaction_to_user_ids).shuffle
-    
-    @user = User.find(current_user.id)
+    if Reaction.all.blank?
+      @users = User.all
+    else
+      @users = User.find(not_like_reaction_to_user_ids).shuffle
+    end
 
+    @user = User.find(current_user.id)
   end
 end
