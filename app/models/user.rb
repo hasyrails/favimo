@@ -1,12 +1,14 @@
 class User < ApplicationRecord
-  has_many :reactions
-  has_many :chat_room_users
-  has_many :chat_rooms, through: :chat_room_users
-  has_many :favorites
-  has_many :youtube_videos, through: :favorites
-  has_many :share_videos
-  has_many :youtube_videos, through: :share_videos
-  has_many :chat_messages
+  has_many :reactions, foreign_key: :from_user_id, dependent: :destroy
+  has_many :reactions, foreign_key: :to_user_id, dependent: :destroy
+  has_many :chat_room_users, dependent: :destroy
+  has_many :chat_rooms, through: :chat_room_users, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :youtube_videos, through: :favorites, dependent: :destroy
+  has_many :share_videos, foreign_key: :from_user_id,dependent: :destroy
+  has_many :share_videos, foreign_key: :to_user_id,dependent: :destroy
+  has_many :youtube_videos, through: :share_videos, dependent: :destroy
+  has_many :chat_messages, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -16,7 +18,8 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :self_introduction, length: { maximum: 500 }
 
-  enum gender: { 男性: 0, 女性: 1 }
+  enum gender: { male: 0, female: 1 }
+  enum role: { general: 0, admin: 1 }
 
   mount_uploader :profile_image, ProfileImageUploader
 
