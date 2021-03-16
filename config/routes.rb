@@ -13,6 +13,15 @@ Rails.application.routes.draw do
       resources :like, only: [:index], controller: 'users/status/like'
     end
   end
+  namespace :admin do
+    root 'top#index'
+    resources :dashboard, only: [:index]
+    resource :dashboard do
+      resources :users, controller: 'dashboard/users'
+      resources :youtube_videos
+    end
+  end
+
   resources :reactions, only: [:create]
   resources :matching, only: [:index]
   resources :chat_rooms, only: [:create, :show]

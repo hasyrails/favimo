@@ -1,0 +1,109 @@
+<div
+  style="
+  width: 100%;
+  height: 100vh;
+  background-color:#F5FFFA;
+  "
+>
+  <div
+  style="
+  display: flex;
+  "
+  >
+  <div
+  style="
+  width: 15%;
+  height: 100vh;
+  background-color:#EEEEEE;
+  "
+  >
+    <div
+    style="
+    font-weight: bold;
+    font-size: 24px;
+    "
+    >
+    App for Admin
+    </div>
+    <% @table_names.each do |table_name| %>
+      <div
+      style="
+      font-weight: bold;
+      font-size: 16px;
+      margin-left: 15px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      "
+      >
+        <%= table_name %>
+      </div>
+    <% end %>
+  </div>
+  <div
+  >
+    <div
+    style="
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    "
+    >
+      DataBase Tables
+    </div>
+    <div
+    style="
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 30px;
+    margin-right: 30px;
+    "
+    >
+      <% @table_names.zip(@columns) do |table_name, columns| %>
+        <div
+        style="
+        display: block;
+        margin-top: 30px;
+        margin-left: 15px;
+        margin-right: 15px;
+        "
+        >
+          <div
+          style="
+          font-size: 16px;
+          font-weight: bold;
+          border: 2px solid;
+          width: 150px;
+          text-align: center;
+          "
+          >
+            <%= table_name %>
+          </div>
+          <div
+          style="
+          width: 150px;
+          border: 1px solid;
+          "
+          >
+            <% columns.each do |column| %>
+              <div
+              style="
+              border: 1px solid;
+              "
+              >
+                <div
+                style="
+                margin-left: 5px;
+                "
+                >
+                  <%= column.name %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          
+        </div>
+      <% end %>
+    </div>
+  </div>
+  </div>
+</div>
