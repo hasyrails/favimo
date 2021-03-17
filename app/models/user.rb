@@ -5,8 +5,8 @@ class User < ApplicationRecord
   has_many :chat_rooms, through: :chat_room_users, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :youtube_videos, through: :favorites, dependent: :destroy
-  has_many :share_videos, foreign_key: :from_user_id,dependent: :destroy
-  has_many :share_videos, foreign_key: :to_user_id,dependent: :destroy
+  has_many :share_videos, foreign_key: :from_user_id, dependent: :destroy
+  has_many :share_videos, foreign_key: :to_user_id, dependent: :destroy
   has_many :youtube_videos, through: :share_videos, dependent: :destroy
   has_many :chat_messages, dependent: :destroy
 
