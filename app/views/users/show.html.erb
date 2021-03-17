@@ -136,7 +136,7 @@
     display: flex;
     justify-content: center;
     ">
-      <%= link_to'共有する', youtube_myvideos_status_like_share_index_path(@user ,params: {youtube_video_id: params[:share_video_unique_id], from_user_id: current_user.id, to_user_id: params[:id]}), method: :post, class: 'btn btn-primary', style: 'margin-bottom: 10%;' %>
+      <%= link_to'共有する', youtube_myvideos_status_like_share_index_path(params: {youtube_video_id: params[:share_video_unique_id], from_user_id: current_user.id, to_user_id: @user.id}), method: :post, class: 'btn btn-primary', style: 'margin-bottom: 10%;' %>
     </div>
   <% end %>
 

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :chat_messages, controller: 'dashboard/chat_messages'
       resources :reactions, controller: 'dashboard/reactions'
       resources :favorites, controller: 'dashboard/favorites'
+      resources :share_videos, controller: 'dashboard/share_videos'
     end
   end
 
