@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_13_140716) do
+ActiveRecord::Schema.define(version: 2021_03_16_211328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,7 +88,6 @@ ActiveRecord::Schema.define(version: 2021_03_13_140716) do
   end
 
   create_table "youtube_videos", force: :cascade do |t|
-    t.string "identify_id"
     t.string "video_id"
     t.string "title"
     t.string "description"

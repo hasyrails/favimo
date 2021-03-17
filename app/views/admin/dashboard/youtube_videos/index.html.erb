@@ -53,7 +53,7 @@
       font-size: 32px;
       "
       >
-      <%= @users.model_name.name %>モデルレコード
+        <%= @youtube_videos.model_name.name %>モデルレコード
       </div>
       <div
       style="
@@ -141,9 +141,9 @@
           </tr>
         </thead>
         <tbody>
-        <% @users.each do |user| %>
+        <% @youtube_videos.each do |youtube_video| %>
           <tr>
-          <% user.attributes.each do |key, value| %>
+          <% youtube_video.attributes.each do |key, value| %>
             <td>
               <div
               style="
@@ -169,7 +169,7 @@
                 margin-right: 5px;
                 "
                 >
-                <%= link_to admin_dashboard_user_path(user) do %>
+                <%= link_to admin_dashboard_youtube_video_path(youtube_video) do %>
                   <i class="fa fa-info-circle fa-2x"></i>
                 <% end %>
                 </div>
@@ -179,7 +179,7 @@
                 margin-right: 5px;
                 "
                 >
-                <%= link_to edit_admin_dashboard_user_path(user) do %>
+                <%= link_to edit_admin_dashboard_youtube_video_path(youtube_video) do %>
                   <i class="fa fa-pen fa-2x"></i>
                 <% end %>
                 </div>
@@ -189,7 +189,7 @@
                 margin-right: 5px;
                 "
                 >
-                <%= link_to admin_dashboard_user_path(user), method: :delete do %>
+                <%= link_to admin_dashboard_youtube_video_path(youtube_video), method: :delete do %>
                   <i class="fa fa-trash fa-2x"></i>
                 <% end %>
                 </div>
@@ -200,7 +200,7 @@
         </tbody>
      </table>
      <div>
-       <%= paginate @users %>
+       <%= paginate @youtube_videos %>
      </div>
     </div>
   </div>

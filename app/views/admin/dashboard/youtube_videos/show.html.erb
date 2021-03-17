@@ -55,10 +55,10 @@
       >
         <div>
           <div>
-            <%= @user.model_name.name %> モデルレコード
+            <%= @youtube_video.model_name.name %> モデルレコード
           </div>
           <div>
-            id =<%= @user.id %>
+            id =<%= @youtube_video.id %>
           </div>
         </div>
         <div>
@@ -75,7 +75,7 @@
             margin-right: 5px;
             "
             >
-            <%= link_to admin_dashboard_user_path(@user) do %>
+            <%= link_to admin_dashboard_youtube_video_path(@youtube_video) do %>
               <i class="fa fa-info-circle fa-1x"></i>
             <% end %>
             </div>
@@ -85,7 +85,7 @@
             margin-right: 5px;
             "
             >
-            <%= link_to edit_admin_dashboard_user_path(@user) do %>
+            <%= link_to edit_admin_dashboard_youtube_video_path(@youtube_video) do %>
               <i class="fa fa-pen fa-1x"></i>
             <% end %>
             </div>
@@ -95,7 +95,7 @@
             margin-right: 5px;
             "
             >
-            <%= link_to admin_dashboard_user_path(@user), method: :delete do %>
+            <%= link_to admin_dashboard_youtube_video_path(@youtube_video), method: :delete do %>
               <i class="fa fa-trash fa-1x"></i>
             <% end %>
             </div>
@@ -108,7 +108,6 @@
       "
       >
         <table 
-        class="table"
         border="1">
           <thead
           class="table-dark"
@@ -171,7 +170,7 @@
                 id
               </div>
             </th>
-          <% @column_names.drop(1).take((@column_names.size.to_f/2).ceil).each do |column_name| %>
+          <% @column_names.drop(1).take((@column_names.size.to_f/2-1).ceil).each do |column_name| %>
             <th>
               <div
               style="
@@ -189,9 +188,9 @@
           
           <tr>
             <td>
-              <%= @user.id %>
+              <%= @youtube_video.id %>
             </td>
-            <% @user.attributes.drop(1).take((@user.attributes.size.to_f/2).ceil).each do |key, value| %>
+            <% @youtube_video.attributes.drop(1).take((@youtube_video.attributes.size.to_f/2-1).ceil).each do |key, value| %>
             <td>
               <div
               style="
@@ -230,7 +229,7 @@
       </thead>
        <tbody>
         <tr>
-          <% @user.attributes.drop((@user.attributes.size.to_f/2).ceil).each do |key, value| %>
+          <% @youtube_video.attributes.drop((@youtube_video.attributes.size.to_f/2).ceil).each do |key, value| %>
             <td>
               <div
               style="
