@@ -42,7 +42,7 @@ class Youtube::VideosSearchController < ApplicationController
       @search_results.items.each do |search_result|
         @youtube_video = YoutubeVideo.new(
           # id: id.next,
-          identify_id: search_result.id,
+          # identify_id: search_result.id,
           video_id: search_result.id.video_id,
           title: search_result.snippet.title,
           description: search_result.snippet.description,
