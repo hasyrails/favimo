@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resource :dashboard do
       resources :users, controller: 'dashboard/users'
       resources :youtube_videos, controller: 'dashboard/youtube_videos'
+      resources :chat_rooms, controller: 'dashboard/chat_rooms'
     end
   end
 
