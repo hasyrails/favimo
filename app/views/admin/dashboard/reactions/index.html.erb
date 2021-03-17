@@ -1,0 +1,207 @@
+<div
+  style="
+  width: 100%;
+  height: 100vh;
+  background-color:#F5FFFA;
+  "
+>
+  <div
+  style="
+  display: flex;
+  "
+  >
+  <div
+  style="
+  width: 15%;
+  height: 100vh;
+  background-color:#EEEEEE;
+  "
+  >
+    <div
+    style="
+    font-weight: bold;
+    font-size: 24px;
+    "
+    >
+    App for Admin
+    </div>
+    <% @table_names.each do |table_name| %>
+      <div
+      style="
+      font-weight: bold;
+      font-size: 16px;
+      margin-left: 15px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      "
+      >
+        <%= table_name %>
+      </div>
+    <% end %>
+  </div>
+  <div>
+    <div
+    style="
+    display: flex;
+    "
+    >
+      <div
+      style="
+      margin-top: 6%;
+      margin-left: 30%;
+      margin-right: 1%;
+      font-size: 32px;
+      "
+      >
+        <%= @reactions.model_name.name %>モデルレコード
+      </div>
+      <div
+      style="
+      margin-top: 1%;
+      "
+      >
+        <table 
+        border="1">
+          <thead
+          class="table-dark"
+          >
+            <tr>
+              <th>
+                <div
+                style="
+                text-align: center;
+                font-size: 20px;
+                font-weight: bold;
+                "
+                >
+                  <%= @model_name %>
+                </div>
+              </th>
+            </tr>
+          </thead>
+
+          <% @column_names.each do |column_name|  %>
+          <tr>
+            <td>
+              <div
+              style="
+              margin-left: 10px;
+              margin-right: 10px;
+              "
+              >
+              <%= column_name %>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <div
+    style="
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-right: 1%;
+    "
+    >
+      <table
+      class="table" 
+      border="1"
+      >
+        <thead
+        class="table-dark"
+        >
+          <tr>
+          <% @column_names.each do |column_name| %>
+            <th>
+              <div
+              style="
+              text-align: center;
+              font-size: 10px;
+              "
+              >
+              <%= column_name.truncate(10) %>
+              </div>
+            </th>
+          <% end %>
+            <th
+            style="
+              width: 100px;
+            "
+            >
+              <div
+              style="
+              text-align: center;
+              font-size: 10px;
+              "
+              >
+              レコード操作
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @reactions.each do |reaction| %>
+          <tr>
+          <% reaction.attributes.each do |key, value| %>
+            <td>
+              <div
+              style="
+              margin-left: 10px;
+              margin-right: 10px;
+              "
+              >
+              <%= value.to_s.truncate(20) %>
+              </div>
+            </td>
+          <% end %>
+            <td>
+              <div
+              style="
+              margin-left: 5px;
+              margin-right: 5px;
+              display: flex;
+              "
+              >
+                <div
+                style="
+                margin-left: 5px;
+                margin-right: 5px;
+                "
+                >
+                <%= link_to admin_dashboard_reaction_path(reaction) do %>
+                  <i class="fa fa-info-circle fa-2x"></i>
+                <% end %>
+                </div>
+                <div
+                style="
+                margin-left: 5px;
+                margin-right: 5px;
+                "
+                >
+                <%= link_to edit_admin_dashboard_reaction_path(reaction) do %>
+                  <i class="fa fa-pen fa-2x"></i>
+                <% end %>
+                </div>
+                <div
+                style="
+                margin-left: 5px;
+                margin-right: 5px;
+                "
+                >
+                <%= link_to admin_dashboard_reaction_path(reaction), method: :delete do %>
+                  <i class="fa fa-trash fa-2x"></i>
+                <% end %>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+     </table>
+     <div>
+       <%= paginate @reactions %>
+     </div>
+    </div>
+  </div>
+</div>
