@@ -1,9 +1,13 @@
 class Admin::Dashboard::UsersController < ApplicationController
+  before_action :admin_user
   before_action :set_user_model_name
   before_action :set_column_names_of_user_model
 
   def index
     @users = User.all
+
+    @users = User.page(params[:page]).per(5)
+
   end
 
   def show
@@ -50,4 +54,10 @@ class Admin::Dashboard::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(@column_names)
   end
+
+
+  def admin_user
+    redirect_to(root_path) if  current_user.nil? || !current_user.admin?
+  end
+
 end

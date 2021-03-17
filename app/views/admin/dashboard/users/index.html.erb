@@ -53,7 +53,7 @@
       font-size: 32px;
       "
       >
-      Userモデルレコード
+      <%= @users.model_name.name %>モデルレコード
       </div>
       <div
       style="
@@ -199,6 +199,9 @@
         <% end %>
         </tbody>
      </table>
+     <div>
+       <%= paginate @users %>
+     </div>
     </div>
   </div>
 </div>
