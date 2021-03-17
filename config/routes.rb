@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
     resource :dashboard do
       resources :users, controller: 'dashboard/users'
-      resources :youtube_videos
+      resources :youtube_videos, controller: 'dashboard/youtube_videos'
     end
   end
 
