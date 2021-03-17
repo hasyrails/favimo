@@ -1,0 +1,249 @@
+<div
+  style="
+  width: 100%;
+  height: 100vh;
+  background-color:#F5FFFA;
+  "
+>
+  <div
+  style="
+  display: flex;
+  "
+  >
+  <div
+  style="
+  width: 15%;
+  height: 100vh;
+  background-color:#EEEEEE;
+  "
+  >
+    <div
+    style="
+    font-weight: bold;
+    font-size: 24px;
+    "
+    >
+    App for Admin
+    </div>
+    <% @table_names.each do |table_name| %>
+      <div
+      style="
+      font-weight: bold;
+      font-size: 16px;
+      margin-left: 15px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      "
+      >
+        <%= table_name %>
+      </div>
+    <% end %>
+  </div>
+  <div>
+    <div
+    style="
+    display: flex;
+    "
+    >
+      <div
+      style="
+      margin-top: 6%;
+      margin-left: 30%;
+      margin-right: 1%;
+      font-size: 32px;
+      "
+      >
+        <div>
+          <div>
+            <%= @chat_room_user.model_name.name %> モデルレコード
+          </div>
+          <div>
+            id =<%= @chat_room_user.id %>
+          </div>
+        </div>
+        <div>
+          <div
+          style="
+          margin-left: 5px;
+          margin-right: 5px;
+          display: flex;
+          "
+          >
+            <div
+            style="
+            margin-left: 5px;
+            margin-right: 5px;
+            "
+            >
+            <%= link_to admin_dashboard_chat_room_user_path(@chat_room_user) do %>
+              <i class="fa fa-info-circle fa-1x"></i>
+            <% end %>
+            </div>
+            <div
+            style="
+            margin-left: 5px;
+            margin-right: 5px;
+            "
+            >
+            <%= link_to edit_admin_dashboard_chat_room_user_path(@chat_room_user) do %>
+              <i class="fa fa-pen fa-1x"></i>
+            <% end %>
+            </div>
+            <div
+            style="
+            margin-left: 5px;
+            margin-right: 5px;
+            "
+            >
+            <%= link_to admin_dashboard_chat_room_user_path(@chat_room_user), method: :delete do %>
+              <i class="fa fa-trash fa-1x"></i>
+            <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+      style="
+      margin-top: 1%;
+      "
+      >
+        <table 
+        border="1">
+          <thead
+          class="table-dark"
+          >
+            <tr>
+              <th>
+                <div
+                style="
+                text-align: center;
+                font-size: 20px;
+                font-weight: bold;
+                "
+                >
+                  <%= @model_name %>
+                </div>
+              </th>
+            </tr>
+          </thead>
+
+          <% @column_names.each do |column_name|  %>
+          <tr>
+            <td>
+              <div
+              style="
+              margin-left: 10px;
+              margin-right: 10px;
+              "
+              >
+              <%= column_name %>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <div
+    style="
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-right: 1%;
+    "
+    class="table-responsive"
+    >
+      <table
+      class="table"
+      border="1"
+      >
+        <thead
+        class="table-dark"
+        >
+          <tr>
+            <th>
+              <div
+              style="
+              text-align: center;
+              font-size: 20px;
+              "
+              >
+                id
+              </div>
+            </th>
+          <% @column_names.drop(1).take((@column_names.size.to_f/2-1).ceil).each do |column_name| %>
+            <th>
+              <div
+              style="
+              text-align: center;
+              font-size: 20px;
+              "
+              >
+              <%= column_name.truncate(10) %>
+              </div>
+            </th>
+          <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td>
+              <%= @chat_room_user.id %>
+            </td>
+            <% @chat_room_user.attributes.drop(1).take((@chat_room_user.attributes.size.to_f/2-1).ceil).each do |key, value| %>
+            <td>
+              <div
+              style="
+              margin-left: 10px;
+              margin-right: 10px;
+              "
+              >
+                <%= value.to_s.truncate(20) %>
+              </div>
+            </td>
+            <% end %>
+          </tr>
+        </tbody>
+     </table>
+     <table
+     class="table"
+     border="1"
+     >
+       <thead
+       class="table-dark"
+       >
+        <tr>
+        <% @column_names.drop((@column_names.size.to_f/2).ceil).each do |column_name| %>
+          <th>
+            <div
+            style="
+            text-align: center;
+            font-size: 20px;
+            "
+            >
+            <%= column_name.truncate(10) %>
+            </div>
+          </th>
+        <% end %>
+        </tr>
+      </thead>
+       <tbody>
+        <tr>
+          <% @chat_room_user.attributes.drop((@chat_room_user.attributes.size.to_f/2).ceil).each do |key, value| %>
+            <td>
+              <div
+              style="
+              margin-left: 10px;
+              margin-right: 10px;
+              "
+              >
+                <%= value %>
+              </div>
+            </td>
+          <% end %>
+        </tr>
+      </tbody>
+     </table>
+    </div>
+  </div>
+</div>
