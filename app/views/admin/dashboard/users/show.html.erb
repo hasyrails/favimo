@@ -10,35 +10,6 @@
   display: flex;
   "
   >
-  <div
-  style="
-  width: 15%;
-  height: 100vh;
-  background-color:#EEEEEE;
-  "
-  >
-    <div
-    style="
-    font-weight: bold;
-    font-size: 24px;
-    "
-    >
-    App for Admin
-    </div>
-    <% @table_names.each do |table_name| %>
-      <div
-      style="
-      font-weight: bold;
-      font-size: 16px;
-      margin-left: 15px;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      "
-      >
-        <%= table_name %>
-      </div>
-    <% end %>
-  </div>
   <div>
     <div
     style="
@@ -108,7 +79,6 @@
       "
       >
         <table 
-        class="table"
         border="1">
           <thead
           class="table-dark"

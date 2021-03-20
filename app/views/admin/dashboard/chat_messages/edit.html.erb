@@ -26,10 +26,10 @@
       >
         <div>
           <div>
-            <%= @chat_room_user.model_name.name %> モデルレコード
+            <%= @chat_message.model_name.name %> モデルレコード
           </div>
           <div>
-            id =<%= @chat_room_user.id %>
+            id =<%= @chat_message.id %>
           </div>
         </div>
         <div>
@@ -46,7 +46,7 @@
             margin-right: 5px;
             "
             >
-            <%= link_to admin_dashboard_chat_room_user_path(@chat_room_user) do %>
+            <%= link_to admin_dashboard_chat_message_path(@chat_message) do %>
               <i class="fa fa-info-circle fa-1x"></i>
             <% end %>
             </div>
@@ -56,7 +56,7 @@
             margin-right: 5px;
             "
             >
-            <%= link_to edit_admin_dashboard_chat_room_user_path(@chat_room_user) do %>
+            <%= link_to edit_admin_dashboard_chat_message_path(@chat_message) do %>
               <i class="fa fa-pen fa-1x"></i>
             <% end %>
             </div>
@@ -66,7 +66,7 @@
             margin-right: 5px;
             "
             >
-            <%= link_to admin_dashboard_chat_room_user_path(@chat_room_user), method: :delete do %>
+            <%= link_to admin_dashboard_chat_message_path(@chat_message), method: :delete do %>
               <i class="fa fa-trash fa-1x"></i>
             <% end %>
             </div>
@@ -158,9 +158,9 @@
           
           <tr>
             <td>
-              <%= @chat_room_user.id %>
+              <%= @chat_message.id %>
             </td>
-            <% @chat_room_user.attributes.drop(1).take((@chat_room_user.attributes.size.to_f/2).ceil-1).each do |key, value| %>
+            <% @chat_message.attributes.drop(1).take((@chat_message.attributes.size.to_f/2).ceil-1).each do |key, value| %>
             <td>
               <div
               style="
@@ -172,7 +172,7 @@
                   <% if key.eql?("video_id") ||key.eql?("title") ||key.eql?("published_at") || key.eql?("channel_id")||key.eql?("channel_title")||key.eql?("thumbnail_url") %>
                     <%= value %>
                   <% else %>
-                    <%= form_with model: [:admin, :dashboard, @chat_room_user] do |f| %>
+                    <%= form_with model: [:admin, :dashboard, @chat_message] do |f| %>
                     <div>
                       <%= f.text_field "#{key}", style: 'width: 75px;' %>
                     </div>
@@ -213,9 +213,9 @@
         <% end %>
         </tr>
       </thead>
-       <tbody>
+      <tbody>
         <tr>
-          <% @chat_room_user.attributes.drop((@chat_room_user.attributes.size.to_f/2).ceil).each do |key, value| %>
+          <% @chat_message.attributes.drohfp((@chat_message.attributes.size.to_f/2).ceil).each do |key, value| %>
             <td>
               <div
               style="
@@ -227,7 +227,7 @@
                   <% if key.eql?("video_id") || key.eql?("channel_id")||key.eql?("channel_title")||key.eql?("thumbnail_url") %>
                     <%= value %>
                   <% else %>
-                    <%= form_with model: [:admin, :dashboard, @chat_room_user] do |f| %>
+                    <%= form_with model: [:admin, :dashboard, @chat_message] do |f| %>
                       <div>
                         <%= f.text_field "#{key}", style: 'width: 75px;' %>
                       </div>
