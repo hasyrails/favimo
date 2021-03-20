@@ -3,9 +3,32 @@ style="
 background-color: #EEEEEE;
 "
 >
-  <ul class="drawer-menu">
-    <li><a class="drawer-brand" href="#">Brand</a></li>
-    <li><a class="drawer-menu-item" href="#">Nav1</a></li>
-    <li><a class="drawer-menu-item" href="#">Nav2</a></li>
+  <div
+  style="
+  font-size: 24px;
+  font-weight: bold;
+  "
+  >
+    App for Admin
+  </div>
+  <ul 
+  class="drawer-menu"
+  style="
+  list-style: none;
+  "
+  >
+    <% @table_names.each do |table_name| %>
+      <li
+      style="
+      magin-top: 15px;
+      margin-bottom: 15px;
+      margin-left: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      "
+      >
+        <%= link_to table_name, send("admin_dashboard_#{table_name.underscore.downcase}s_path"), style:"text-decoration: none;"  %>
+      </li>
+    <% end %>
   </ul>
 </nav>
