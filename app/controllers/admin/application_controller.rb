@@ -1,4 +1,5 @@
 class Admin::ApplicationController < ApplicationController
+  layout 'admin'
   before_action :admin_user
 
   def index

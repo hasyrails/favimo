@@ -1,4 +1,6 @@
 class Admin::Dashboard::YoutubeVideosController < ApplicationController
+  layout 'admin/dashboard/application.html.erb'
+
   before_action :admin_user
   before_action :set_youtube_video_model_name
   before_action :set_column_names_of_youtube_video_model

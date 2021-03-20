@@ -1,4 +1,6 @@
-class Admin::Dashboard::UsersController < ApplicationController
+class Admin::Dashboard::UsersController < Admin::DashboardController
+  layout 'admin/dashboard/application.html.erb'
+
   before_action :admin_user
   before_action :set_user_model_name
   before_action :set_column_names_of_user_model

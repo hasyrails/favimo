@@ -1,4 +1,6 @@
 class Admin::Dashboard::ChatMessagesController < ApplicationController
+  layout 'admin/dashboard/application.html.erb'
+
   before_action :admin_chat_message
   before_action :set_chat_message_model_name
   before_action :set_column_names_of_chat_message_model
