@@ -30,6 +30,7 @@
     "
     >
       <% @table_names.zip(@columns) do |table_name, columns| %>
+        <%= link_to send("admin_dashboard_#{table_name.underscore.downcase}s_path"), style:"text-decoration: none;" do %>
         <div
         style="
         display: block;
@@ -73,6 +74,7 @@
           </div>
           
         </div>
+        <% end %>
       <% end %>
     </div>
   </div>
