@@ -14,69 +14,35 @@
     <div
     style="
     display: flex;
+    position: fixed;
+    top: 50px;
+    left: 20vw;
+    width: 60vw;
+    margin-top: 1%;
     "
     >
       <div
       style="
-      margin-top: 6%;
+      width: 50vw;
+      margin-top: 2%;
       margin-left: 30%;
       margin-right: 1%;
-      font-size: 32px;
+      font-size: 20px;
       "
       >
-        <div>
-          <div>
-            <%= @chat_room.model_name.name %> モデルレコード
-          </div>
-          <div>
-            id =<%= @chat_room.id %>
-          </div>
-        </div>
-        <div>
-          <div
-          style="
-          margin-left: 5px;
-          margin-right: 5px;
-          display: flex;
-          "
-          >
-            <div
-            style="
-            margin-left: 5px;
-            margin-right: 5px;
-            "
-            >
-            <%= link_to admin_dashboard_chat_room_path(@chat_room) do %>
-              <i class="fa fa-info-circle fa-1x"></i>
-            <% end %>
-            </div>
-            <div
-            style="
-            margin-left: 5px;
-            margin-right: 5px;
-            "
-            >
-            <%= link_to edit_admin_dashboard_chat_room_path(@chat_room) do %>
-              <i class="fa fa-pen fa-1x"></i>
-            <% end %>
-            </div>
-            <div
-            style="
-            margin-left: 5px;
-            margin-right: 5px;
-            "
-            >
-            <%= link_to admin_dashboard_chat_room_path(@chat_room), method: :delete do %>
-              <i class="fa fa-trash fa-1x"></i>
-            <% end %>
-            </div>
-          </div>
-        </div>
+        <p><%= @chat_room.model_name.name %>モデル</p>
+        <p
+        style="margin-top: -5%;"
+        >レコード</p>
+        <p>id = <%= @chat_room.id %></p>
       </div>
       <div
       style="
-      margin-top: 1%;
-      "
+      width: 100vw;
+      margin-top: 3%;
+      margin-left: auto;
+      margin-right: auto;
+  "
       >
         <table 
         border="1">
@@ -118,61 +84,90 @@
     <div
     style="
     margin-top: 1%;
-    margin-left: 1%;
-    margin-right: 1%;
+    text-align: center;
+    width: 100vw;
+    position: fixed;
+    top: 25%;
+    margin-left:auto;
+    margin-right:auto;
     "
-    class="table-responsive"
     >
       <table
-      class="table"
+      class="table" 
       border="1"
       >
         <thead
         class="table-dark"
         >
           <tr>
+          <% @column_names.each do |column_name| %>
             <th>
-              <div
-              style="
-              text-align: center;
-              font-size: 20px;
-              "
-              >
-                id
-              </div>
-            </th>
-          <% @column_names.drop(1).each do |column_name| %>
-            <th>
-              <div
-              style="
-              text-align: center;
-              font-size: 20px;
-              "
-              >
               <%= column_name.truncate(10) %>
-              </div>
             </th>
           <% end %>
+            <th
+            style="
+              width: 100px;
+            "
+            >
+              <div
+              style="
+              text-align: center;
+              font-size: 10px;
+              "
+              >
+              レコード操作
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
-          
           <tr>
+          <% @chat_room.attributes.each do |key, value| %>
             <td>
-              <%= @chat_room.id %>
+              <%= value.to_s.truncate(20) %>
             </td>
-            <% @chat_room.attributes.drop(1).each do |key, value| %>
+          <% end %>
             <td>
               <div
               style="
-              margin-left: 10px;
-              margin-right: 10px;
+              margin-left: 5px;
+              margin-right: 5px;
+              display: flex;
               "
               >
-                <%= value.to_s.truncate(20) %>
+                <div
+                style="
+                margin-left: 5px;
+                margin-right: 5px;
+                "
+                >
+                <%= link_to admin_dashboard_chat_room_path(@chat_room) do %>
+                  <i class="fa fa-info-circle fa-2x"></i>
+                <% end %>
+                </div>
+                <div
+                style="
+                margin-left: 5px;
+                margin-right: 5px;
+                "
+                >
+                <%= link_to edit_admin_dashboard_chat_room_path(@chat_room) do %>
+                  <i class="fa fa-pen fa-2x"></i>
+                <% end %>
+                </div>
+                <div
+                style="
+                margin-left: 5px;
+                margin-right: 5px;
+                "
+                >
+                <%= link_to admin_dashboard_chat_room_path(@chat_room), method: :delete do %>
+                  <i class="fa fa-trash fa-2x"></i>
+                <% end %>
+                </div>
               </div>
             </td>
-            <% end %>
           </tr>
         </tbody>
      </table>
