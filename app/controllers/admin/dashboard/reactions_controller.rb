@@ -22,7 +22,39 @@ class Admin::Dashboard::ReactionsController < ApplicationController
     @reaction.update(reaction_params)
   end
 
+  def new
+    if Reaction.all.present?
+      reactions = Reaction.all
+      @new_reaction_id = reactions.last.id+1
+    else
+      @new_reaction_id = 1
+    end
 
+    @reaction = Reaction.new
+
+    column_names = []
+    @columns.each do |column|
+      column_names << column.name
+    end
+    
+    column_names.reject! do |column_name| 
+      column_name == "id" ||
+      column_name == "updated_at" || column_name == "created_at"
+    end
+
+    @column_names_for_new_reaction = column_names
+  end
+
+  def create
+    begin
+      @reaction = Reaction.new(reaction_params)
+      @reaction.save!
+      redirect_to admin_dashboard_reactions_path
+    rescue ActiveRecord::RecordInvalid => e
+      @reaction = e.record
+      p e.message
+    end
+  end
   
   def destroy
     @reaction = Reaction.find(params[:id])

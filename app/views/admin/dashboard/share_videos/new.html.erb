@@ -1,0 +1,161 @@
+<div
+  style="
+  width: 100%;
+  height: 100vh;
+  background-color:#F5FFFA;
+  "
+>
+  <div
+  style="
+  display: flex;
+  "
+  >
+  <div>
+    <div
+    style="
+    display: flex;
+    position: fixed;
+    top: 50px;
+    left: 20vw;
+    width: 60vw;
+    margin-top: 1%;
+    "
+    >
+      <div
+      style="
+      width: 50vw;
+      margin-top: 6%;
+      margin-left: 30%;
+      margin-right: 1%;
+      font-size: 20px;
+      "
+      >
+        <p><%= @share_video.model_name.name %>モデル</p>
+        <p
+        style="margin-top: -5%;"
+        >レコード</p>
+        <p>新規作成</p>
+      </div>
+      <div
+      style="
+      width: 100vw;
+      margin-top: 1%;
+      margin-left: auto;
+      margin-right: auto;
+      "
+      >
+        <table 
+        border="1">
+          <thead
+          class="table-dark"
+          >
+            <tr>
+              <th>
+                <div
+                style="
+                text-align: center;
+                font-size: 20px;
+                font-weight: bold;
+                "
+                >
+                  <%= @model_name %>
+                </div>
+              </th>
+            </tr>
+          </thead>
+
+          <% @column_names.each do |column_name|  %>
+          <tr>
+            <td>
+              <div
+              style="
+              margin-left: 10px;
+              margin-right: 10px;
+              "
+              >
+              <%= column_name %>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <div
+    style="
+    margin-top: 1%;
+    text-align: center;
+    width: 100vw;
+    position: fixed;
+    top: 45%;
+    margin-left:auto;
+    margin-right:auto;
+    "
+    >
+      <table
+      class="table" 
+      border="1"
+      >
+        <thead
+        class="table-dark"
+        >
+          <tr>
+            <th>
+              id
+            </th>
+            <% @column_names_for_new_share_video.each do |column_name| %>
+            <th>
+              <%= column_name.truncate(10) %>
+            </th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+            <%= @new_share_video_id %>
+            </td>
+            <%= form_with model: [:admin, :dashboard, @share_video] do |f| %>
+              <div>
+                <% @column_names_for_new_share_video.each do |column| %>
+                <td>
+                <%= f.text_field "#{column}", style: 'width: 75px;' %>
+                </td>
+                <% end %>
+              </div>
+          </tr>
+        </tbody>
+      </table>
+      <div
+      style="
+      margin-top: 10px;
+      margin-bottom: 10px;
+      "
+      >
+        <%= f.submit "作成する", class: "btn btn-primary"  %>
+      </div>
+      <% end %>
+      <%= link_to admin_dashboard_share_videos_path(@share_video) do %>
+        <div
+        style="
+        display: flex;
+        justify-content: center;
+        margin-top: 5%;
+        "
+        >
+          <div>
+            <i class="fa fa-table fa-2x"></i>
+          </div>
+          <div
+          style="
+          margin-top: 3px;
+          margin-left: 3px;
+          "
+          >
+            <%= @share_video.model_name.name %>レコード一覧画面へ
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

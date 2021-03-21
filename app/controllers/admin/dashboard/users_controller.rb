@@ -25,7 +25,39 @@ class Admin::Dashboard::UsersController < Admin::DashboardController
     @user.update(user_params)
   end
 
+  def new
+    if User.all.present?
+      users = User.all
+      @new_user_id = users.last.id+1
+    else
+      @new_user_id = 1
+    end
 
+    @user = User.new
+
+    column_names = []
+    @columns.each do |column|
+      column_names << column.name
+    end
+    
+    column_names.reject! do |column_name| 
+      column_name == "id" ||
+      column_name == "updated_at" || column_name == "created_at"
+    end
+
+    @column_names_for_new_user = column_names
+  end
+
+  def create
+    begin
+      @user = User.new(user_params)
+      @user.save!
+      redirect_to admin_dashboard_users_path
+    rescue ActiveRecord::RecordInvalid => e
+      @user = e.record
+      p e.message
+    end
+  end
   
   def destroy
     @user = User.find(params[:id])
