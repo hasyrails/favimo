@@ -1,0 +1,34 @@
+<nav class="drawer-nav" role="navigation"
+style="
+background-color: #EEEEEE;
+"
+>
+  <div
+  style="
+  font-size: 24px;
+  font-weight: bold;
+  "
+  >
+    <%= link_to 'App for Admin', admin_dashboard_index_path %>
+  </div>
+  <ul 
+  class="drawer-menu"
+  style="
+  list-style: none;
+  "
+  >
+    <% @table_names.each do |table_name| %>
+      <li
+      style="
+      magin-top: 15px;
+      margin-bottom: 15px;
+      margin-left: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      "
+      >
+        <%= link_to table_name, send("admin_dashboard_#{table_name.underscore.downcase}s_path")  %>
+      </li>
+    <% end %>
+  </ul>
+</nav>

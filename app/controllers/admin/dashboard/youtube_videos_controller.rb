@@ -1,4 +1,6 @@
 class Admin::Dashboard::YoutubeVideosController < ApplicationController
+  layout 'admin/dashboard/application.html.erb'
+
   before_action :admin_user
   before_action :set_youtube_video_model_name
   before_action :set_column_names_of_youtube_video_model
@@ -17,9 +19,46 @@ class Admin::Dashboard::YoutubeVideosController < ApplicationController
 
   def update
     @youtube_video = YoutubeVideo.find(params[:id])
-    @youtube_video.update(youtube_video_params)
+    if @youtube_video.update(youtube_video_params)
+      redirect_to admin_dashboard_youtube_videos_path(@youtube_video)
+    else
+      render :edit
+    end
   end
 
+  def new
+    if YoutubeVideo.all.present?
+      youtube_videos = YoutubeVideo.all
+      @new_youtube_video_id = youtube_videos.last.id+1
+    else
+      @new_youtube_video_id = 1
+    end
+
+    @youtube_video = YoutubeVideo.new
+
+    column_names = []
+    @columns.each do |column|
+      column_names << column.name
+    end
+    
+    column_names.reject! do |column_name| 
+      column_name == "id" ||
+      column_name == "updated_at" || column_name == "created_at"
+    end
+
+    @column_names_for_new_youtube_video = column_names
+  end
+
+  def create
+    begin
+      @youtube_video = YoutubeVideo.new(youtube_video_params)
+      @youtube_video.save!
+      redirect_to admin_dashboard_youtube_videos_path
+    rescue ActiveRecord::RecordInvalid => e
+      @youtube_video = e.record
+      p e.message
+    end
+  end
 
   
   def destroy

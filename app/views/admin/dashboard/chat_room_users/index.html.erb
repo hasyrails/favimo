@@ -10,54 +10,37 @@
   display: flex;
   "
   >
-  <div
-  style="
-  width: 15%;
-  height: 100vh;
-  background-color:#EEEEEE;
-  "
-  >
-    <div
-    style="
-    font-weight: bold;
-    font-size: 24px;
-    "
-    >
-    App for Admin
-    </div>
-    <% @table_names.each do |table_name| %>
-      <div
-      style="
-      font-weight: bold;
-      font-size: 16px;
-      margin-left: 15px;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      "
-      >
-        <%= table_name %>
-      </div>
-    <% end %>
-  </div>
   <div>
     <div
     style="
     display: flex;
+    position: fixed;
+    top: 50px;
+    left: 20vw;
+    width: 60vw;
+    margin-top: 1%;
     "
     >
       <div
       style="
-      margin-top: 6%;
+      width: 50vw;
+      margin-top: 2%;
       margin-left: 30%;
       margin-right: 1%;
-      font-size: 32px;
+      font-size: 20px;
       "
       >
-        <%= @chat_room_users.model_name.name %>モデルレコード
+        <p><%= @chat_room_users.model_name.name %>モデル</p>
+        <p
+        style="margin-top: -5%;"
+        >レコード</p>
       </div>
       <div
       style="
+      width: 100vw;
       margin-top: 1%;
+      margin-left: auto;
+      margin-right: auto;
       "
       >
         <table 
@@ -100,8 +83,12 @@
     <div
     style="
     margin-top: 1%;
-    margin-left: 1%;
-    margin-right: 1%;
+    text-align: center;
+    width: 100vw;
+    position: fixed;
+    top: 25%;
+    margin-left:auto;
+    margin-right:auto;
     "
     >
       <table
@@ -114,14 +101,7 @@
           <tr>
           <% @column_names.each do |column_name| %>
             <th>
-              <div
-              style="
-              text-align: center;
-              font-size: 10px;
-              "
-              >
               <%= column_name.truncate(10) %>
-              </div>
             </th>
           <% end %>
             <th
@@ -145,14 +125,7 @@
           <tr>
           <% chat_room_user.attributes.each do |key, value| %>
             <td>
-              <div
-              style="
-              margin-left: 10px;
-              margin-right: 10px;
-              "
-              >
               <%= value.to_s.truncate(20) %>
-              </div>
             </td>
           <% end %>
             <td>
@@ -202,6 +175,11 @@
      <div>
        <%= paginate @chat_room_users %>
      </div>
+      <div
+      class="btn btn-primary"
+      >
+        <%= link_to "#{@chat_room_users.model_name.name}モデルレコードを新規作成する", new_admin_dashboard_chat_room_user_path, class: "text-white",style:"text-decoration: none;" %>
+      </div>
     </div>
   </div>
 </div>

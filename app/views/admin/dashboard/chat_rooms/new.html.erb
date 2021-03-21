@@ -24,17 +24,17 @@
       <div
       style="
       width: 50vw;
-      margin-top: 2%;
+      margin-top: 6%;
       margin-left: 30%;
       margin-right: 1%;
       font-size: 20px;
       "
       >
-        <p><%= @chat_room_user.model_name.name %>モデル</p>
+        <p><%= @chat_room.model_name.name %>モデル</p>
         <p
         style="margin-top: -5%;"
         >レコード</p>
-        <p>id = <%= @chat_room_user.id %></p>
+        <p>新規作成</p>
       </div>
       <div
       style="
@@ -87,7 +87,7 @@
     text-align: center;
     width: 100vw;
     position: fixed;
-    top: 25%;
+    top: 45%;
     margin-left:auto;
     margin-right:auto;
     "
@@ -100,77 +100,62 @@
         class="table-dark"
         >
           <tr>
-          <% @column_names.each do |column_name| %>
+            <th>
+              id
+            </th>
+            <% @column_names_for_new_chat_room.each do |column_name| %>
             <th>
               <%= column_name.truncate(10) %>
             </th>
-          <% end %>
-            <th
-            style="
-              width: 100px;
-            "
-            >
-              <div
-              style="
-              text-align: center;
-              font-size: 10px;
-              "
-              >
-              レコード操作
-              </div>
-            </th>
+            <% end %>
           </tr>
         </thead>
         <tbody>
           <tr>
-          <% @chat_room_user.attributes.each do |key, value| %>
             <td>
-              <%= value.to_s.truncate(20) %>
+            <%= @new_chat_room_id %>
             </td>
-          <% end %>
-            <td>
-              <div
-              style="
-              margin-left: 5px;
-              margin-right: 5px;
-              display: flex;
-              "
-              >
-                <div
-                style="
-                margin-left: 5px;
-                margin-right: 5px;
-                "
-                >
-                <%= link_to admin_dashboard_chat_room_user_path(@chat_room_user) do %>
-                  <i class="fa fa-info-circle fa-2x"></i>
+            <%= form_with model: [:admin, :dashboard, @chat_room] do |f| %>
+              <div>
+                <% @column_names_for_new_chat_room.each do |column| %>
+                <td>
+                <%= f.text_field "#{column}", style: 'width: 75px;' %>
+                </td>
                 <% end %>
-                </div>
-                <div
-                style="
-                margin-left: 5px;
-                margin-right: 5px;
-                "
-                >
-                <%= link_to edit_admin_dashboard_chat_room_user_path(@chat_room_user) do %>
-                  <i class="fa fa-pen fa-2x"></i>
-                <% end %>
-                </div>
-                <div
-                style="
-                margin-left: 5px;
-                margin-right: 5px;
-                "
-                >
-                <%= link_to admin_dashboard_chat_room_user_path(@chat_room_user), method: :delete do %>
-                  <i class="fa fa-trash fa-2x"></i>
-                <% end %>
-                </div>
               </div>
-            </td>
           </tr>
         </tbody>
-     </table>
+      </table>
+      <div
+      style="
+      margin-top: 10px;
+      margin-bottom: 10px;
+      "
+      >
+        <%= f.submit "作成する", class: "btn btn-primary"  %>
+      </div>
+      <% end %>
+      <%= link_to admin_dashboard_chat_rooms_path(@chat_room) do %>
+        <div
+        style="
+        display: flex;
+        justify-content: center;
+        margin-top: 5%;
+        "
+        >
+          <div>
+            <i class="fa fa-table fa-2x"></i>
+          </div>
+          <div
+          style="
+          margin-top: 3px;
+          margin-left: 3px;
+          "
+          >
+            <%= @chat_room.model_name.name %>レコード一覧画面へ
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

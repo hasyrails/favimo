@@ -11,35 +11,6 @@
   "
   >
   <div
-  style="
-  width: 15%;
-  height: 100vh;
-  background-color:#EEEEEE;
-  "
-  >
-    <div
-    style="
-    font-weight: bold;
-    font-size: 24px;
-    "
-    >
-    App for Admin
-    </div>
-    <% @table_names.each do |table_name| %>
-      <div
-      style="
-      font-weight: bold;
-      font-size: 16px;
-      margin-left: 15px;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      "
-      >
-        <%= table_name %>
-      </div>
-    <% end %>
-  </div>
-  <div
   >
     <div
     style="
@@ -59,6 +30,7 @@
     "
     >
       <% @table_names.zip(@columns) do |table_name, columns| %>
+        <%= link_to send("admin_dashboard_#{table_name.underscore.downcase}s_path"), style:"text-decoration: none;" do %>
         <div
         style="
         display: block;
@@ -102,6 +74,7 @@
           </div>
           
         </div>
+        <% end %>
       <% end %>
     </div>
   </div>

@@ -1,4 +1,6 @@
 class Admin::Dashboard::FavoritesController < ApplicationController
+  layout 'admin/dashboard/application.html.erb'
+
   before_action :admin_user
   before_action :set_favorite_model_name
   before_action :set_column_names_of_favorite_model
@@ -20,7 +22,39 @@ class Admin::Dashboard::FavoritesController < ApplicationController
     @favorite.update(favorite_params)
   end
 
+  def new
+    if Favorite.all.present?
+      favorites = Favorite.all
+      @new_favorite_id = favorites.last.id+1
+    else
+      @new_favorite_id = 1
+    end
 
+    @favorite = Favorite.new
+
+    column_names = []
+    @columns.each do |column|
+      column_names << column.name
+    end
+    
+    column_names.reject! do |column_name| 
+      column_name == "id" ||
+      column_name == "updated_at" || column_name == "created_at"
+    end
+
+    @column_names_for_new_favorite = column_names
+  end
+  
+  def create
+    begin
+      @favorite = Favorite.new(favorite_params)
+      @favorite.save!
+      redirect_to admin_dashboard_favorites_path
+    rescue ActiveRecord::RecordInvalid => e
+      @favorite = e.record
+      p e.message
+    end
+  end
   
   def destroy
     @favorite = Favorite.find(params[:id])
