@@ -27,6 +27,20 @@ Rails.application.routes.draw do
       resources :share_videos, controller: 'dashboard/share_videos'
     end
   end
+  namespace :demo_admin do
+    root 'top#index'
+    resources :dashboard, only: [:index]
+    resource :dashboard do
+      resources :users, controller: 'dashboard/users'
+      resources :youtube_videos, controller: 'dashboard/youtube_videos'
+      resources :chat_rooms, controller: 'dashboard/chat_rooms'
+      resources :chat_room_users, controller: 'dashboard/chat_room_users'
+      resources :chat_messages, controller: 'dashboard/chat_messages'
+      resources :reactions, controller: 'dashboard/reactions'
+      resources :favorites, controller: 'dashboard/favorites'
+      resources :share_videos, controller: 'dashboard/share_videos'
+    end
+  end
 
   resources :reactions, only: [:create]
   resources :matching, only: [:index]
