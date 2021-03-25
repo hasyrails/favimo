@@ -28,15 +28,23 @@ class DemoAdmin::Dashboard::UsersController < DemoAdmin::DashboardController
   end
 
   def new
-    if User.dammy.present?
-      users = User.dammy
+    if User.all.present?
+      users = User.all
       @new_user_id = users.last.id+1
     else
       @new_user_id = 1
     end
 
-    @user = User.dammy.new
-
+    serial_num_for_new_dammy_user = User.last.id + 1
+    
+    @user = User.dammy.new(
+      name: "testuser#{serial_num_for_new_dammy_user}",
+      email: "testuser#{serial_num_for_new_dammy_user}@mail.com",
+      self_introduction: "testuser#{serial_num_for_new_dammy_user}です",
+      password: "test-password",
+      
+    )
+    
     column_names = []
     @columns.each do |column|
       column_names << column.name
@@ -46,14 +54,50 @@ class DemoAdmin::Dashboard::UsersController < DemoAdmin::DashboardController
       column_name == "id" ||
       column_name == "updated_at" || column_name == "created_at"
     end
-
+    
     @column_names_for_new_user = column_names
   end
-
+  
   def create
     begin
-      @user = User.dammy.new(user_params)
-      @user.save!
+      serial_num_for_new_dammy_user = User.all.size + 1
+      @user = User.dammy.create(
+        name: "testuser#{serial_num_for_new_dammy_user}",
+        email: "testuser#{serial_num_for_new_dammy_user}@mail.com",
+        self_introduction: "testuser#{serial_num_for_new_dammy_user}です",
+        password: "test-password",
+      )
+      youtube_video_for_new_dammy_user = YoutubeVideo.dammy.create!(
+        user_id: @user.id
+      )
+      share_video_for_new_dammy_user = @user.share_videos.create!(
+        to_user_id: @user.id,
+        from_user_id: User.dammy.ids.sample,
+        youtube_video_id: YoutubeVideo.dammy.ids.sample
+      )
+      favorite_for_new_dammy_user = @user.favorites.create!(
+        youtube_video_id: YoutubeVideo.dammy.ids.sample
+      )
+      reaction_for_new_dammy_user = @user.reactions.create!(
+        to_user_id: @user.id,
+        from_user_id: User.dammy.ids.sample,
+        status: "like"
+      )
+      chat_room_for_new_dammy_user = ChatRoom.dammy.create!
+      chat_room_user_as_new_dammy_user = ChatRoomUser.create!(
+        chat_room_id: chat_room_for_new_dammy_user.id,
+        user_id: @user.id,
+      )
+      chat_room_user_for_new_dammy_user = ChatRoomUser.create!(
+        chat_room_id: chat_room_for_new_dammy_user.id,
+        user_id: User.dammy.ids.sample,
+      )
+      chat_message_for_new_dammy_user = ChatMessage.create!(
+        chat_room_id: chat_room_for_new_dammy_user.id,
+        user_id: [@user.id, User.dammy.ids].flatten.sample,
+        content: ["テストです", "こんにちは", "元気ですか"].sample 
+      )
+
       redirect_to demo_admin_dashboard_users_path
     rescue ActiveRecord::RecordInvalid => e
       @user = e.record
