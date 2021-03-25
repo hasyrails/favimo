@@ -9,7 +9,7 @@ background-color: #EEEEEE;
   font-weight: bold;
   "
   >
-    <%= link_to 'App for Admin', demo_admin_dashboard_index_path %>
+    <%= link_to 'App for DemoAdmin', demo_admin_dashboard_index_path %>
   </div>
   <ul 
   class="drawer-menu"
@@ -31,4 +31,14 @@ background-color: #EEEEEE;
       </li>
     <% end %>
   </ul>
+  <%= link_to destroy_user_session_path, method: :delete do %>
+    <div
+    class="btn btn-primary text-white"
+    style="
+    margin-left: 10px;
+    "
+    >
+    アプリへ戻る
+    </div>
+  <% end %>
 </nav>

@@ -31,4 +31,14 @@ background-color: #EEEEEE;
       </li>
     <% end %>
   </ul>
+  <%= link_to destroy_user_session_path, method: :delete do %>
+    <div
+    class="btn btn-primary text-white"
+    style="
+    margin-left: 10px;
+    "
+    >
+    アプリへ戻る
+    </div>
+  <% end %>
 </nav>
