@@ -26,9 +26,8 @@
   >
     検索された動画キーワード
   </div>
-  <% if !@search_words.nil? %>
-    <% @search_words.each do |search_word| %>
-      <div
+  <% @search_words.each do |search_word| %>
+    <div
       style="
       background-color: ghostwhite;
       display: flex;
@@ -51,13 +50,14 @@
             font-size: 16px;
           "
           >
+          <% if !search_word.nil? %>
             <%= link_to  youtube_myvideos_path(q: search_word) ,method: :get do %>
               <%= search_word %>
             <% end %>
-          </div>
+          <% end %>
+        </div>
       </div>
     <% end %>
-  <% end %>
 
   <%= paginate @search_words, class: "pagination" %>
 

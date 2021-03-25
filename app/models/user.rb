@@ -19,7 +19,7 @@ class User < ApplicationRecord
   validates :self_introduction, length: { maximum: 500 }
 
   enum gender: { male: 0, female: 1 }
-  enum role: { general: 0, admin: 1, demo_admin: 2, dammy: 3}
+  enum role: { general: 0, admin: 1, demo_admin: 2, dammy: 3, guest: 4}
 
   mount_uploader :profile_image, ProfileImageUploader
 
@@ -35,4 +35,12 @@ class User < ApplicationRecord
     result
   end
   
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲストユーザー"
+      user.role = "guest"
+      # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
+    end
+  end
 end
