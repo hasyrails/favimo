@@ -116,7 +116,7 @@
           font-size: 16px;
         "
         >
-          <%= link_to  youtube_myvideos_path(q: search_word) ,method: :get do %>
+          <%= link_to  youtube_myvideos_path(params: {q: search_word}) ,method: :get do %>
             <%= search_word %>
           <% end %>
         </div>

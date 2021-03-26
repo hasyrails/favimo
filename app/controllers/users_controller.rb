@@ -8,18 +8,31 @@ class UsersController < ApplicationController
   end
 
   def index
-    not_like_reactions = Reaction.where.not(status: 'like').where( from_user_id: current_user.id)
-    not_like_reaction_to_user_ids = Reaction.where.not(status: 'like').where(from_user_id: current_user.id).map(&:to_user_id)
-
-    if Reaction.where(to_user_id: current_user.id).blank?
+    if Reaction.where(from_user_id: current_user.id).where.not(status: "like").blank?
       @users = User.where.not(id: current_user.id, role: "dammy")
     else
-      @users = User.find(not_like_reaction_to_user_ids).shuffle
-      @users.reject! do |user| 
-        user.role == "guest" || user.role == "dammy"
+      non_dammy_users = []
+      non_dammy_users.push(User.general).push(User.admin).push(User.demo_admin)
+      non_dammy_users = non_dammy_users.flatten
+
+      non_dammy_users.reject! do |non_dammy_user|
+        non_dammy_user.id == current_user.id
       end
-      
+
+      non_dammy_user_ids = []
+
+      non_dammy_users.each do |non_dammy_user|
+        non_dammy_user_ids << non_dammy_user.id
+      end
+
+      non_like_reactions = Reaction.where(to_user_id: non_dammy_user_ids, from_user_id: current_user.id).where.not(status: "like")
+
+      non_like_user_ids = non_like_reactions.map(&:to_user_id) 
+
+      @users = User.find(non_like_user_ids)
+
     end
+    # binding.pry
 
     @user = User.find(current_user.id)
   end
