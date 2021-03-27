@@ -71,3 +71,5 @@ gem 'pry-rails'
 gem 'kaminari'
 
 gem 'gretel'
+
+gem 'mysql2'
