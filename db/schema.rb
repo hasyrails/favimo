@@ -12,12 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2021_03_23_220653) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "chat_messages", force: :cascade do |t|
-    t.bigint "chat_room_id", null: false
-    t.bigint "user_id", null: false
+  create_table "chat_messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "chat_room_id", null: false
+    t.string "user_id", null: false
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -25,23 +22,23 @@ ActiveRecord::Schema.define(version: 2021_03_23_220653) do
     t.index ["user_id"], name: "index_chat_messages_on_user_id"
   end
 
-  create_table "chat_room_users", force: :cascade do |t|
-    t.bigint "chat_room_id", null: false
-    t.bigint "user_id", null: false
+  create_table "chat_room_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "chat_room_id", null: false
+    t.string "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["chat_room_id"], name: "index_chat_room_users_on_chat_room_id"
     t.index ["user_id"], name: "index_chat_room_users_on_user_id"
   end
 
-  create_table "chat_rooms", force: :cascade do |t|
+  create_table "chat_rooms", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status"
   end
 
-  create_table "favorites", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "user_id", null: false
     t.bigint "youtube_video_id", null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -50,9 +47,9 @@ ActiveRecord::Schema.define(version: 2021_03_23_220653) do
     t.index ["youtube_video_id"], name: "index_favorites_on_youtube_video_id"
   end
 
-  create_table "reactions", force: :cascade do |t|
-    t.bigint "to_user_id", null: false
-    t.bigint "from_user_id", null: false
+  create_table "reactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "to_user_id", null: false
+    t.string "from_user_id", null: false
     t.integer "status", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -60,10 +57,10 @@ ActiveRecord::Schema.define(version: 2021_03_23_220653) do
     t.index ["to_user_id"], name: "index_reactions_on_to_user_id"
   end
 
-  create_table "share_videos", force: :cascade do |t|
+  create_table "share_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "youtube_video_id", null: false
-    t.bigint "to_user_id", null: false
-    t.bigint "from_user_id", null: false
+    t.string "to_user_id", null: false
+    t.string "from_user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["from_user_id"], name: "index_share_videos_on_from_user_id"
@@ -71,7 +68,7 @@ ActiveRecord::Schema.define(version: 2021_03_23_220653) do
     t.index ["youtube_video_id"], name: "index_share_videos_on_youtube_video_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -88,7 +85,7 @@ ActiveRecord::Schema.define(version: 2021_03_23_220653) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "youtube_videos", force: :cascade do |t|
+  create_table "youtube_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "video_id"
     t.string "title"
     t.string "description"
@@ -99,7 +96,7 @@ ActiveRecord::Schema.define(version: 2021_03_23_220653) do
     t.integer "status", default: 0, null: false
     t.integer "is_remaining", default: 0, null: false
     t.string "search_keyword"
-    t.bigint "user_id", null: false
+    t.string "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_youtube_videos_on_user_id"
