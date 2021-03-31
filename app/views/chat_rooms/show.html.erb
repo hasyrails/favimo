@@ -4,8 +4,11 @@
     <%= breadcrumbs separator: " &rsaquo; " %>
   </div>
 
-  <nav class="navbar navbar-light chat-room__header">
+  <div>
+    <%= render partial: 'layouts/flash_message' %>
+  </div>
 
+  <nav class="navbar navbar-light chat-room__header">
 
     <%= link_to matching_index_path, class: "nav-item nav-link" do%>
       <i class="fas fa-chevron-left"></i>
