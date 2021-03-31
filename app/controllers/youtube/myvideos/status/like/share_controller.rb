@@ -16,6 +16,8 @@ class Youtube::Myvideos::Status::Like::ShareController < ApplicationController
   end
 
   def create
+    @user = User.find_by(id: params[:to_user_id])
+
     youtube_video = YoutubeVideo.find_by(video_id: params[:youtube_video_id])
 
     share = ShareVideo.create!(
@@ -23,5 +25,9 @@ class Youtube::Myvideos::Status::Like::ShareController < ApplicationController
       from_user_id: params[:from_user_id],
       to_user_id: params[:to_user_id]
     )
+
+    redirect_to user_path(@user, params:{
+      share_video_unique_id: params[:youtube_video_id]
+    }), notice: "動画を共有しました:<br>#{youtube_video.title}"
   end
 end

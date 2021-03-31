@@ -33,7 +33,7 @@ class Youtube::Myvideos::Status::Like::SharedAndSharingHistoryController < Appli
       videos << YoutubeVideo.find(youtube_video_id)
     end
 
-    @videos = videos
+    @videos = videos.uniq
     @videos = Kaminari.paginate_array(@videos).page(params[:page]).per(3)
     
     from_user_ids = []

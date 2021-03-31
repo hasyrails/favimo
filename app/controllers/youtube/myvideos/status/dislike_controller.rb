@@ -27,9 +27,8 @@ class Youtube::Myvideos::Status::DislikeController < ApplicationController
   def destroy
     dislike_myvideo = YoutubeVideo.find(params[:id])
     if dislike_myvideo.user_id == current_user.id
-      dislike_myvideo.destroy
-      dislike_myvideo.favorites.destroy
-      redirect_to youtube_myvideos_status_dislike_index_path
+      dislike_myvideo.favorites.where(user_id: current_user.id).delete_all
+      redirect_to youtube_myvideos_status_dislike_index_path, notice: "Dislikeした動画を削除しました<br>:#{dislike_myvideo.title}"
     end
   end
   
