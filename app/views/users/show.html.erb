@@ -1,6 +1,7 @@
 <div class="user-show-page">
 
   <%= render "partial/users_page_navbar" %>
+  <%= render "layouts/flash_message" %>
 
   <% if params[:share_video_unique_id].present? %>
     <div>
@@ -16,7 +17,9 @@
   
 
 
-  <div class="profile mt-4">
+  <div 
+  class="profile mt-4"
+  >
     <% if @user.profile_image.url.nil? %>
       <div class="profile-default-img"></div>
     <% else %>
@@ -112,7 +115,7 @@
 
       </div>
       <div class="user-action-common">
-        <%= link_to edit_user_registration_path do %>
+        <%= link_to edit_user_registration_path(params: {user_id: params[:user_id]}) do %>
           <i class="fas fa-pencil-alt fa-2x"></i>
         <% end %>
         <p style="text-align: center;">情報を編集</p>
