@@ -9,7 +9,7 @@
   <div>
     <div class="profile mt-4">
       <% if @user.profile_image.present? %>
-        <%= image_tag @user.profile_image.url %>
+        <%= image_tag @user.profile_image.url, class: 'profile-img' %>
       <% else %>
         <div 
         class="profile-default-img",

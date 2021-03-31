@@ -28,9 +28,9 @@ class Youtube::Myvideos::FavoritesController < ApplicationController
     )
 
     if params[:favorite] == 'like'
-      redirect_to youtube_myvideos_status_dislike_index_path
+      redirect_to youtube_myvideos_status_like_index_path, notice: "動画のステータスをLikeにしました"
     elsif params[:favorite] == 'dislike'
-      redirect_to youtube_myvideos_status_like_index_path
+      redirect_to youtube_myvideos_status_dislike_index_path, notice: "動画のステータスをDisLikeにしました"
     end
   end
 

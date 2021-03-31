@@ -25,9 +25,15 @@ class Youtube::Myvideos::Status::LikeController < ApplicationController
   def destroy
     like_myvideo = YoutubeVideo.find(params[:id])
     if like_myvideo.user_id == current_user.id
-      like_myvideo.destroy
-      like_myvideo.favorites.destroy
-      redirect_to youtube_myvideos_status_like_index_path
+      begin
+        like_myvideo.favorites.where(user_id: current_user.id).delete_all
+        # like_myvideo.destroy!
+        redirect_to youtube_myvideos_status_like_index_path
+      rescue ActiveRecord::RecordNotDestroyed => e
+        @like_myvideo = e.record
+        p e.message
+      end
+    flash[:notice] =  "Likeした動画を削除しました: <br>#{like_myvideo.title}"
     end
   end
 end
