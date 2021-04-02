@@ -6,8 +6,7 @@ class DemoAdmin::Dashboard::ShareVideosController < DemoAdmin::DashboardControll
   before_action :set_column_names_of_share_video_model
 
   def index
-    @share_videos = ShareVideo.where(to_user_id: User.dammy.ids, from_user_id: User.dammy.ids)
-    @share_videos = @share_videos.page(params[:page]).per(5)
+    @share_videos = ShareVideo.page(params[:page]).per(5)
   end
 
   def show
@@ -20,7 +19,15 @@ class DemoAdmin::Dashboard::ShareVideosController < DemoAdmin::DashboardControll
 
   def update
     @share_video = ShareVideo.find(params[:id])
-    @share_video.update(share_video_params)
+    begin
+      @share_video.update(share_video_params)
+      flash[:notice] = "#{@share_video.model_name.name}モデルレコードを更新しました<br>id = #{@share_video.id}"
+      redirect_to demo_admin_dashboard_share_video_path(@share_video)
+    rescue => e
+      p e.message
+      flash.now[:alert] = "#{@share_video.model_name.name}モデルレコードを更新できませんでした"
+      render edit_demo_admin_dashboard_share_video_path(@share_video)
+    end
   end
 
   def new
@@ -50,17 +57,24 @@ class DemoAdmin::Dashboard::ShareVideosController < DemoAdmin::DashboardControll
     begin
       @share_video = ShareVideo.new(share_video_params)
       @share_video.save!
+      flash[:notice] = "#{@share_video.model_name.name}モデルレコードを作成しました<br>id = #{@share_video.id}"
       redirect_to demo_admin_dashboard_share_videos_path
     rescue ActiveRecord::RecordInvalid => e
-      @share_video = e.record
-      p e.message
+      flash[:alert] = "#{@share_video.model_name.name}モデルレコードを作成できませんでした"
+      redirect_to new_demo_admin_dashboard_share_videos_path
     end
   end
   
   def destroy
     @share_video = ShareVideo.find(params[:id])
-    @share_video.destroy
-    redirect_to demo_admin_dashboard_share_videos_path
+    begin
+      @share_video.destroy
+      flash[:notice] = "#{@share_video.model_name.name}モデルレコードを削除しました<br>id = #{@share_video.id}"
+      redirect_to demo_admin_dashboard_share_videos_path
+    rescue => exception
+      flash[:alert] = "#{@share_video.model_name.name}モデルレコードを削除できませんでした"
+      redirect_to demo_admin_dashboard_share_videos_path
+    end
   end
 
 

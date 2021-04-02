@@ -6,8 +6,7 @@ class DemoAdmin::Dashboard::FavoritesController < DemoAdmin::DashboardController
   before_action :set_column_names_of_favorite_model
 
   def index
-    @favorites = Favorite.where(user_id: User.dammy.ids, youtube_video_id: YoutubeVideo.dammy.ids)
-    @favorites = @favorites.page(params[:page]).per(5)
+    @favorites = Favorite.page(params[:page]).per(5)
   end
 
   def show
@@ -20,7 +19,14 @@ class DemoAdmin::Dashboard::FavoritesController < DemoAdmin::DashboardController
 
   def update
     @favorite = Favorite.find(params[:id])
-    @favorite.update(favorite_params)
+    begin
+      @favorite.update(favorite_params)
+      flash[:notice] = "#{@favorite.model_name.name}モデルレコードを更新しました<br>id = #{@favorite.id}"
+      redirect_to demo_admin_dashboard_favorite_path(@favorite)
+    rescue ArgumentError, ActiveRecord::NotNullViolation => e
+      flash[:alert] = "#{@favorite.model_name.name}モデルレコードを更新できませんでした"
+      redirect_to edit_demo_admin_dashboard_favorite_path(@favorite)
+    end
   end
 
   def new
@@ -50,17 +56,28 @@ class DemoAdmin::Dashboard::FavoritesController < DemoAdmin::DashboardController
     begin
       @favorite = Favorite.new(favorite_params)
       @favorite.save!
+      flash[:notice] = "#{@favorite.model_name.name}モデルレコードを作成しました<br>id = #{@favorite.id}"
       redirect_to demo_admin_dashboard_favorites_path
     rescue ActiveRecord::RecordInvalid => e
       @favorite = e.record
       p e.message
+      flash[:alert] = "#{@favorite.model_name.name}モデルレコードを作成できませんでした"
+      redirect_to new_demo_admin_dashboard_favorites_path
     end
   end
   
   def destroy
     @favorite = Favorite.find(params[:id])
-    @favorite.destroy
-    redirect_to demo_admin_dashboard_favorites_path
+    begin
+      @favorite.destroy
+      flash[:notice] = "#{@favorite.model_name.name}モデルレコードを削除しました<br>id = #{@favorite.id}"
+      redirect_to demo_admin_dashboard_favorites_path
+      
+    rescue => e
+      flash[:alert] = "#{@favorite.model_name.name}モデルレコードを削除できませんでした"
+      redirect_to demo_admin_dashboard_favorites_path
+      
+    end
   end
 
 
