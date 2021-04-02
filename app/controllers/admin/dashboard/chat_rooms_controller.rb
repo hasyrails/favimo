@@ -1,4 +1,4 @@
-class Admin::Dashboard::ChatRoomsController < ApplicationController
+class Admin::Dashboard::ChatRoomsController < Admin::DashboardController
   layout 'admin/dashboard/application.html.erb'
 
   before_action :admin_user
@@ -19,17 +19,18 @@ class Admin::Dashboard::ChatRoomsController < ApplicationController
 
   def update
     @chat_room = ChatRoom.find(params[:id])
-    @chat_room.update(chat_room_params)
+    begin
+      @chat_room.update(chat_room_params)
+      flash[:notice] = "#{@chat_room.model_name.name}モデルレコードを更新しました<br>id=#{@chat_room.model_name.name}"
+      redirect_to admin_dashboard_chat_rooms_path
+    rescue => e
+      p e.message
+      flash[:alert] = "#{@chat_room.model_name.name}モデルレコードを更新できませんでした<br>id=#{@chat_room.model_name.name}"
+      redirect_to admin_dashboard_chat_rooms_path
+    end
   end
 
   def new
-    if ChatRoom.all.present?
-      chat_rooms = ChatRoom.all
-      @new_chat_room_id = chat_rooms.last.id+1
-    else
-      @new_chat_room_id = 1
-    end
-
     @chat_room = ChatRoom.new
 
     column_names = []
@@ -46,23 +47,25 @@ class Admin::Dashboard::ChatRoomsController < ApplicationController
   end
 
   def create
-    begin
-      @chat_room = ChatRoom.new(chat_room_params)
-      @chat_room.save!
+    if @chat_room = ChatRoom.create!(chat_room_params)
+      flash[:notice] = "#{@chat_room.model_name.name}レコードを作成しました<br>id = #{@chat_room.id}"
       redirect_to admin_dashboard_chat_rooms_path
-    rescue ActiveRecord::RecordInvalid => e
-      @chat_room = e.record
-      p e.message
+    else
+      flash.now[:alert] = "#{@chat_room.model_name.name}レコードを作成できませんでした"
+      render :new
     end
   end
   
   def destroy
     @chat_room = ChatRoom.find(params[:id])
-    @chat_room.destroy
-    redirect_to admin_dashboard_chat_rooms_path
+    if @chat_room.destroy
+      flash[:notice] = "#{@chat_room.model_name.name}レコードを削除しました<br>id = #{@chat_room.id}"
+      redirect_to admin_dashboard_chat_rooms_path
+    else
+      flash.now[:alert] = "#{@chat_room.model_name.name}レコードを作成できませんでした"
+      render :index
+    end
   end
-
-
 
   private
   
@@ -78,11 +81,10 @@ class Admin::Dashboard::ChatRoomsController < ApplicationController
       column_names << column.name
     end
     @column_names = column_names
-
   end
   
   def chat_room_params
-    params.permit(@column_names)
+    params.require(:chat_room).permit(@column_names.push(:chat_room))
   end
 
   def admin_user

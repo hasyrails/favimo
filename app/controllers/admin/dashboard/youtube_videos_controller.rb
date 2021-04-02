@@ -1,4 +1,4 @@
-class Admin::Dashboard::YoutubeVideosController < ApplicationController
+class Admin::Dashboard::YoutubeVideosController < Admin::DashboardController
   layout 'admin/dashboard/application.html.erb'
 
   before_action :admin_user
@@ -6,7 +6,7 @@ class Admin::Dashboard::YoutubeVideosController < ApplicationController
   before_action :set_column_names_of_youtube_video_model
 
   def index
-    @youtube_videos = YoutubeVideo.page(params[:page]).per(5)
+    @youtube_videos = YoutubeVideo.page(params[:page]).per(4)
   end
 
   def show
@@ -20,8 +20,10 @@ class Admin::Dashboard::YoutubeVideosController < ApplicationController
   def update
     @youtube_video = YoutubeVideo.find(params[:id])
     if @youtube_video.update(youtube_video_params)
+      flash[:notice] = "#{@youtube_video.model_name.name}モデルレコード( id = #{@youtube_video.id} )を更新しました"
       redirect_to admin_dashboard_youtube_videos_path(@youtube_video)
     else
+      flash[:alert] = "#{@youtube_video.model_name.name}モデルレコード( id = #{@youtube_video.id})を更新できませんでした"
       render :edit
     end
   end
@@ -63,11 +65,15 @@ class Admin::Dashboard::YoutubeVideosController < ApplicationController
   
   def destroy
     @youtube_video = YoutubeVideo.find(params[:id])
-    @youtube_video.destroy
-    redirect_to admin_dashboard_youtube_videos_path
+    if @youtube_video.destroy
+      flash[:notice] = "#{@youtube_video.model_name.name}モデルレコード( id = #{@youtube_video.id} )を削除しました"
+      redirect_to admin_dashboard_youtube_videos_path
+    else
+      flash[:alert] = "#{@youtube_video.model_name.name}モデルレコード( id = #{@youtube_video.id} )を削除できませんでした"
+      render :index
+      
+    end
   end
-
-
 
   private
   

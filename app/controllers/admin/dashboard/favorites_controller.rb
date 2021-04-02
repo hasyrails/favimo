@@ -1,4 +1,4 @@
-class Admin::Dashboard::FavoritesController < ApplicationController
+class Admin::Dashboard::FavoritesController < Admin::DashboardController
   layout 'admin/dashboard/application.html.erb'
 
   before_action :admin_user
@@ -19,7 +19,14 @@ class Admin::Dashboard::FavoritesController < ApplicationController
 
   def update
     @favorite = Favorite.find(params[:id])
-    @favorite.update(favorite_params)
+    begin
+      @favorite.update(favorite_params)
+      flash[:notice] = "#{@favorite.model_name.name}モデルレコードを更新しました<br>id = #{@favorite.id}"
+      redirect_to admin_dashboard_favorite_path(@favorite)
+    rescue ArgumentError => e
+      flash[:alert] = "#{@favorite.model_name.name}モデルレコードを更新できませんでした"
+      redirect_to edit_admin_dashboard_favorite_path(@favorite)
+    end
   end
 
   def new
@@ -49,10 +56,13 @@ class Admin::Dashboard::FavoritesController < ApplicationController
     begin
       @favorite = Favorite.new(favorite_params)
       @favorite.save!
+      flash[:notice] = "#{@favorite.model_name.name}モデルレコードを作成しました<br>id = #{@favorite.id}"
       redirect_to admin_dashboard_favorites_path
     rescue ActiveRecord::RecordInvalid => e
       @favorite = e.record
       p e.message
+      flash[:alert] = "#{@favorite.model_name.name}モデルレコードを作成できませんでした"
+      redirect_to new_admin_dashboard_favorites_path
     end
   end
   

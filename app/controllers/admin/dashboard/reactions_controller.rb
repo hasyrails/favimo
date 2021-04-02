@@ -1,4 +1,4 @@
-class Admin::Dashboard::ReactionsController < ApplicationController
+class Admin::Dashboard::ReactionsController < Admin::DashboardController
   layout 'admin/dashboard/application.html.erb'
 
   before_action :admin_user
@@ -19,9 +19,16 @@ class Admin::Dashboard::ReactionsController < ApplicationController
 
   def update
     @reaction = Reaction.find(params[:id])
-    @reaction.update(reaction_params)
+    begin 
+      @reaction.update(reaction_params)
+      flash[:notice] = "#{@reaction.model_name.name}モデルレコードを更新しました<br>id = #{@reaction.id}"
+      redirect_to admin_dashboard_reaction_path(@reaction)
+    rescue ArgumentError => e
+      flash[:alert] = "#{@reaction.model_name.name}モデルレコードを更新できませんでした"
+      redirect_to edit_admin_dashboard_reaction_path(@reaction)
+    end
   end
-
+  
   def new
     if Reaction.all.present?
       reactions = Reaction.all
@@ -29,9 +36,9 @@ class Admin::Dashboard::ReactionsController < ApplicationController
     else
       @new_reaction_id = 1
     end
-
+    
     @reaction = Reaction.new
-
+    
     column_names = []
     @columns.each do |column|
       column_names << column.name
@@ -41,16 +48,19 @@ class Admin::Dashboard::ReactionsController < ApplicationController
       column_name == "id" ||
       column_name == "updated_at" || column_name == "created_at"
     end
-
+    
     @column_names_for_new_reaction = column_names
   end
-
+  
   def create
     begin
       @reaction = Reaction.new(reaction_params)
       @reaction.save!
+      flash[:notice] = "#{@reaction.model_name.name}モデルレコードを作成しました<br>id = #{@reaction.id}"
       redirect_to admin_dashboard_reactions_path
     rescue ActiveRecord::RecordInvalid => e
+      flash[:alert] = "#{@reaction.model_name.name}モデルレコードを作成できませんでした"
+      redirect_to new_admin_dashboard_reactions_path
       @reaction = e.record
       p e.message
     end
@@ -58,11 +68,15 @@ class Admin::Dashboard::ReactionsController < ApplicationController
   
   def destroy
     @reaction = Reaction.find(params[:id])
-    @reaction.destroy
-    redirect_to admin_dashboard_reactions_path
+    begin
+      @reaction.destroy
+      flash[:notice] = "#{@reaction.model_name.name}モデルレコードを削除しました<br>id = #{@reaction.id}"
+      redirect_to admin_dashboard_reactions_path
+    rescue
+      flash[:alert] = "#{@reaction.model_name.name}モデルレコードを削除できませんでした"
+      redirect_to admin_dashboard_reactions_path
+    end
   end
-
-
 
   private
   

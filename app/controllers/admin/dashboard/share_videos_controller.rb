@@ -1,4 +1,4 @@
-class Admin::Dashboard::ShareVideosController < ApplicationController
+class Admin::Dashboard::ShareVideosController < Admin::DashboardController
   layout 'admin/dashboard/application.html.erb'
 
   before_action :admin_user
@@ -19,7 +19,15 @@ class Admin::Dashboard::ShareVideosController < ApplicationController
 
   def update
     @share_video = ShareVideo.find(params[:id])
-    @share_video.update(share_video_params)
+    begin
+      @share_video.update(share_video_params)
+      flash[:notice] = "#{@share_video.model_name.name}モデルレコードを更新しました<br>id = #{@share_video.id}"
+      redirect_to admin_dashboard_share_video_path(@share_video)
+    rescue => e
+      p e.message
+      flash.now[:alert] = "#{@share_video.model_name.name}モデルレコードを更新できませんでした"
+      render edit_admin_dashboard_share_video_path(@share_video)
+    end
   end
 
   def new
@@ -49,17 +57,24 @@ class Admin::Dashboard::ShareVideosController < ApplicationController
     begin
       @share_video = ShareVideo.new(share_video_params)
       @share_video.save!
+      flash[:notice] = "#{@share_video.model_name.name}モデルレコードを作成しました<br>id = #{@share_video.id}"
       redirect_to admin_dashboard_share_videos_path
     rescue ActiveRecord::RecordInvalid => e
-      @share_video = e.record
-      p e.message
+      flash[:alert] = "#{@share_video.model_name.name}モデルレコードを作成できませんでした"
+      redirect_to new_admin_dashboard_share_videos_path
     end
   end
   
   def destroy
     @share_video = ShareVideo.find(params[:id])
-    @share_video.destroy
-    redirect_to admin_dashboard_share_videos_path
+    begin
+      @share_video.destroy
+      flash[:notice] = "#{@share_video.model_name.name}モデルレコードを削除しました<br>id = #{@share_video.id}"
+      redirect_to admin_dashboard_share_videos_path
+    rescue => exception
+      flash[:alert] = "#{@share_video.model_name.name}モデルレコードを削除できませんでした"
+      redirect_to admin_dashboard_share_videos_path
+    end
   end
 
 
