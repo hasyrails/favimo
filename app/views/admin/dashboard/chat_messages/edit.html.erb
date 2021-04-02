@@ -14,71 +14,38 @@
     <div
     style="
     display: flex;
+    position: fixed;
+    top: 50px;
+    left: 20vw;
+    width: 60vw;
+    margin-top: 1%;
     "
     >
       <div
       style="
-      margin-top: 6%;
+      width: 50vw;
+      margin-top: 2%;
       margin-left: 30%;
       margin-right: 1%;
-      font-size: 32px;
+      font-size: 20px;
       "
       >
-        <div>
-          <div>
-            <%= @chat_message.model_name.name %> モデルレコード
-          </div>
-          <div>
-            id =<%= @chat_message.id %>
-          </div>
-        </div>
-        <div>
-          <div
-          style="
-          margin-left: 5px;
-          margin-right: 5px;
-          display: flex;
-          "
-          >
-            <div
-            style="
-            margin-left: 5px;
-            margin-right: 5px;
-            "
-            >
-            <%= link_to admin_dashboard_chat_message_path(@chat_message) do %>
-              <i class="fa fa-info-circle fa-1x"></i>
-            <% end %>
-            </div>
-            <div
-            style="
-            margin-left: 5px;
-            margin-right: 5px;
-            "
-            >
-            <%= link_to edit_admin_dashboard_chat_message_path(@chat_message) do %>
-              <i class="fa fa-pen fa-1x"></i>
-            <% end %>
-            </div>
-            <div
-            style="
-            margin-left: 5px;
-            margin-right: 5px;
-            "
-            >
-            <%= link_to admin_dashboard_chat_message_path(@chat_message), method: :delete do %>
-              <i class="fa fa-trash fa-1x"></i>
-            <% end %>
-            </div>
-          </div>
-        </div>
+        <p><%= @chat_message.model_name.name %>モデル</p>
+        <p
+        style="margin-top: -5%;"
+        >レコード</p>
+        <p>id = <%= @chat_message.id %></p>
       </div>
       <div
       style="
-      margin-top: 1%;
-      "
+      width: 100vw;
+      margin-top: 3%;
+      margin-left: auto;
+      margin-right: auto;
+  "
       >
-        <table border="1">
+        <table 
+        border="1">
           <thead
           class="table-dark"
           >
@@ -117,134 +84,103 @@
     <div
     style="
     margin-top: 1%;
-    margin-left: 1%;
-    margin-right: 1%;
+    text-align: center;
+    width: 100vw;
+    position: fixed;
+    top: 45%;
+    margin-left:auto;
+    margin-right:auto;
     "
-    class="table-responsive"
     >
       <table
-      class="table"
+      class="table" 
       border="1"
       >
         <thead
         class="table-dark"
         >
           <tr>
+          <% @column_names.each do |column_name| %>
             <th>
-              <div
-              style="
-              text-align: center;
-              font-size: 20px;
-              "
-              >
-                id
-              </div>
-            </th>
-          <% @column_names.drop(1).take((@column_names.size.to_f/2).ceil-1).each do |column_name| %>
-            <th>
-              <div
-              style="
-              text-align: center;
-              font-size: 20px;
-              "
-              >
               <%= column_name.truncate(10) %>
-              </div>
             </th>
           <% end %>
+            <th
+            style="
+              width: 100px;
+            "
+            >
+              <div
+              style="
+              text-align: center;
+              font-size: 10px;
+              "
+              >
+              レコード操作
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
-          
-          <tr>
+          <td>
+            <%= @chat_message.attributes.values.first %>
+          </td>
+          <% @chat_message.attributes.drop(1).each do |key, value| %>
             <td>
-              <%= @chat_message.id %>
-            </td>
-            <% @chat_message.attributes.drop(1).take((@chat_message.attributes.size.to_f/2).ceil-1).each do |key, value| %>
-            <td>
-              <div
-              style="
-              margin-left: 10px;
-              margin-right: 10px;
-              "
-              >
-                <% if value.present? %>
-                  <% if key.eql?("video_id") ||key.eql?("title") ||key.eql?("published_at") || key.eql?("channel_id")||key.eql?("channel_title")||key.eql?("thumbnail_url") %>
-                    <%= value %>
-                  <% else %>
-                    <%= form_with model: [:admin, :dashboard, @chat_message] do |f| %>
-                    <div>
-                      <%= f.text_field "#{key}", style: 'width: 75px;' %>
-                    </div>
-                    <div
-                    style="margin-top: 5px;"
-                    >
-                      <%= f.submit "更新する", class: "btn btn-primary" %>
-                    </div>
-                    <% end %>
-                  <% end %>
-                <% else %>
-                <% end %>
-              </div>
-            </td>
-            <% end %>
-          </tr>
-        </tbody>
-     </table>
-     <table
-     class="table"
-     border="1"
-     >
-       <thead
-       class="table-dark"
-       >
-        <tr>
-        <% @column_names.drop((@column_names.size.to_f/2).ceil).each do |column_name| %>
-          <th>
-            <div
-            style="
-            text-align: center;
-            font-size: 20px;
-            "
-            >
-            <%= column_name.truncate(10) %>
-            </div>
-          </th>
-        <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <% @chat_message.attributes.drohfp((@chat_message.attributes.size.to_f/2).ceil).each do |key, value| %>
-            <td>
-              <div
-              style="
-              margin-left: 10px;
-              margin-right: 10px;
-              "
-              >
-                <% if value.present? %>
-                  <% if key.eql?("video_id") || key.eql?("channel_id")||key.eql?("channel_title")||key.eql?("thumbnail_url") %>
-                    <%= value %>
-                  <% else %>
-                    <%= form_with model: [:admin, :dashboard, @chat_message] do |f| %>
-                      <div>
-                        <%= f.text_field "#{key}", style: 'width: 75px;' %>
-                      </div>
-                      <div
-                      style="margin-top: 5px;"
-                      >
-                        <%= f.submit "更新する", class: "btn btn-primary"  %>
-                      </div>
-                    <% end %>
-                  <% end %>
-                <% else %>
-                <% end %>
-              </div>
+              <%= form_with model: [:admin, :dashboard, @chat_message] do |f| %>
+                <div>
+                  <%= f.text_field "#{key}", style: 'width: 75px;' %>
+                </div>
+                <div
+                style="margin-top: 5px;"
+                >
+                  <%= f.submit "更新する", class: "btn btn-primary"  %>
+                </div>
+              <% end %>
             </td>
           <% end %>
-        </tr>
-      </tbody>
+            <td>
+              <div
+              style="
+              margin-left: 5px;
+              margin-right: 5px;
+              display: flex;
+              "
+              >
+                <div
+                style="
+                margin-left: 5px;
+                margin-right: 5px;
+                "
+                >
+                <%= link_to admin_dashboard_chat_message_path(@chat_message) do %>
+                  <i class="fa fa-info-circle fa-2x"></i>
+                <% end %>
+                </div>
+                <div
+                style="
+                margin-left: 5px;
+                margin-right: 5px;
+                "
+                >
+                <%= link_to edit_admin_dashboard_chat_message_path(@chat_message) do %>
+                  <i class="fa fa-pen fa-2x"></i>
+                <% end %>
+                </div>
+                <div
+                style="
+                margin-left: 5px;
+                margin-right: 5px;
+                "
+                >
+                <%= link_to admin_dashboard_chat_message_path(@chat_message), method: :delete do %>
+                  <i class="fa fa-trash fa-2x"></i>
+                <% end %>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
      </table>
     </div>
   </div>
