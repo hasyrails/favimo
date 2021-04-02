@@ -142,7 +142,7 @@
                 margin-right: 5px;
                 "
                 >
-                <%= link_to admin_dashboard_user_path(@chat_message) do %>
+                <%= link_to admin_dashboard_chat_message_path(@chat_message) do %>
                   <i class="fa fa-info-circle fa-2x"></i>
                 <% end %>
                 </div>
@@ -152,7 +152,7 @@
                 margin-right: 5px;
                 "
                 >
-                <%= link_to edit_admin_dashboard_user_path(@chat_message) do %>
+                <%= link_to edit_admin_dashboard_chat_message_path(@chat_message) do %>
                   <i class="fa fa-pen fa-2x"></i>
                 <% end %>
                 </div>
@@ -162,7 +162,7 @@
                 margin-right: 5px;
                 "
                 >
-                <%= link_to admin_dashboard_user_path(@chat_message), method: :delete do %>
+                <%= link_to admin_dashboard_chat_message_path(@chat_message), method: :delete do %>
                   <i class="fa fa-trash fa-2x"></i>
                 <% end %>
                 </div>

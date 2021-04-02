@@ -23,8 +23,13 @@
   </head>
 
   <body class="drawer drawer--left">
-    <%= render 'admin/partial/header' %>
+    <div>
+      <%= render 'admin/partial/header' %>
+    </div>
     <%= yield %>
+    <div>
+      <%= render "admin/layouts/flash_message" %>
+    </div>
   </body>
 </html>
 
