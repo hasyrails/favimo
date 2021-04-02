@@ -6,7 +6,7 @@ class DemoAdmin::Dashboard::YoutubeVideosController < DemoAdmin::DashboardContro
   before_action :set_column_names_of_youtube_video_model
 
   def index
-    @youtube_videos = YoutubeVideo.dammy.page(params[:page]).per(5)
+    @youtube_videos = YoutubeVideo.page(params[:page]).per(4)
   end
 
   def show
@@ -19,9 +19,12 @@ class DemoAdmin::Dashboard::YoutubeVideosController < DemoAdmin::DashboardContro
 
   def update
     @youtube_video = YoutubeVideo.find(params[:id])
-    if @youtube_video.update(youtube_video_params)
+    begin
+      @youtube_video.update(youtube_video_params)
+      flash[:notice] = "#{@youtube_video.model_name.name}モデルレコード( id = #{@youtube_video.id} )を更新しました"
       redirect_to demo_admin_dashboard_youtube_videos_path(@youtube_video)
-    else
+    rescue ArgumentError => e
+      flash[:alert] = "#{@youtube_video.model_name.name}モデルレコード( id = #{@youtube_video.id})を更新できませんでした"
       render :edit
     end
   end
@@ -63,11 +66,15 @@ class DemoAdmin::Dashboard::YoutubeVideosController < DemoAdmin::DashboardContro
   
   def destroy
     @youtube_video = YoutubeVideo.find(params[:id])
-    @youtube_video.destroy
-    redirect_to demo_admin_dashboard_youtube_videos_path
+    if @youtube_video.destroy
+      flash[:notice] = "#{@youtube_video.model_name.name}モデルレコード( id = #{@youtube_video.id} )を削除しました"
+      redirect_to demo_admin_dashboard_youtube_videos_path
+    else
+      flash[:alert] = "#{@youtube_video.model_name.name}モデルレコード( id = #{@youtube_video.id} )を削除できませんでした"
+      render :index
+      
+    end
   end
-
-
 
   private
   
@@ -87,8 +94,6 @@ class DemoAdmin::Dashboard::YoutubeVideosController < DemoAdmin::DashboardContro
   end
   
   def youtube_video_params
-    @column_names.delete("status")
-    @column_names
     params.require(:youtube_video).permit(@column_names)
   end
 

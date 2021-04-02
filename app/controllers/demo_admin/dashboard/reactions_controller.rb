@@ -6,8 +6,7 @@ class DemoAdmin::Dashboard::ReactionsController < DemoAdmin::DashboardController
   before_action :set_column_names_of_reaction_model
 
   def index
-    @reactions = Reaction.where(from_user_id: User.dammy.ids, to_user_id: User.dammy.ids)
-    @reactions = @reactions.page(params[:page]).per(5)
+    @reactions = Reaction.page(params[:page]).per(5)
   end
 
   def show
@@ -20,9 +19,16 @@ class DemoAdmin::Dashboard::ReactionsController < DemoAdmin::DashboardController
 
   def update
     @reaction = Reaction.find(params[:id])
-    @reaction.update(reaction_params)
+    begin 
+      @reaction.update(reaction_params)
+      flash[:notice] = "#{@reaction.model_name.name}モデルレコードを更新しました<br>id = #{@reaction.id}"
+      redirect_to demo_admin_dashboard_reaction_path(@reaction)
+    rescue ArgumentError, ActiveRecord::NotNullViolation => e
+      flash[:alert] = "#{@reaction.model_name.name}モデルレコードを更新できませんでした"
+      redirect_to edit_demo_admin_dashboard_reaction_path(@reaction)
+    end
   end
-
+  
   def new
     if Reaction.all.present?
       reactions = Reaction.all
@@ -30,9 +36,9 @@ class DemoAdmin::Dashboard::ReactionsController < DemoAdmin::DashboardController
     else
       @new_reaction_id = 1
     end
-
+    
     @reaction = Reaction.new
-
+    
     column_names = []
     @columns.each do |column|
       column_names << column.name
@@ -42,16 +48,19 @@ class DemoAdmin::Dashboard::ReactionsController < DemoAdmin::DashboardController
       column_name == "id" ||
       column_name == "updated_at" || column_name == "created_at"
     end
-
+    
     @column_names_for_new_reaction = column_names
   end
-
+  
   def create
     begin
       @reaction = Reaction.new(reaction_params)
       @reaction.save!
+      flash[:notice] = "#{@reaction.model_name.name}モデルレコードを作成しました<br>id = #{@reaction.id}"
       redirect_to demo_admin_dashboard_reactions_path
     rescue ActiveRecord::RecordInvalid => e
+      flash[:alert] = "#{@reaction.model_name.name}モデルレコードを作成できませんでした"
+      redirect_to new_demo_admin_dashboard_reactions_path
       @reaction = e.record
       p e.message
     end
@@ -59,11 +68,15 @@ class DemoAdmin::Dashboard::ReactionsController < DemoAdmin::DashboardController
   
   def destroy
     @reaction = Reaction.find(params[:id])
-    @reaction.destroy
-    redirect_to demo_admin_dashboard_reactions_path
+    begin
+      @reaction.destroy
+      flash[:notice] = "#{@reaction.model_name.name}モデルレコードを削除しました<br>id = #{@reaction.id}"
+      redirect_to demo_admin_dashboard_reactions_path
+    rescue
+      flash[:alert] = "#{@reaction.model_name.name}モデルレコードを削除できませんでした"
+      redirect_to demo_admin_dashboard_reactions_path
+    end
   end
-
-
 
   private
   

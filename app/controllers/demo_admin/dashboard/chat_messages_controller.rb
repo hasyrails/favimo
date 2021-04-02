@@ -6,9 +6,9 @@ class DemoAdmin::Dashboard::ChatMessagesController < DemoAdmin::DashboardControl
   before_action :set_column_names_of_chat_message_model
 
   def index
-    @chat_messages = ChatMessage.where(user_id: User.dammy.ids)
+    @chat_messages = ChatMessage.all
 
-    @chat_messages = @chat_messages.page(params[:page]).per(5)
+    @chat_messages = ChatMessage.page(params[:page]).per(5)
 
   end
 
@@ -22,7 +22,14 @@ class DemoAdmin::Dashboard::ChatMessagesController < DemoAdmin::DashboardControl
 
   def update
     @chat_message = ChatMessage.find(params[:id])
-    @chat_message.update(chat_message_params)
+    begin
+      @chat_message.update(chat_message_params)
+      flash[:notice] = "#{@chat_message.model_name.name}モデルレコードを更新しました<br>id=#{@chat_message.id}"
+      redirect_to demo_admin_dashboard_chat_message_path(@chat_message)
+    rescue => e
+      flash[:alert] = "#{@chat_message.model_name.name}モデルレコードを更新できませんでした"
+      render :edit
+    end
   end
 
   def new
@@ -51,8 +58,12 @@ class DemoAdmin::Dashboard::ChatMessagesController < DemoAdmin::DashboardControl
   def create
     begin
       @chat_message = ChatMessage.new(chat_message_params)
-      @chat_message.save!
-      redirect_to demo_admin_dashboard_chat_messages_path
+      if @chat_message.save!
+        flash[:notice] = "#{@chat_message.model_name.name}モデルレコードを作成しました<br>id=#{@chat_message.id}"
+        redirect_to demo_admin_dashboard_chat_messages_path
+      else
+        flash.now[:alert] = "#{@chat_message.model_name.name}モデルレコードを作成できませんでした"
+      end
     rescue ActiveRecord::RecordInvalid => e
       @chat_message = e.record
       p e.message
@@ -62,8 +73,13 @@ class DemoAdmin::Dashboard::ChatMessagesController < DemoAdmin::DashboardControl
   
   def destroy
     @chat_message = ChatMessage.find(params[:id])
-    @chat_message.destroy
-    redirect_to demo_admin_dashboard_chat_messages_path
+    if @chat_message.destroy
+      flash[:notice] = "#{@chat_message.model_name.name}モデルレコードを削除しました<br>id = #{@chat_message.id}"
+      redirect_to demo_admin_dashboard_chat_messages_path
+    else
+      flash.now[:alert] = "#{@chat_message.model_name.name}モデルレコードを削除できませんでした"
+      render :index
+    end
   end
 
   private

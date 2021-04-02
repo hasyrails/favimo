@@ -7,10 +7,9 @@ class DemoAdmin::Dashboard::UsersController < DemoAdmin::DashboardController
   before_action :set_update_attributes_names_of_user_model
 
   def index
-    @users = User.dammy
-    # dammy_users のenumフラグ
+    @users = User.all
 
-    @users = @users.page(params[:page]).per(5)
+    @users = User.page(params[:page]).per(5)
 
   end
 
@@ -24,27 +23,23 @@ class DemoAdmin::Dashboard::UsersController < DemoAdmin::DashboardController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
+    if @user.update!(user_params)
+      redirect_to demo_admin_dashboard_user_path(@user), notice: "#{@user.model_name.name}モデルレコード( id = #{@user.id} )の情報を更新しました"
+    else 
+      render :edit, alert: "#{@user.model_name.name}モデルレコード( id = #{@user.id} )の情報の更新ができませんでした"
+    end
   end
 
   def new
-    if User.all.present?
-      users = User.all
-      @new_user_id = users.last.id+1
-    else
-      @new_user_id = 1
-    end
+    # if User.all.present?
+    #   users = User.all
+    #   @new_user_id = users.last.id+1
+    # else
+    #   @new_user_id = 1
+    # end
 
-    serial_num_for_new_dammy_user = User.last.id + 1
-    
-    @user = User.dammy.new(
-      name: "testuser#{serial_num_for_new_dammy_user}",
-      email: "testuser#{serial_num_for_new_dammy_user}@mail.com",
-      self_introduction: "testuser#{serial_num_for_new_dammy_user}です",
-      password: "test-password",
-      
-    )
-    
+    @user = User.new
+
     column_names = []
     @columns.each do |column|
       column_names << column.name
@@ -54,51 +49,26 @@ class DemoAdmin::Dashboard::UsersController < DemoAdmin::DashboardController
       column_name == "id" ||
       column_name == "updated_at" || column_name == "created_at"
     end
-    
+
     @column_names_for_new_user = column_names
   end
-  
+
   def create
     begin
-      serial_num_for_new_dammy_user = User.all.size + 1
-      @user = User.dammy.create(
-        name: "testuser#{serial_num_for_new_dammy_user}",
-        email: "testuser#{serial_num_for_new_dammy_user}@mail.com",
-        self_introduction: "testuser#{serial_num_for_new_dammy_user}です",
-        password: "test-password",
-      )
-      youtube_video_for_new_dammy_user = YoutubeVideo.dammy.create!(
-        user_id: @user.id
-      )
-      share_video_for_new_dammy_user = @user.share_videos.create!(
-        to_user_id: @user.id,
-        from_user_id: User.dammy.ids.sample,
-        youtube_video_id: YoutubeVideo.dammy.ids.sample
-      )
-      favorite_for_new_dammy_user = @user.favorites.create!(
-        youtube_video_id: YoutubeVideo.dammy.ids.sample
-      )
-      reaction_for_new_dammy_user = @user.reactions.create!(
-        to_user_id: @user.id,
-        from_user_id: User.dammy.ids.sample,
-        status: "like"
-      )
-      chat_room_for_new_dammy_user = ChatRoom.dammy.create!
-      chat_room_user_as_new_dammy_user = ChatRoomUser.create!(
-        chat_room_id: chat_room_for_new_dammy_user.id,
-        user_id: @user.id,
-      )
-      chat_room_user_for_new_dammy_user = ChatRoomUser.create!(
-        chat_room_id: chat_room_for_new_dammy_user.id,
-        user_id: User.dammy.ids.sample,
-      )
-      chat_message_for_new_dammy_user = ChatMessage.create!(
-        chat_room_id: chat_room_for_new_dammy_user.id,
-        user_id: [@user.id, User.dammy.ids].flatten.sample,
-        content: ["テストです", "こんにちは", "元気ですか"].sample 
-      )
-
+      @user = User.new(user_params)
+      @user.save!
       redirect_to demo_admin_dashboard_users_path
+
+      # ユーザー作成はアプリ内のアカウント作成画面で行うためフラッシュメッセージの実装不要
+
+      # if @user.save!
+      #   flash[:notice] = "#{@user.model_name.name}モデルレコードを作成しました"
+      #   redirect_to demo_admin_dashboard_users_path
+      # else
+      #   flash.now[:alert] = "#{@user.model_name.name}モデルレコードを作成できませんでした"
+      #   render new_demo_admin_dashboard_user_path
+      # end
+
     rescue ActiveRecord::RecordInvalid => e
       @user = e.record
       p e.message
@@ -106,15 +76,31 @@ class DemoAdmin::Dashboard::UsersController < DemoAdmin::DashboardController
   end
   
   def destroy
-    @user = User.find(params[:id])
-    @user.reactions
-    @user.destroy
-    redirect_to demo_admin_dashboard_users_path
+    begin
+      @user = User.find_by(id: params[:id])
+      @user.destroy
+      redirect_to demo_admin_dashboard_users_path, notice: "#{@user.model_name.name}モデルレコード( id = #{@user.id} )を削除しました"
+    rescue ActiveRecord::InvalidForeignKey => e
+      p e.message
+    end
   end
-
-
-
+    
+    
+    
   private
+
+  def set_update_attributes_names_of_user_model
+    @columns = ActiveRecord::Base.connection.columns(:users)
+    
+    column_names = []
+    @columns.each do |column|
+      column_names << column.name
+    end
+    column_names.shift
+    column_names.pop
+    @update_attributes = column_names
+
+  end
   
   def set_user_model_name
     @model_name = User.model_name.name
@@ -128,19 +114,6 @@ class DemoAdmin::Dashboard::UsersController < DemoAdmin::DashboardController
       column_names << column.name
     end
     @column_names = column_names
-
-  end
-  
-  def set_update_attributes_names_of_user_model
-    @columns = ActiveRecord::Base.connection.columns(:users)
-    
-    column_names = []
-    @columns.each do |column|
-      column_names << column.name
-    end
-    column_names.shift
-    column_names.pop
-    @update_attributes = column_names
 
   end
   
