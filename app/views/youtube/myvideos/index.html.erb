@@ -61,7 +61,12 @@
       <div 
       class="no-user"
       style="font-size: 16px;"
-      >動画がありません</div>
+      >
+        <p>動画がありません</p>
+        <% if @api_timeout_error_message.present? %>
+          <p><%= @api_timeout_error_message %></p>
+        <% end  %>
+      </div>
     </div>
   </div>
   

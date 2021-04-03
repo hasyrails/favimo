@@ -1,7 +1,7 @@
 class Youtube::VideosSearchController < ApplicationController
   before_action :authenticate_user!
   require 'google/apis/youtube_v3'
-  # require 'kaminari'
+  require 'timeout'
   GOOGLE_API_KEY = Rails.application.credentials.google[:api_key]
 
   def create
@@ -26,7 +26,23 @@ class Youtube::VideosSearchController < ApplicationController
       published_after: after.iso8601,
       published_before: before.iso8601
     }
-    youtube.list_searches(:snippet, opt)
+    begin 
+      Timeout.timeout(5) do 
+        youtube.list_searches(:snippet, opt)
+      end
+    rescue Timeout::Error => e
+      p 'タイムアウトです'
+      p e.class
+      p e.class.superclass
+      p e.class.superclass.superclass
+      @api_timeout_error_message = "現在、検索ができません"
+    rescue Google::Apis::TransmissionError => e
+      p "YouTubeAPIが使えない状態です"
+      p e.class
+      p e.class.superclass
+      p e.class.superclass.superclass
+      @api_timeout_error_message = "現在、検索ができません"
+    end
   end
 
   def index
@@ -39,28 +55,48 @@ class Youtube::VideosSearchController < ApplicationController
 
     if params[:keyword].present?
       @search_results = find_videos(params[:keyword])
-      @search_results.items.each do |search_result|
-        @youtube_video = YoutubeVideo.new(
-          # id: id.next,
-          # identify_id: search_result.id,
-          video_id: search_result.id.video_id,
-          title: search_result.snippet.title,
-          description: search_result.snippet.description,
-          published_at: search_result.snippet.published_at,
-          channel_id: search_result.snippet.channel_id,
-          channel_title: search_result.snippet.channel_title,
-          thumbnail_url: search_result.snippet.thumbnails.default.url,
-          search_keyword: params[:keyword],
-          user_id: current_user.id
-        )
-        @youtube_video.save!
-        rescue ActiveRecord::RecordInvalid => e
-          pp e.record.errors
-          @youtube_videos << @youtube_video
+      
+      if @search_results.present?
+        begin
+          @search_results.items.each do |search_result|
+            @youtube_video = YoutubeVideo.new(
+              # id: id.next,
+              # identify_id: search_result.id,
+              video_id: search_result.id.video_id,
+              title: search_result.snippet.title,
+              description: search_result.snippet.description,
+              published_at: search_result.snippet.published_at,
+              channel_id: search_result.snippet.channel_id,
+              channel_title: search_result.snippet.channel_title,
+              thumbnail_url: search_result.snippet.thumbnails.default.url,
+              search_keyword: params[:keyword],
+              user_id: current_user.id
+            )
+            @youtube_video.save!
+            # rescue ActiveRecord::RecordInvalid => e
+            #   pp e.record.errors
+            #   @youtube_videos << @youtube_video
+        end
+        rescue NoMethodError => e
+          e.class
+          @youtube_video = YoutubeVideo.new(
+            # id: id.next,
+            # identify_id: search_result.id,
+            video_id: "",
+            title: "",
+            description: "",
+            published_at: "",
+            channel_id: "",
+            channel_title: "",
+            thumbnail_url: "",
+            search_keyword: params[:keyword],
+            user_id: current_user.id
+          )
+        end
       end
       redirect_to youtube_myvideos_path(q: params[:keyword]) and return
     end
-
+  
     search_words = []
     @search_words = []
     youtube_videos = YoutubeVideo.order(created_at: 'ASC')
