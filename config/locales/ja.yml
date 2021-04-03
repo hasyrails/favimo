@@ -1,4 +1,15 @@
 ja:
+  devise:
+    registrations:
+      user:
+        updated: "ユーザー情報を更新しました"
+        signed_up: "アカウントを作成しました"
+    sessions:
+      user:
+        signed_in: "ログインしました"
+    failure:
+      user:
+        already_authenticated: "すでにログインしています"
   views:
     pagination:
       first: <i class="fas fa-angle-double-left"></i>
