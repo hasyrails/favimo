@@ -17,4 +17,5 @@ class CreateYoutubeVideos < ActiveRecord::Migration[6.0]
       t.timestamps
     end
   end
+  add_foreign_key :youtube_videos, :user, column: :user_id
 end

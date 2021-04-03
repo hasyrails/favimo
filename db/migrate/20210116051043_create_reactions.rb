@@ -7,5 +7,7 @@ class CreateReactions < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+    add_foreign_key :reactions, :to_user, column: :to_user_id
+    add_foreign_key :reactions, :from_user, column: :from_user_id
   end
 end
