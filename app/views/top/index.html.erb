@@ -1,7 +1,12 @@
 <div class="jumbotron">
   <div class="container">
     <nav class="navbar navbar-light">
-      <a class="navbar-brand text-white">Techpit Match</a>
+      <a 
+      class="navbar-brand text-white" style="
+      font-size: 20px;
+      ">
+        faviMo
+      </a>
       <div class="navbar__sign-in-btn">
         <%= link_to "ログイン", new_user_session_path, class: "btn my-2 my-sm-0 bg-light text-top-color" %>
         <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: "btn my-2 my-sm-0 bg-light text-top-color" %>
@@ -14,9 +19,9 @@
   </div>
 
   <div class="top-title">
-    <h1 class="text-white text-center">
-      Swipe Right
-    </h1>
+    <h2 class="text-white text-center">
+      お気に入りの動画を共有しよう
+    </h2>
   </div>
 
   <div class="top-authentication text-center">

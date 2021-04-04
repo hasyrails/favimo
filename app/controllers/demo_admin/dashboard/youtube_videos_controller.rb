@@ -1,7 +1,6 @@
 class DemoAdmin::Dashboard::YoutubeVideosController < DemoAdmin::DashboardController
   layout 'demo_admin/dashboard/application.html.erb'
 
-  before_action :demo_admin_user
   before_action :set_youtube_video_model_name
   before_action :set_column_names_of_youtube_video_model
 
@@ -95,10 +94,6 @@ class DemoAdmin::Dashboard::YoutubeVideosController < DemoAdmin::DashboardContro
   
   def youtube_video_params
     params.require(:youtube_video).permit(@column_names)
-  end
-
-  def demo_admin_user
-    redirect_to(root_path) if  current_user.nil? || !current_user.demo_admin?
   end
 
 end

@@ -1,7 +1,6 @@
 class DemoAdmin::Dashboard::ChatRoomUsersController < DemoAdmin::DashboardController
   layout 'demo_admin/dashboard/application.html.erb'
 
-  before_action :demo_admin_user
   before_action :set_chat_room_user_model_name
   before_action :set_column_names_of_chat_room_user_model
 
@@ -100,10 +99,6 @@ class DemoAdmin::Dashboard::ChatRoomUsersController < DemoAdmin::DashboardContro
   
   def chat_room_user_params
     params.require(:chat_room_user).permit(@column_names)
-  end
-
-  def demo_admin_user
-    redirect_to(root_path) if  current_user.nil? || !current_user.demo_admin?
   end
 
 end
