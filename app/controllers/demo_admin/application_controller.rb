@@ -4,6 +4,7 @@ class DemoAdmin::ApplicationController < ApplicationController
   before_action :set_model_names
   before_action :set_column_names
 
+
   def index
     # @table_names = ActiveRecord::Base.connection.tables.map{|t| t.classify}
     
@@ -41,7 +42,4 @@ class DemoAdmin::ApplicationController < ApplicationController
     end
   end
 
-  def demo_admin_user
-    redirect_to(root_path) if  current_user.nil? || !current_user.demo_admin?
-  end
 end

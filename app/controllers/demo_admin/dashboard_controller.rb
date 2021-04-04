@@ -6,7 +6,6 @@ class DemoAdmin::DashboardController < DemoAdmin::ApplicationController
   private
 
   def demo_admin_user
-    redirect_to(root_path) if  current_user.nil? || !current_user.demo_admin?
+    redirect_to(root_path) if  current_user.nil? || (!current_user.demo_admin? && !current_user.general?)
   end
-
 end

@@ -1,7 +1,6 @@
 class DemoAdmin::Dashboard::ChatMessagesController < DemoAdmin::DashboardController
   layout 'demo_admin/dashboard/application.html.erb'
 
-  before_action :demo_admin_chat_message
   before_action :set_chat_message_model_name
   before_action :set_column_names_of_chat_message_model
 
@@ -107,7 +106,4 @@ class DemoAdmin::Dashboard::ChatMessagesController < DemoAdmin::DashboardControl
     params.require(:chat_message).permit(column_names)
   end
 
-  def demo_admin_chat_message
-    redirect_to(root_path) if  current_user.nil? || !current_user.demo_admin?
-  end
 end

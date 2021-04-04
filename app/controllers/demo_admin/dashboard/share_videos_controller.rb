@@ -1,7 +1,6 @@
 class DemoAdmin::Dashboard::ShareVideosController < DemoAdmin::DashboardController
   layout 'demo_admin/dashboard/application.html.erb'
 
-  before_action :demo_admin_user
   before_action :set_share_video_model_name
   before_action :set_column_names_of_share_video_model
 
@@ -98,10 +97,6 @@ class DemoAdmin::Dashboard::ShareVideosController < DemoAdmin::DashboardControll
   
   def share_video_params
     params.require(:share_video).permit(@column_names)
-  end
-
-  def demo_admin_user
-    redirect_to(root_path) if  current_user.nil? || !current_user.demo_admin?
   end
 
 end

@@ -1,7 +1,6 @@
 class DemoAdmin::Dashboard::FavoritesController < DemoAdmin::DashboardController
   layout 'demo_admin/dashboard/application.html.erb'
 
-  before_action :demo_admin_user
   before_action :set_favorite_model_name
   before_action :set_column_names_of_favorite_model
 
@@ -101,10 +100,6 @@ class DemoAdmin::Dashboard::FavoritesController < DemoAdmin::DashboardController
   
   def favorite_params
     params.require(:favorite).permit(@column_names)
-  end
-
-  def demo_admin_user
-    redirect_to(root_path) if  current_user.nil? || !current_user.demo_admin?
   end
 
 end
