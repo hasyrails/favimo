@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   include IdGenerator
 
+  has_many :youtube_videos, dependent: :destroy
   has_many :reactions, foreign_key: :from_user_id, dependent: :destroy
   has_many :reactions, foreign_key: :to_user_id, dependent: :destroy
   has_many :chat_room_users, dependent: :destroy

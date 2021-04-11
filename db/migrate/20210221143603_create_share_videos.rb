@@ -8,7 +8,7 @@ class CreateShareVideos < ActiveRecord::Migration[6.0]
       t.timestamps
     end
   end
-  add_foreign_key :share_videos, :youtube_video, column: :youtube_video_id
-  add_foreign_key :share_videos, :to_user, column: :to_user_id
-  add_foreign_key :share_videos, :from_user, column: :from_user_id
+  # add_foreign_key :share_videos, :youtube_video, column: :youtube_video_id
+  # add_foreign_key :share_videos, :to_user, column: :to_user_id
+  # add_foreign_key :share_videos, :from_user, column: :from_user_id
 end

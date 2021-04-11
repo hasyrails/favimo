@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def index
     if Reaction.where(from_user_id: current_user.id).where.not(status: "like").blank?
-      @users = User.where.not(id: current_user.id, role: "dammy")
+      @users = User.where.not(id: current_user.id).where.not(role: "dammy")
     else
       non_dammy_users = []
       non_dammy_users.push(User.general).push(User.admin).push(User.demo_admin)

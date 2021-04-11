@@ -19,10 +19,12 @@
         <%= @chat_room_user.name %>
       </span>
 
-      <% if @chat_room_user.profile_image.url.nil? %>
-        <div class="chat-room__partner-default-img"></div>
-      <% else %>
-        <%= image_tag @chat_room_user.profile_image.url, class: "chat-room__partner-img" %>
+      <%= link_to user_path(@chat_room_user) do %>
+        <% if @chat_room_user.profile_image.url.nil? %>
+          <div class="chat-room__partner-default-img"></div>
+        <% else %>
+          <%= image_tag @chat_room_user.profile_image.url, class: "chat-room__partner-img" %>
+        <% end %>
       <% end %>
     </div>
   </nav>
