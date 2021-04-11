@@ -34,7 +34,7 @@ crumb :user do |user|
   if user == current_user
     link "プロフィール : #{user.name}さん", user_path(user)
   else
-  link "#{user.name}さん", user_path(user)
+    link "#{user.name}さん", user_path(user)
   end
   parent :root
 end
@@ -47,7 +47,7 @@ end
 
 crumb :share_video_select do |user|
   link "#{user.name}さんと動画を共有する", new_user_video_share_path
-  parent :like_users
+  parent :user, user
 end
 
 crumb :shared_and_sharing_history  do |user|

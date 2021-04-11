@@ -1,0 +1,44 @@
+example_id                                         | status  | run_time        |
+-------------------------------------------------- | ------- | --------------- |
+./spec/system/app/partial/navbar_links.rb[1:1:1:1] | passed  | 1.11 seconds    |
+./spec/system/app/partial/navbar_links.rb[1:1:1:2] | passed  | 9.39 seconds    |
+./spec/system/app/partial/navbar_links.rb[1:1:2:1] | passed  | 1.11 seconds    |
+./spec/system/app/partial/navbar_links.rb[1:1:2:2] | passed  | 9.35 seconds    |
+./spec/system/app/partial/navbar_links.rb[1:1:3:1] | passed  | 0.95596 seconds |
+./spec/system/app/partial/navbar_links.rb[1:1:3:2] | passed  | 5.96 seconds    |
+./spec/system/app/partial/navbar_links.rb[1:1:4:1] | passed  | 1.04 seconds    |
+./spec/system/app/partial/navbar_links.rb[1:1:4:2] | passed  | 9.02 seconds    |
+./spec/system/app/root_path_page.rb[1:1:1]         | passed  | 2.86 seconds    |
+./spec/system/app/root_path_page.rb[1:1:2:1]       | passed  | 0.49824 seconds |
+./spec/system/app/root_path_page.rb[1:1:3:1]       | passed  | 4.3 seconds     |
+./spec/system/app/root_path_page.rb[1:1:4:1]       | failed  | 0.40597 seconds |
+./spec/system/app/root_path_page.rb[1:2:1]         | passed  | 4.86 seconds    |
+./spec/system/app/root_path_page.rb[1:2:2:1]       | unknown |                 |
+./spec/system/app/user_path_page.rb[1:1:1]         | passed  | 1.15 seconds    |
+./spec/system/app/user_path_page.rb[1:1:2]         | passed  | 1.45 seconds    |
+./spec/system/app/user_path_page.rb[1:1:3]         | failed  | 6.24 seconds    |
+./spec/system/app/user_path_page.rb[1:1:4]         | failed  | 6.25 seconds    |
+./spec/system/app/user_path_page.rb[1:1:5]         | failed  | 6.47 seconds    |
+./spec/system/app/user_path_page.rb[1:1:6]         | passed  | 6.07 seconds    |
+./spec/system/app/user_path_page.rb[1:1:7]         | passed  | 6.1 seconds     |
+./spec/system/app/user_path_page.rb[1:1:8:1]       | passed  | 1.12 seconds    |
+./spec/system/app/user_path_page.rb[1:1:8:2]       | passed  | 1.09 seconds    |
+./spec/system/app/user_path_page.rb[1:1:8:3]       | passed  | 1.14 seconds    |
+./spec/system/app/user_path_page.rb[1:1:8:4]       | passed  | 1.37 seconds    |
+./spec/system/app/user_path_page.rb[1:1:8:5]       | passed  | 1.17 seconds    |
+./spec/system/app/user_path_page.rb[1:1:9:1]       | passed  | 1.06 seconds    |
+./spec/system/app/user_path_page.rb[1:1:10:1]      | passed  | 1.08 seconds    |
+./spec/system/app/user_path_page.rb[1:2:1]         | passed  | 1.18 seconds    |
+./spec/system/app/user_path_page.rb[1:2:2]         | passed  | 1.07 seconds    |
+./spec/system/app/user_path_page.rb[1:2:3]         | passed  | 11.29 seconds   |
+./spec/system/app/user_path_page.rb[1:2:4]         | passed  | 11.08 seconds   |
+./spec/system/app/user_path_page.rb[1:2:5]         | passed  | 11.31 seconds   |
+./spec/system/app/user_path_page.rb[1:2:6]         | passed  | 11.33 seconds   |
+./spec/system/app/user_path_page.rb[1:2:7]         | passed  | 16.1 seconds    |
+./spec/system/app/users_path_page.rb[1:1:1]        | passed  | 4.09 seconds    |
+./spec/system/app/users_path_page.rb[1:2:1]        | passed  | 1.44 seconds    |
+./spec/system/app/users_path_page.rb[1:2:2:1]      | failed  | 0.00155 seconds |
+./spec/system/app/users_path_page.rb[1:2:2:2]      | failed  | 0.00122 seconds |
+./spec/system/app/users_path_page.rb[1:3:1]        | passed  | 0.64533 seconds |
+./spec/system/app/users_path_page.rb[1:3:2:1]      | failed  | 0.57855 seconds |
+./spec/system/app/users_path_page.rb[1:3:2:2]      | failed  | 0.6052 seconds  |
