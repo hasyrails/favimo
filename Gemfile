@@ -76,3 +76,4 @@ gem 'gretel'
 
 gem 'mysql2'
 
+gem 'rename'
