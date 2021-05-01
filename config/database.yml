@@ -21,8 +21,7 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password: <%= Rails.application.credentials.mysql[:password] %>
-  socket: /tmp/mysql.sock
+  socket: 
 
 development:
   <<: *default
@@ -84,5 +83,6 @@ test:
 production:
   <<: *default
   database: favimo_production
-  username: favimo
-  password: <%= ENV['favimo_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= Rails.application.credentials.db[:password] %>
+  host: <%= Rails.application.credentials.db[:hostname] %>
