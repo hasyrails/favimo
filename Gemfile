@@ -87,3 +87,5 @@ gem 'rename'
 
 gem 'ed25519'
 gem 'bcrypt_pbkdf'
+
+gem 'fog-aws'
