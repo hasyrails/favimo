@@ -7,16 +7,13 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-server "18.180.42.246", user: "hasyrails", roles: %w{app db web}
-set :repo_url, "https://github.com/hasyrails/favimo.git"
-set :application, "favimo"
-set :ssh_options, {
-  keys: %w(~/.ssh/favimo_rsa_hasyrails),
-  forward_agent: true,
-  auth_methods: %w(publickey)
-}
-set :use_sudo, true
+server "35.73.47.61", user: "hasyrails", roles: %w{app db web}
 
+set :ssh_options, {
+  keys: %w(~/.ssh/favimo.pem),
+  forward_agent: true,
+  auth_methods: %w(publickey),
+}
 
 # role-based syntax
 # ==================
