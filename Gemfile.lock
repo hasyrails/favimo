@@ -83,6 +83,10 @@ GEM
     capistrano-rbenv-vars (0.1.0)
       capistrano (>= 3.0)
       capistrano-rbenv (>= 2.0)
+    capistrano3-puma (4.0.0)
+      capistrano (~> 3.7)
+      capistrano-bundler
+      puma (~> 4.0)
     capybara (3.35.3)
       addressable
       mini_mime (>= 0.1.3)
@@ -297,16 +301,6 @@ GEM
     ruby-vips (2.1.0)
       ffi (~> 1.12)
     rubyzip (2.3.0)
-    sass-rails (6.0.0)
-      sassc-rails (~> 2.1, >= 2.1.1)
-    sassc (2.4.0)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
@@ -333,7 +327,6 @@ GEM
     ssrf_filter (1.0.7)
     thor (1.1.0)
     thread_safe (0.3.6)
-    tilt (2.0.10)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -370,11 +363,11 @@ DEPENDENCIES
   bcrypt_pbkdf
   bootsnap (>= 1.4.2)
   byebug
-  capistrano
-  capistrano-bundler
-  capistrano-rails
-  capistrano-rbenv
-  capistrano-rbenv-vars
+  capistrano (~> 3.10)
+  capistrano-rails (~> 1.6)
+  capistrano-rbenv (~> 2.2)
+  capistrano-rbenv-vars (~> 0.1)
+  capistrano3-puma (< 5)
   capybara (>= 2.15)
   carrierwave (~> 2.0)
   devise
@@ -393,7 +386,6 @@ DEPENDENCIES
   rails (~> 6.0.3, >= 6.0.3.4)
   rename
   rspec-rails (= 4.0.1)
-  sass-rails (>= 6)
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
