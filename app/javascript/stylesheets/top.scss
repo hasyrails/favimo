@@ -1,11 +1,25 @@
 .jumbotron {
-  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.05) ), url("~top.png") center no-repeat;
-  // background-size: cover;
-  // background-color: grey;
-  height: 100vh;
-  padding: 0;
-  border-radius: 0;
-}
+  // デスクトップ
+  @media all and (min-width: 480px) and (max-width: 1500px) {
+    background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.05) ), url("~top.png") center no-repeat;
+    // background-size: cover;
+    // background-color: grey;
+    height: 100vh;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  // スマホ
+  @media all and (max-width: 480px) {
+    background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.05) ), url("~top_for_smartphone.png") center no-repeat;
+    // background-size: cover;
+    // background-color: grey;
+    height: 100vh;
+    padding: 0;
+    border-radius: 0;
+  }
+  
+ }
 
 .text-top-color {
   color: #FD3378;
@@ -14,12 +28,20 @@
 }
 
 .top-title {
-  position: absolute;
-  top: 50%;
-  left: 80%;
-  transform: translate(-50%,-50%);
-  letter-spacing: 2px;
-  white-space: nowrap;
+  // デスクトップ
+  @media all and (min-width: 480px) and (max-width: 1500px) {
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%,-50%);
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  // スマホ
+  @media all and (max-width: 480px) {
+    display: none;
+  }
 }
 
 .top-authentication {
@@ -43,11 +65,20 @@
   }
 }
 
-@media (max-width: 767px) {
+
+// デスクトップ
+@media all and (min-width: 480px) and (max-width: 1280px) {
   .navbar__sign-in-btn {
-    display: none;
   }
 }
+
+// スマホ
+@media all and (max-width: 480px) {
+  .navbar__sign-in-btn {
+    text-align: center;
+  }
+  
+ }
 
 @media (min-width: 768px) {
   .top-authentication {
