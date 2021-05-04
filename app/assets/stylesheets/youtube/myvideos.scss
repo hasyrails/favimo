@@ -2,14 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.cp_iptxt {
-	position: relative;
-	width: 80%;
-	margin: 40px 3%;
+// デスクトップ
+@media all and (min-width: 480px) and (max-width: 1500px) {
+	.video-search-form{
+		width: 80%;
+	}
+}
+// スマホ
+@media all and (max-width: 480px){
+	.video-search-form{
+		width: 80%;
+		margin-top: 3%;
+	}
 }
 .cp_iptxt input[type=text] {
 	font: 15px/24px sans-serif;
-	box-sizing: border-box;
+	// box-sizing: border-box;
 	width: 100%;
 	margin: 8px 0;
 	padding: 0.3em;

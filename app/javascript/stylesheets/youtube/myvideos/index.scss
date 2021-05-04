@@ -30,107 +30,12 @@
   }
 }
 
-.video {
-  // height: 10vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  transition: opacity 0.1s ease-in-out;
-  &--status {
-    position: absolute;
-    top: 50%;
-    margin-top: -30px;
-    z-index: 2;
-    width: 100%;
-    text-align: center;
-    pointer-events: none;
-    svg {
-      font-size: 100px;
-      opacity: 0;
-      transform: scale(0.3);
-      transition: all 0.2s ease-in-out;
-      position: absolute;
-      margin: -40px 0 0 -40px;
-      width: 100px;
-    }
-  }
-  &--cards {
-    // flex-grow: 1;
-    // text-align: center;
-    // display: flex;
-    // justify-content: center;
-    // z-index: 1;
-    .no-user {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      &.is-active {
-        display: flex;
-      }
-    }
-  }
-  &--card {
-    display: inline-block;
-    width: 90vw;
-    max-width: 340px;
-    max-height: max-content;
-    background: #FFFFFF;
-    border-radius: 8px;
-    overflow: hidden;
-    position: absolute;
-    will-change: transform;
-    transition: all 0.3s ease-in-out;
-    cursor: -webkit-grab;
-    cursor: -moz-grab;
-    cursor: grab;
-    p {
-      margin-top: 24px;
-      font-size: 20px;
-      padding: 0 16px;
-      pointer-events: none;
-    }
-    img {	
-      max-width: 100%;	
-      pointer-events: none;	
-    }
-  }
-  &--buttons {
-    // flex: 0 0 100px;
-    text-align: center;
-    button {
-      border-radius: 50%;
-      width: 60px;
-      border: 0;
-      background: #FFFFFF;
-      // display: inline-block;
-      margin: 0 8px;
-      &:focus {
-        outline: 0;
-      }
-    }
-  }
-  &_like .fa-heart {
-    opacity: 0.7;
-    transform: scale(1);
-  }
-  &_dislike .fa-times {
-    opacity: 0.7;
-    transform: scale(1);
-  }
-  .moving .swipe--card {
-    transition: none;
-    cursor: -webkit-grabbing;
-    cursor: -moz-grabbing;
-    cursor: grabbing;
-  }
-}
+
 
 .video-swipe {
   // height: 10vh;
-  overflow: hidden;
-  display: flex;
+  // overflow: hidden;
+  // display: flex;
   flex-direction: column;
   position: relative;
   transition: opacity 0.1s ease-in-out;
@@ -158,6 +63,9 @@
     // display: flex;
     // justify-content: center;
     // z-index: 1;
+    iframe {
+      display:block
+    }
     .no-user {
       display: none;
       flex-direction: column;
@@ -193,28 +101,58 @@
       pointer-events: none;	
     }
   }
-  &--buttons {
-    // flex: 0 0 100px;
-    text-align: center;
-    button {
-      border-radius: 50%;
-      width: 60px;
-      border: 0;
-      background: #FFFFFF;
-      // display: inline-block;
-      margin: 0 8px;
-      &:focus {
-        outline: 0;
+  // デスクトップ
+  @media all and (min-width: 480px) and (max-width: 1500px) {
+    &--buttons {
+      // flex: 0 0 100px;
+      text-align: center;
+      button {
+        border-radius: 50%;
+        width: 60px;
+        border: 0;
+        background: #FFFFFF;
+        // display: inline-block;
+        margin: 0 8px;
+        &:focus {
+          outline: 0;
+        }
+      }
+      &_like .fa-heart {
+        opacity: 0.7;
+        transform: scale(1);
+      }
+      &_dislike .fa-times {
+        opacity: 0.7;
+        transform: scale(1);
       }
     }
   }
-  &_like .fa-heart {
-    opacity: 0.7;
-    transform: scale(1);
-  }
-  &_dislike .fa-times {
-    opacity: 0.7;
-    transform: scale(1);
+  // スマホ
+  @media all and (max-width: 480px){
+    &--buttons {
+      // flex: 0 0 100px;
+      text-align: center;
+      margin-top: 100%;
+      button {
+        border-radius: 50%;
+        width: 60px;
+        border: 0;
+        background: #FFFFFF;
+        // display: inline-block;
+        margin: 0 8px;
+        &:focus {
+          outline: 0;
+        }
+      }
+      &_like .fa-heart {
+        opacity: 0.7;
+        transform: scale(1);
+      }
+      &_dislike .fa-times {
+        opacity: 0.7;
+        transform: scale(1);
+      }
+    }
   }
   .moving .swipe--card {
     transition: none;
@@ -240,8 +178,27 @@
   }
 }
 
-@media (min-width: 414px) {
-  .video-swipe {
-    height: 400px;
+// @media (min-width: 414px) {
+//   .video-swipe {
+//     height: 400px;
+//   }
+// }
+// @media (min-width: 414px) {
+//   .video-swipe {
+//     height: 400px;
+//   }
+// }
+
+// デスクトップ
+@media all and (min-width: 480px) and (max-width: 1500px) {
+    .video-swipe--card iframe{
+      height: 200px;
+    }
+}
+    
+    // スマホ
+@media all and (max-width: 480px) {
+  .video-swipe--card iframe {
+    height: 200px;
   }
 }
