@@ -1,4 +1,5 @@
-# README
+# faviMo(ファビモ)
+<img src="https://img.shields.io/badge/Rails-6.0.3.6-red"> <img src="https://img.shields.io/badge/ruby-2.6.4-red"> <img src="https://img.shields.io/badge/rbenv-1.1.2-red">
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
