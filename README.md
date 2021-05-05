@@ -12,7 +12,7 @@ faviMoは自分のお気に入りのYoutube動画を共有できるアプリで�
 ## 各画面の機能
 | トップページ | ユーザータイプ画面 |
 | --- | --- |
-| <p align="center"><img src="https://i.gyazo.com/0991b86d49a3ec2c3dd6c99f158ab858.png" width="100%"></p> | <p align="center"><img src="https://i.gyazo.com/2e99b3ad903967155651feeb82c4b049.png" width="100%"></p> |
+| <p align="center"><img src="https://i.gyazo.com/0991b86d49a3ec2c3dd6c99f158ab858.png" width="100%"></p> | <p align="center"><img src="https://i.gyazo.com/e3c4a651987517083d9d4d825f32d3eb.png" width="100%"></p> |
 | <ul><li>アカウント作成 or ログインをする画面です</li><li>アカウント作成不要のゲストログインも</br>することができます</li></ul>  | <ul><li>気になるユーザーをタイプする画面です</li><li>タイプしたユーザーには</br>自分のお気に入りの動画をシェアすることができます</li></ul> |
 
 | 動画検索画面 | 動画検索結果表示画面 |
@@ -23,7 +23,7 @@ faviMoは自分のお気に入りのYoutube動画を共有できるアプリで�
 | Likeした動画の一覧画面  |
 | --- |
 |<p><img src="https://i.gyazo.com/2a83ff8ef74c5f9b9a123d612ab16be4.png" width="45%" height="100%"> <img src="https://i.gyazo.com/e5b45bd5c0858ebd6707cdc159a62d9c.png" width="45%" height="100%"></p>|
-| <ul><li>Likeした動画の一覧画面です</li><li>Likeした動画に対して行える操作</li><ul><li>①DisLike(✖︎)へ変更します</li><li>②動画をリストから削除します</li><li>③タイプしているユーザーへ共有します</li><li>④他に同じ動画をLikeしているユーザーがいないか調べることができます</li></ul></ul> |
+| <ul><li>Likeした動画の一覧画面です</li><li>Likeした動画に対して行える操作</li><ul><li>① DisLike(✖︎)へ変更します</li><li>② 動画をリストから削除します</li><li>③ タイプしているユーザーへ共有します</li><li>④ 他に同じ動画をLikeしているユーザーがいないか調べることができます</li></ul></ul> |
 
 
 ## faviMoの製作に使用した技術など
