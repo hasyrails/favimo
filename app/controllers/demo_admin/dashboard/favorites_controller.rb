@@ -5,7 +5,8 @@ class DemoAdmin::Dashboard::FavoritesController < DemoAdmin::DashboardController
   before_action :set_column_names_of_favorite_model
 
   def index
-    @favorites = Favorite.page(params[:page]).per(5)
+    @favorites = Favorite.where(user_id: User.dummy.ids, youtube_video_id: YoutubeVideo.dummy.ids)
+    @favorites = @favorites.page(params[:page]).per(5)
   end
 
   def show

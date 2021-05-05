@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_23_220653) do
+ActiveRecord::Schema.define(version: 2021_05_05_193838) do
 
   create_table "chat_messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "chat_room_id", null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2021_03_23_220653) do
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "status", default: "0"
     t.index ["chat_room_id"], name: "index_chat_messages_on_chat_room_id"
     t.index ["user_id"], name: "index_chat_messages_on_user_id"
   end

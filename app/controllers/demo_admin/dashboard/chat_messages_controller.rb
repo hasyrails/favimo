@@ -5,9 +5,9 @@ class DemoAdmin::Dashboard::ChatMessagesController < DemoAdmin::DashboardControl
   before_action :set_column_names_of_chat_message_model
 
   def index
-    @chat_messages = ChatMessage.all
+    @chat_messages = ChatMessage.dummy
 
-    @chat_messages = ChatMessage.page(params[:page]).per(5)
+    @chat_messages = @chat_messages.page(params[:page]).per(5)
 
   end
 
