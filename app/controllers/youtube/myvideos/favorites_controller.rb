@@ -18,7 +18,6 @@ class Youtube::Myvideos::FavoritesController < ApplicationController
     YoutubeVideo.find(id).update(
       status: params[:favorite]
     )
-    binding.pry
   end
 
   def update

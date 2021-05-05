@@ -21,7 +21,7 @@ class User < ApplicationRecord
   validates :self_introduction, length: { maximum: 500 }
 
   enum gender: { male: 0, female: 1 }
-  enum role: { general: 0, admin: 1, demo_admin: 2, dammy: 3, guest: 4}
+  enum role: { general: 0, admin: 1, demo_admin: 2, dummy: 3, guest: 4}
 
   mount_uploader :profile_image, ProfileImageUploader
 

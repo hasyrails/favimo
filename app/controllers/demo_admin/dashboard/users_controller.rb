@@ -6,9 +6,9 @@ class DemoAdmin::Dashboard::UsersController < DemoAdmin::DashboardController
   before_action :set_update_attributes_names_of_user_model
 
   def index
-    @users = User.all
+    @users = User.dummy
 
-    @users = User.page(params[:page]).per(5)
+    @users = @users.page(params[:page]).per(5)
 
   end
 

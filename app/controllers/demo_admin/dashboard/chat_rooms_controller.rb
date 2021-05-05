@@ -5,6 +5,7 @@ class DemoAdmin::Dashboard::ChatRoomsController < DemoAdmin::DashboardController
   before_action :set_column_names_of_chat_room_model
 
   def index
+    @chat_rooms = ChatRoom.dummy
     @chat_rooms = ChatRoom.page(params[:page]).per(5)
   end
 

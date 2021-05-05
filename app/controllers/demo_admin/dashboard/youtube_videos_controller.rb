@@ -5,7 +5,8 @@ class DemoAdmin::Dashboard::YoutubeVideosController < DemoAdmin::DashboardContro
   before_action :set_column_names_of_youtube_video_model
 
   def index
-    @youtube_videos = YoutubeVideo.page(params[:page]).per(4)
+    @youtube_videos = YoutubeVideo.dummy
+    @youtube_videos = @youtube_videos.page(params[:page]).per(4)
   end
 
   def show
