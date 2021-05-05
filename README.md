@@ -35,6 +35,14 @@ faviMoは自分のお気に入りのYoutube動画を共有できるアプリで�
 |<p><img src="https://i.gyazo.com/9d0a9beb8ee115bacba1f5506f38389c.png" width="45%" height="100%"> <img src="https://i.gyazo.com/affedaaa70882288e8a294b9caabc539.png" width="45%" height="100%"></p>|
 | マッチしているユーザー(お互いにタイプしているユーザー)とチャットすることができます |
 
+## 管理者画面
+
+| 管理者画面(デモver) |
+| --- |
+|<p><img src="https://i.gyazo.com/e00ef0c9514db0b96b4812e6859e42db.png" width="45%" height="100%"> <img src="https://i.gyazo.com/affedaaa70882288e8a294b9caabc539.png" width="45%" height="100%"></p>|
+| マッチしているユーザー(お互いにタイプしているユーザー)とチャットすることができます |
+
+
 
 ## faviMoの製作に使用した技術など
 [faviMoの製作に使用した技術や設計についてはこちら](app_design_document.md)
