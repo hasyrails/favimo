@@ -1,5 +1,5 @@
-if(location.pathname.includes('/youtube/myvideos/')) {
-  $(function () {
+window.addEventListener('DOMContentLoaded', function(){
+  if(location.pathname.includes('/youtube/myvideos/')) {
     let allCards = document.querySelectorAll('.video-swipe--card');
     let swipeContainer = document.querySelector('.video-swipe');
 
@@ -76,7 +76,7 @@ if(location.pathname.includes('/youtube/myvideos/')) {
     $('#myvideo-dislike').on('click', function() {
       createButtonListener("dislike");
     })
-  
-  });
-}
+  }
+});
+
 

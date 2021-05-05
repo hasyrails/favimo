@@ -1,5 +1,5 @@
-if(location.pathname == "/users") {
-  $(function () {
+window.addEventListener('DOMContentLoaded', function(){
+  if(location.pathname == "/users") {
     let allCards = document.querySelectorAll('.swipe--card');
     let swipeContainer = document.querySelector('.swipe');
 
@@ -114,6 +114,8 @@ if(location.pathname == "/users") {
         initCards();
       }
     });
-  });
-}
+  }
+});
+
+
 
