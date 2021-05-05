@@ -172,13 +172,6 @@
         <% end %>
         </tbody>
      </table>
-      <div>
-        <div
-        class="btn btn-primary"
-        >
-          <%= link_to "#{@users.model_name.name}モデルレコードを新規作成する", new_demo_admin_dashboard_user_path, class: "text-white",style:"text-decoration: none;" %>
-        </div>
-     </div>
      <div>
        <%= paginate @users %>
      </div>
