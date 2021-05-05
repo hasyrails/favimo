@@ -6,7 +6,7 @@ class DemoAdmin::Dashboard::ChatRoomsController < DemoAdmin::DashboardController
 
   def index
     @chat_rooms = ChatRoom.dummy
-    @chat_rooms = ChatRoom.page(params[:page]).per(5)
+    @chat_rooms = @chat_rooms.page(params[:page]).per(5)
   end
 
   def show

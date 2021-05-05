@@ -5,7 +5,15 @@ class DemoAdmin::Dashboard::ChatRoomUsersController < DemoAdmin::DashboardContro
   before_action :set_column_names_of_chat_room_user_model
 
   def index
-    @chat_room_users = ChatRoomUser.page(params[:page]).per(5)
+    @chat_room_users = ChatRoomUser.where (user_id: User.dummy.ids)
+
+    # @chat_room_users.reject! do |chat_room_user|
+    #   chat_room_user.role == "dummy"
+    # end
+
+    # binding.pry
+
+    @chat_room_users = @chat_room_users.page(params[:page]).per(5) 
   end
 
   def show

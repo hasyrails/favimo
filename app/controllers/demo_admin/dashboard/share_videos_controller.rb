@@ -5,7 +5,8 @@ class DemoAdmin::Dashboard::ShareVideosController < DemoAdmin::DashboardControll
   before_action :set_column_names_of_share_video_model
 
   def index
-    @share_videos = ShareVideo.page(params[:page]).per(5)
+    @share_videos = ShareVideo.where(youtube_video_id: YoutubeVideo.dummy.ids, to_user_id: User.dummy.ids, from_user_id: User.dummy.ids)
+    @share_videos = @share_videos.page(params[:page]).per(5)
   end
 
   def show

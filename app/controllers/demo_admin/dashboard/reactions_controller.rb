@@ -5,7 +5,8 @@ class DemoAdmin::Dashboard::ReactionsController < DemoAdmin::DashboardController
   before_action :set_column_names_of_reaction_model
 
   def index
-    @reactions = Reaction.page(params[:page]).per(5)
+    @reactions = Reaction.where(from_user_id: User.dummy.ids, to_user_id: User.dummy.ids)
+    @reactions = @reactions.page(params[:page]).per(5)
   end
 
   def show
