@@ -1,5 +1,5 @@
 # faviMo(ファビモ)
-<img src="https://img.shields.io/badge/Rails-6.0.3.6-red"> <img src="https://img.shields.io/badge/ruby-2.6.4-red"> <img src="https://img.shields.io/badge/rbenv-1.1.2-red"> <img src="https://img.shields.io/badge/Node.js-14.16.1-green">
+<img src="https://img.shields.io/badge/Rails-v6.0.3.6-red"> <img src="https://img.shields.io/badge/ruby-v2.6.4-red"> <img src="https://img.shields.io/badge/rbenv-v1.1.2-red"> <img src="https://img.shields.io/badge/Node.js-v14.16.1-green"> <img src="https://img.shields.io/badge/nvm-v14.16.1-green"> <img src="https://img.shields.io/badge/yarn-v1.22.5-lightblue"> 
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
