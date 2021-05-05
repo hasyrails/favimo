@@ -10,7 +10,7 @@ faviMoは自分のお気に入りのYoutube動画を共有できるアプリで�
 | トップページ | ユーザータイプ画面 |
 | --- | --- |
 | <p align="center"><img src="https://i.gyazo.com/0991b86d49a3ec2c3dd6c99f158ab858.png" width="100%"></p> | <p align="center"><img src="https://i.gyazo.com/2e99b3ad903967155651feeb82c4b049.png" width="100%"></p> |
-| アカウント作成 or ログインをする画面です</br>アカウント作成不要のゲストログインもすることができます  | 内容セル  |
+| <ul><li>アカウント作成 or ログインをする画面です</li><li>アカウント作成不要のゲストログインも</br>することができます</li></ul>  | 気になるユーザーをタイプする画面です |
 
 
 ![image](https://user-images.githubusercontent.com/62625114/117087251-d627f600-ad89-11eb-8b57-58d8e806670b.png)
