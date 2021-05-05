@@ -1,11 +1,15 @@
 class Youtube::Myvideos::FavoritesController < ApplicationController
+  protect_from_forgery # ActionController::InvalidAuthenticityToken (ActionController::InvalidAuthenticityToken):対策
+  skip_before_action :verify_authenticity_token # Can't verify CSRF token authenticity対策
+
   def create
     favorite = Favorite.create(
       youtube_video_id: params[:youtube_video_id], 
       user_id: current_user.id,
       status: params[:favorite]
     )
-
+    
+    
     youtube_video = YoutubeVideo.where(
       video_id: params[:youtube_video_unique_id],
       user_id: current_user.id
@@ -14,6 +18,7 @@ class Youtube::Myvideos::FavoritesController < ApplicationController
     YoutubeVideo.find(id).update(
       status: params[:favorite]
     )
+    binding.pry
   end
 
   def update
