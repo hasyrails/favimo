@@ -25,6 +25,11 @@ faviMoは自分のお気に入りのYoutube動画を共有できるアプリで�
 |<p><img src="https://i.gyazo.com/2a83ff8ef74c5f9b9a123d612ab16be4.png" width="45%" height="100%"> <img src="https://i.gyazo.com/e5b45bd5c0858ebd6707cdc159a62d9c.png" width="45%" height="100%"></p>|
 | <ul><li>Likeした動画の一覧画面です</li><li>Likeした動画に対して行える操作</li><ul><li>① DisLike(✖︎)へ変更します</li><li>② 動画をリストから削除します</li><li>③ タイプしているユーザーへ共有します</li><li>④ 他に同じ動画をLikeしているユーザーがいないか調べることができます</li></ul></ul> |
 
+| DisLikeした動画の一覧画面  |
+| --- |
+|<p><img src="https://i.gyazo.com/6816df0c626a67d11e64f8933dda2fda.png" width="45%" height="100%"> <img src="https://i.gyazo.com/5955f37336d1bd9c21f92669ffc1743c.png" width="45%" height="100%"></p>|
+| <ul><li>DisLikeした動画の一覧画面です</li><li>DisLikeした動画に対して行える操作</li><ul><li>① Like(❤️)へ変更します</li><li>② 動画をリストから削除します</li><li>(※) DisLikeされた動画は１週間後に自動的にリストから削除されます</li></ul></ul> |
+
 
 ## faviMoの製作に使用した技術など
 [faviMoの製作に使用した技術や設計についてはこちら](app_design_document.md)
