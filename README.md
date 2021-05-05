@@ -18,7 +18,13 @@ faviMoは自分のお気に入りのYoutube動画を共有できるアプリで�
 | 動画検索画面 | 動画検索結果表示画面 |
 | --- | --- |
 | <p align="center"><img src="https://i.gyazo.com/4cf6b0f65a35feed5ffc71354d49669a.png"></p> | <p align="center"><img src="https://i.gyazo.com/5c857c6ac31c8d84630c123c10c62899.png" width="100%"></p> |
-| <ul><li>Youtubeの動画を検索します</li><li>検索したワードが表示されます</li></ul>  | <ul><li>検索結果の動画をタイプする画面です</li><li>タイプした動画はシェアすることができます</li></ul> |
+| <ul><li>Youtubeの動画を検索ができます</li><li>検索したワードが表示されます</li></ul>  | <ul><li>検索結果の動画をLike(❤️)/DisLike(✖︎)する画面です</li><li>Like(❤️)した動画はシェアすることができます</li></ul> |
+
+| Likeした動画の一覧画面  |
+| --- |
+|<p><img src="https://i.gyazo.com/2a83ff8ef74c5f9b9a123d612ab16be4.png" width="45%" height="100%"> <img src="https://i.gyazo.com/e5b45bd5c0858ebd6707cdc159a62d9c.png" width="45%" height="100%"></p>|
+| <ul><li>Likeした動画の一覧画面です</li><li>Likeした動画に対して行える操作</li><ul><li></li><li></li><li></li><li></li></ul></ul> |
+
 
 ## faviMoの製作に使用した技術など
 [faviMoの製作に使用した技術や設計についてはこちら](app_design_document.md)
