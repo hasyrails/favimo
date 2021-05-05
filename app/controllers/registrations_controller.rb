@@ -1,9 +1,14 @@
 class RegistrationsController < Devise::RegistrationsController
   before_action :ensure_normal_user, only: [:update, :destroy]
   prepend_before_action :require_no_authentication, only: [:cancel]
+  
+  def create
+    super
+    bypass_sign_in(@user)
+  end
 
   protected
-
+  
   def update_resource(resource, params)
     resource.update_without_current_password(params)
   end
