@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_05_05_193838) do
 
-  create_table "chat_messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "chat_messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "chat_room_id", null: false
     t.string "user_id", null: false
     t.text "content"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_05_05_193838) do
     t.index ["user_id"], name: "index_chat_messages_on_user_id"
   end
 
-  create_table "chat_room_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "chat_room_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "chat_room_id", null: false
     t.string "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -32,13 +32,13 @@ ActiveRecord::Schema.define(version: 2021_05_05_193838) do
     t.index ["user_id"], name: "index_chat_room_users_on_user_id"
   end
 
-  create_table "chat_rooms", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "chat_rooms", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status"
   end
 
-  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "user_id", null: false
     t.bigint "youtube_video_id", null: false
     t.integer "status", default: 0, null: false
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2021_05_05_193838) do
     t.index ["youtube_video_id"], name: "index_favorites_on_youtube_video_id"
   end
 
-  create_table "reactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "reactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "to_user_id", null: false
     t.string "from_user_id", null: false
     t.integer "status", null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_05_05_193838) do
     t.index ["to_user_id"], name: "index_reactions_on_to_user_id"
   end
 
-  create_table "share_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "share_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "youtube_video_id", null: false
     t.string "to_user_id", null: false
     t.string "from_user_id", null: false
@@ -69,12 +69,16 @@ ActiveRecord::Schema.define(version: 2021_05_05_193838) do
     t.index ["youtube_video_id"], name: "index_share_videos_on_youtube_video_id"
   end
 
-  create_table "users", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name", null: false
@@ -86,7 +90,7 @@ ActiveRecord::Schema.define(version: 2021_05_05_193838) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "youtube_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "youtube_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "video_id"
     t.string "title"
     t.string "description"
