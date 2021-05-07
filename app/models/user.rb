@@ -43,7 +43,7 @@ class User < ApplicationRecord
       user.name = "ゲストユーザー"
       user.role = "guest"
       user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
-      user.skip_confirmation!
+      # user.skip_confirmation!
     end
     # user = User.find_by(email: 'guest@gmail.com')
   end
