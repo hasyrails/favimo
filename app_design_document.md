@@ -19,7 +19,7 @@
 ![image](https://user-images.githubusercontent.com/62625114/117087251-d627f600-ad89-11eb-8b57-58d8e806670b.png)
 
 ## インフラシステムアーキテクチャ
-
+<img src="https://i.gyazo.com/ba1f1c7e8199a24a03721d70058b4e66.png">
 
 
 ## faviMoの使い方
