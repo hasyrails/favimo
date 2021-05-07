@@ -5,6 +5,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     super
     bypass_sign_in(@user)
+    # redirect_to users_path
   end
 
   protected
