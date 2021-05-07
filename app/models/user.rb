@@ -42,9 +42,9 @@ class User < ApplicationRecord
       user.password = SecureRandom.urlsafe_base64
       user.name = "ゲストユーザー"
       user.role = "guest"
-      user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
+      # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
       user.skip_confirmation!
     end
-    user = User.find_by(email: 'guest@gmail.com')
+    # user = User.find_by(email: 'guest@gmail.com')
   end
 end
