@@ -1,4 +1,4 @@
-<mxfile modified="2021-05-07T04:45:54.260Z" host="app.diagrams.net" agent="5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36" etag="Tc4YPeAz-UX9VEgDll7x" version="14.6.10" type="github">
+<mxfile modified="2021-05-07T04:47:45.106Z" host="app.diagrams.net" agent="5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36" etag="doXeGCGagf4wTXK6BOLt" version="14.6.10" type="github">
   <diagram id="Ht1M8jgEwFfnCIfOTk4-" name="Page-1">
     <mxGraphModel dx="697" dy="1422" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -11,7 +11,7 @@
           <mxGeometry x="360" y="752" width="400" height="172" as="geometry" />
         </mxCell>
         <mxCell id="elFsV576toSTreKgKbLv-2" value="" style="points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#945DF2;gradientDirection=north;fillColor=#5A30B5;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.route_53;" vertex="1" parent="1">
-          <mxGeometry x="521" y="110" width="80" height="80" as="geometry" />
+          <mxGeometry x="510" y="106" width="100" height="100" as="geometry" />
         </mxCell>
         <mxCell id="elFsV576toSTreKgKbLv-3" value="" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#5A30B5;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.application_load_balancer;" vertex="1" parent="1">
           <mxGeometry x="521" y="318" width="78" height="78" as="geometry" />
@@ -147,6 +147,12 @@
         </mxCell>
         <mxCell id="elFsV576toSTreKgKbLv-90" value="&lt;span style=&quot;font-size: 14px&quot;&gt;&lt;font color=&quot;#ff3333&quot;&gt;Security Group&lt;/font&gt;&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="1">
           <mxGeometry x="505" y="290" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="elFsV576toSTreKgKbLv-91" value="&lt;font style=&quot;font-size: 14px&quot;&gt;ALB&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="575" y="390" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="elFsV576toSTreKgKbLv-92" value="&lt;font style=&quot;font-size: 14px&quot; color=&quot;#ffffff&quot;&gt;Route53&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="525" y="190" width="70" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
