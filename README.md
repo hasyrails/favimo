@@ -41,7 +41,7 @@ faviMoは自分のお気に入りのYoutube動画を共有できるアプリで�
 | --- |
 |<p><img src="https://i.gyazo.com/e00ef0c9514db0b96b4812e6859e42db.png" width="49%" height="100%"> <img src="https://i.gyazo.com/7209df0a8e6a0c7461b056e9271e8460.png" width="49%" height="100%"></p>|
 | レコードの削除・編集などの管理者画面で行える操作をダミーデータを対象に行うことができます |
-管理者画面(デモver)はこちら　→ [https://www.favimo-video-share-app.com/demo_admin](https://www.favimo-video-share-app.com/demo_admin)
+管理者画面(デモver)はこちら　→ https://www.favimo-video-share-app.com/demo_admin
 
 
 
