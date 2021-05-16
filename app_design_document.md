@@ -5,6 +5,9 @@
  - RSpec 3.10
  - YoutubeAPI(外部API) 0.53.0 
 
+## assets pipeline
+webpacker
+
 ## ER図
 <img src="https://i.gyazo.com/eb6996ab748473b5874c3710866ffa3e.png">
 
